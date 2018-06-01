@@ -1,5 +1,6 @@
 .idea
 *.iml
+/*.sql
 
 # Ignore bundler config.
 /.bundle
