@@ -1,4 +1,4 @@
-FROM cabins-server:latest
+FROM registry.gitlab.com/fnf/cabins-server:latest
 
 MAINTAINER Casey Gerstle <gerstle@gmail.com>
 
