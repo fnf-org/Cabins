@@ -1,0 +1,47 @@
+<div class="titlewrapper">
+  <div class="admintitle"><h3><%= @category %> post management</h3></div>
+  <div class="right"><h4><%= link_to 'new', @path, class: 'green' %></h4></div>
+</div>
+<table class="table table-hover table-condensed">
+  <thead>
+  <tr>
+    <th>
+      ID
+    </th>
+    <th>
+      Title
+    </th>
+    <th>
+      Body
+    </th>
+    <th>
+      Sticky?
+    </th>
+    <th>
+      Actions
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @posts.each do |p| %>
+      <tr data-item-id=<%= "#{p.id}" %> class="item">
+        <td>
+          <%= p.id%>
+        </td>
+        <td>
+          <%= p.title %>
+        </td>
+        <td>
+          <%= p.body %>
+        </td>
+        <td>
+          <%= p.sticky %>
+        </td>
+        <td>
+          <%= link_to 'edit', post_path(p) %>
+          <%= link_to 'delete', p, method: :delete, data: { confirm: 'Are you sure you want to delete this post?' } %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

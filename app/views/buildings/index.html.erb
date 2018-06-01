@@ -1,0 +1,23 @@
+<div class="titlewrapper">
+  <div class="admintitle"><h3>building management</h3></div>
+</div>
+<table class="table table-hover table-condensed">
+  <thead>
+  <tr>
+    <th>Type</th>
+    <th>Label</th>
+    <th>Description</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @buildings.each do |b| %>
+      <tr data-item-id=<%= "#{b.id}" %> class="item">
+        <td><%= b.building_type.label %></td>
+        <td><%= b.label %></td>
+        <td><%= b.description %></td>
+        <td><%= link_to 'edit', building_path(b) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

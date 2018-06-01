@@ -1,0 +1,69 @@
+<h3>Editing building '<%= @building.label %>'</h3>
+
+<%= render 'layouts/error_messages' %>
+
+<%= form_for(@building) do |f| %>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-1">
+      <div class="field">
+        <%= f.label :building_type %>
+        <%= f.collection_select :building_type_id, BuildingType.all, :id, :label, class: 'form control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :label %><br>
+        <%= f.text_field :label, :maxlength => 40 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_field :description, :maxlength => 255, class: 'form control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :image %>
+        <%= f.text_field :image, :maxlength => 255, class: 'form control' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update", class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<br />
+<div class="post">
+  <h3>Accommodations for '<%= @building.building_type.label %> <%= @building.label %>'</h3>
+</div>
+<table class="table table-hover table-condensed">
+  <thead>
+  <tr>
+    <th>Label</th>
+    <th>Description</th>
+    <th>Type</th>
+    <th>A/C</th>
+    <th>Bathroom</th>
+    <th>Kitchen</th>
+    <th>Occupancy</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @building.accommodations.each do |a| %>
+      <tr data-item-id=<%= "#{a.id}" %> class="item">
+        <td><%= a.label %></td>
+        <td><%= a.description %></td>
+        <td><%= a.accommodation_type.label %></td>
+        <td><%= a.air_conditioning ? 'yes' : 'no' %></td>
+        <td><%= a.bathroom ? 'yes' : 'no' %></td>
+        <td><%= a.kitchen ? 'yes' : 'no' %></td>
+        <td><%= a.occupancy %></td>
+        <td><%= a.quantity %></td>
+        <td><%= a.price %></td>
+        <td><%= link_to 'edit', accommodation_path(a) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

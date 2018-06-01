@@ -1,0 +1,72 @@
+<h3>Editing accommodation '<%= @accommodation.label %>'</h3>
+
+<%= render 'layouts/error_messages' %>
+
+<%= form_for(@accommodation) do |f| %>
+  <div class="row">
+    <div class="col-md-7 col-md-offset-1">
+      <div class="field">
+        <%= f.label :label %><br>
+        <%= f.text_field :label, :maxlength => 40 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_field :description, :maxlength => 255, class: 'form control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :accommodation_type %>
+        <%= f.collection_select :accommodation_type_id, AccommodationType.all, :id, :label, class: 'form control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :occupancy %>
+        <%= f.number_field :occupancy, :class => 'form control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :quantity %>
+        <%= f.number_field :quantity, :class => 'form control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :price%>
+        <%= f.number_field :price, :step => 0.01, :class => 'form control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :hold, class: 'same-line'%>
+        <%= f.check_box :hold%>
+        <div class="description">
+          If hold is checked, a general user <strong>cannot</strong> reserve this accommodation
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="field">
+            <%= f.label :air_conditioning, class: 'same-line' %>
+            <%= f.check_box :air_conditioning %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="field">
+            <%= f.label :kitchen, class: 'same-line' %>
+            <%= f.check_box :kitchen %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="field">
+            <%= f.label :bathroom, class: 'same-line' %>
+            <%= f.check_box :bathroom %>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update", class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

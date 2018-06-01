@@ -1,0 +1,50 @@
+// Place all the styles related to the accommodations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.leftcolumn {
+}
+
+.contentcolumn {
+}
+
+input[type=text] {
+  width: 100%;
+}
+
+.navbar-indent {
+    margin-left: 8px;
+}
+
+.navbar-stuff {
+    margin-top: 8px;
+    margin-left: 15px;
+}
+
+.navbar-farleft{
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.dropdown-menu > li {
+    margin-left: 10px;
+}
+.dropdown-menu > li > a.selected {
+    font-weight: bold;
+}
+
+
+// --- accommodations content ------------------------------
+
+.lodging {
+    padding-top: 6px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #def3e2;
+
+    ul {
+        padding-left: 4px;
+    }
+
+    ul.indent {
+        padding-left: 20px;
+    }
+}

@@ -1,0 +1,20 @@
+// Place all the styles related to the reservations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.confirmation label {
+  font-size: 125%;
+}
+
+input[type=image] {
+  width: auto;
+  margin: 6px 0 0 8px;
+}
+
+.heading {
+  margin-top: 12px;
+}
+
+.details {
+  padding: 4px 4px 4px 16px;
+}

@@ -1,0 +1,4 @@
+Thank you for your payment of <%= @reservation.payment_amount.blank? ? number_to_currency(0) : number_to_currency(@reservation.payment_amount) %> for room <%= @reservation.accommodation.get_label %>. This completes your registration.  If you have any issues, please contact the cabins crew at fnfreservations@gmail.com See you at the campout!
+
+FnF <%= Time.new.year %> Cabins
+https://cabins.inappropirates.com

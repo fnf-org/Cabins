@@ -1,0 +1,20 @@
+stages:
+  - build
+
+variables:
+  REGISTRY: registry.gitlab.com
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $REGISTRY
+
+build-job:
+  image: docker:latest
+  services:
+  - name: docker:dind
+  stage: build
+  tags:
+  - docker
+  script:
+  - docker pull registry.gitlab.com/fnf/cabins-server:latest
+  - docker build -t registry.gitlab.com/fnf/cabins .
+  - docker push registry.gitlab.com/fnf/cabins

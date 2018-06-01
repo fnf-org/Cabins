@@ -1,0 +1,163 @@
+<%= render 'layouts/status' %>
+
+<% if @user.has_confirmed_reservations? %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="title">Current reservation<%= (@user.reservations && @user.reservations.count) > 1 ? 's' : '' %></div>
+      <div class="content">
+        <% @user.reservations.each do |r| %>
+          <% if !r.confirmed_time.nil? %>
+          <div class="row confirmation">
+            <div class="col-md-10 col-md-offset-1 accommodation">
+              <div class="col-md-8">
+                <% if r.user %>
+                  <div class="row heading">
+                    <span class="buildinglabel"><%= r.user.name %></span>
+                  </div>
+                  <div class="row details">
+                    <div class="row">
+                      <div class="col-md-2">email:</div>
+                      <div class="col-md-3"><%= r.user.email %></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2">phone:</div>
+                      <div class="col-md-3"><%= r.user.phone %></div>
+                    </div>
+                  </div>
+                <% end %>
+                <div class="row heading">
+                  <span class="buildinglabel"><%= "#{r.accommodation.label}"%></span>
+                </div>
+                <div class="row details">
+                  <div class="row"><%= r.accommodation.description %></div>
+                  <div class="row">
+                    <div class="col-md-2">Occupancy:</div>
+                    <div class="col-md-3"><%= r.accommodation.occupancy %></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">Bathroom:</div>
+                    <div class="col-md-3"><%= r.accommodation.bathroom.eql?(true) ? 'yes' : 'no' %></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">Kitchen:</div>
+                    <div class="col-md-3"><%= r.accommodation.kitchen.eql?(true) ? 'yes' : 'no' %></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">Air Conditioner:</div>
+                    <div class="col-md-3"><%= r.accommodation.air_conditioning.eql?(true) ? 'yes' : 'no' %></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row right red-border">
+                  <div class="reservation">
+                    <div class="title"><%= number_to_currency r.price %></div>
+                  </div>
+                  <div class="book">
+                    <div class="price">
+                      <% if r.paid_date.nil? %>
+                          <p>Pay us all the money!</p>
+                          <p>Please include a note with your payment in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room</p>
+                          <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                            <input type="hidden" name="cmd" value="_xclick">
+                            <!-- <input type="hidden" name="business" value="FCNX9KTXRNJ7S"> --> <!-- TEST -->
+                            <input type="hidden" name="business" value="ZJJPT64U2437J">
+                            <input type="hidden" name="lc" value="US">
+                            <input type="hidden" name="item_name" value="<%= r.accommodation.label %>">
+                            <input type="hidden" name="item_number" value="SKU: <%= sku(r) %>">
+                            <input type="hidden" name="amount" value="<%= r.price %>">
+                            <input type="hidden" name="currency_code" value="USD">
+                            <input type="hidden" name="button_subtype" value="services">
+                            <input type="hidden" name="no_note" value="1">
+                            <input type="hidden" name="no_shipping" value="2">
+                            <input type="hidden" name="rm" value="1">
+                            <input type="hidden" name="return" value="<%= user_path(current_user.id) %>">
+                            <input type="hidden" name="cancel_return" value="<%= user_path(current_user.id) %>">
+                            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                          </form>
+                      <% else %>
+                          paid!
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="title">User profile</div>
+    <%= form_for(@user) do |f| %>
+      <div class="row">
+        <%= render 'layouts/error_messages' %>
+      </div>
+      <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+          <div class="field">
+            <%= f.label :name %><br>
+            <%= f.text_field :name, :maxlength => 60 %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email, :maxlength => 255, class: '' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :phone, 'Phone Number' %>
+            <%= f.text_field :phone, class: 'form control' %>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="field">
+            <%= f.label :role, 'Your Role for this event' %>
+          </div>
+          <div class="field">
+            <%= f.radio_button :role, 'planner', class: 'form control' %>
+            <%= f.label :role, 'Planners', value: 'what', class: 'same-line' %>
+          </div>
+          <div class="field">
+            <%= f.radio_button :role, 'planner_medical', class: 'form control' %>
+            <%= f.label :role, 'Planner / Medical', value: 'qwer', class: 'same-line' %>
+          </div>
+          <div class="field">
+            <%= f.radio_button :role, 'attendee', class: 'form control' %>
+            <%= f.label :role, 'Other / Attendee', value: 'qwer', class: 'same-line' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :notes, 'List specific Planner Role(s) and Medical Accommodation needed if applicable. ' %>
+            <%= f.text_area :notes, class: 'form control' %>
+          </div>
+        </div>
+      </div>
+
+      <% if is_admin? %>
+        <div class="row admin">
+          <div class="col-md-5 col-md-offset-1">
+            <div class="field">
+              <%= f.label :tier_id %>
+              <%= f.collection_select :tier_id, Tier.all, :id, :full_label, :include_blank => true, class: 'form control' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+          <div class="actions">
+            <%= f.submit "Update", class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

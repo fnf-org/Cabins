@@ -1,0 +1,3 @@
+<p>Thank you for your payment of <%= @reservation.payment_amount.blank? ? number_to_currency(0) : number_to_currency(@reservation.payment_amount) %> for room <%= @reservation.accommodation.get_label %>. This completes your registration.  If you have any issues, please contact the cabins crew at <a href="mailto:fnfreservations@gmail.com">fnfreservations@gmail.com</a> See you at the campout!</p>
+<br/>
+<p>FnF <%= Time.new.year %> Cabins<br/><a href="https://cabins.inappropirates.com">https://cabins.inappropirates.com</a></p>

@@ -1,0 +1,25 @@
+<div class="titlewrapper">
+  <div class="admintitle"><h3>tier management</h3></div>
+</div>
+<table class="table table-hover table-condensed">
+  <thead>
+  <tr>
+    <th>label</th>
+    <th>description</th>
+    <th>available</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tiers.each do |t| %>
+      <tr data-item-id=<%= "#{t.id}" %> class="item">
+        <td><%= t.label %></td>
+        <td><%= t.description %></td>
+        <td><%= t.available.strftime("%-d %b %Y %T %Z") %></td>
+        <td>
+          <%= link_to 'edit', tier_path(t) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,32 @@
+<div class="titlewrapper">
+  <div class="admintitle"><h3>reservation management :: payment</h3></div>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <%= form_for(@reservation, url: admin_paid_reservation_path(@reservation.id)) do |f| %>
+        <%= render 'layouts/error_messages' %>
+        <%= hidden_field(:id, @reservation.id) %>
+      <div class="field">
+        <%= "Accommodation: #{@reservation.accommodation.label}" %>
+      </div>
+      <div class="field">
+        <%= "User: #{@reservation.user.name}" %>
+      </div>
+      <div class="field">
+        <%= "Total Price: #{@reservation.price}" %>
+      </div>
+      <div class="field">
+        <%= f.label :payment_amount %><br>
+        <%= f.number_field :payment_amount, :step => 0.01, :class => 'form control' %>
+      </div>
+      <div class="field">
+        <%= f.label :payment_types %><br>
+        <%= f.collection_select :payment_types_id, PaymentType.all, :id, :label%>
+      </div>
+      <div class="actions">
+        <%= f.submit "Mark Paid", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
