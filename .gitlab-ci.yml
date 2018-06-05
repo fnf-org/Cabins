@@ -16,6 +16,7 @@ build-job:
   - apk update
   - apk --no-cache add --update python python-dev py-pip
   - pip install awscli --upgrade --user
+  - export PATH=$PATH:~/.local/bin
   - pip install ecs-deploy
   - docker login -u cgerstle -p $CABINS_SERVER_REGISTRY_ACCESS_KEY registry.gitlab.com
   - docker pull registry.gitlab.com/fnf/cabins-server:latest
