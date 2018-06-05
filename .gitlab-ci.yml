@@ -11,8 +11,7 @@ build-job:
   - name: docker:dind
   stage: build
   tags:
-  - ruby
-  - rails
+  - shared
   script:
   - apk update
   - apk --no-cache add --update python python-dev py-pip
