@@ -2,7 +2,6 @@ stages:
   - build
 
 variables:
-  IMAGE_TAG: cabins-${CI_PIPELINE_ID}
   TIMEOUT: "600"
 
 build-job:
@@ -28,8 +27,8 @@ build-job:
   - export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
   - CERT=`aws ecr get-login --no-include-email --region ${AWS_REGION}`
   - ${CERT}
-  - docker build -t ${CI_PROJECT_NAME}:$IMAGE_TAG .
-  - docker tag $CI_PROJECT_NAME:$IMAGE_TAG fnf/cabins:$IMAGE_TAG
-  - docker push fnf/cabins:$IMAGE_TAG
+  - docker build -t fnf/cabins .
+  - docker tag fnf/cabins:latest 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:latest
+  - docker push 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:latest
 #  - ecs deploy --region ${AWS_REGION} cabins-dev cabins --tag ${IMAGE_TAG}  --timeout ${TIMEOUT}
 
