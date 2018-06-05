@@ -2,7 +2,8 @@ stages:
   - build
 
 variables:
-  REGISTRY: registry.gitlab.com
+  IMAGE_TAG: cabins-${CI_PIPELINE_ID}
+  TIMEOUT: "600"
 
 build-job:
   image: docker:latest
@@ -10,10 +11,25 @@ build-job:
   - name: docker:dind
   stage: build
   tags:
-  - docker
+  - ruby
+  - rails
   script:
-  - docker login -u cgerstle -p $CABINS_SERVER_REGISTRY_ACCESS_KEY $REGISTRY
+  - apk update
+  - apk --no-cache add --update python python-dev py-pip
+  - pip install awscli --upgrade --user
+  - pip install ecs-deploy
+  - docker login -u cgerstle -p $CABINS_SERVER_REGISTRY_ACCESS_KEY registry.gitlab.com
   - docker pull registry.gitlab.com/fnf/cabins-server:latest
-  - docker build -t registry.gitlab.com/fnf/cabins .
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $REGISTRY
-  - docker push registry.gitlab.com/fnf/cabins
+#  - docker build -t registry.gitlab.com/fnf/cabins .
+#  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $REGISTRY
+#  - docker push registry.gitlab.com/fnf/cabins
+  - export AWS_REGION="us-west-1"
+  - export AWS_ACCESS_KEY_ID=$aws_access_key_id
+  - export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
+  - CERT=`aws ecr get-login --no-include-email --region ${AWS_REGION}`
+  - ${CERT}
+  - docker build -t ${CI_PROJECT_NAME}:$IMAGE_TAG .
+  - docker tag $CI_PROJECT_NAME:$IMAGE_TAG fnf/cabins:$IMAGE_TAG
+  - docker push fnf/cabins:$IMAGE_TAG
+#  - ecs deploy --region ${AWS_REGION} cabins-dev cabins --tag ${IMAGE_TAG}  --timeout ${TIMEOUT}
+
