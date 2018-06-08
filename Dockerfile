@@ -19,4 +19,4 @@ RUN bundle install
 # assets
 ENV RAILS_ENV production
 RUN bundle exec rake assets:precompile
-COPY public/ /usr/local/apache2/htdocs/
+RUN cp -r $RAILS_ROOT/public/* /usr/local/apache2/htdocs/
