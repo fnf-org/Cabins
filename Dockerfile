@@ -13,7 +13,9 @@ WORKDIR $RAILS_ROOT
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
 RUN bundle install
+ENV RAILS_ENV production
+RUN bundle exec rake assets:precompile
 
-# Copy the main application.
+# Copy the main application
 COPY . .
 COPY public/ /usr/local/apache2/htdocs/
