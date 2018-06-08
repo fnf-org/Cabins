@@ -9,13 +9,14 @@ RUN mkdir -p $RAILS_ROOT
 # Set working directory, where the commands will be ran:
 WORKDIR $RAILS_ROOT
 
-# Gems:
-COPY Gemfile Gemfile.lock ./
-RUN gem install bundler
-RUN bundle install
-ENV RAILS_ENV production
-RUN bundle exec rake assets:precompile
-
 # Copy the main application
 COPY . .
+
+# gems
+RUN gem install bundler
+RUN bundle install
+
+# assets
+ENV RAILS_ENV production
+RUN bundle exec rake assets:precompile
 COPY public/ /usr/local/apache2/htdocs/
