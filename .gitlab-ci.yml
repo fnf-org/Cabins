@@ -1,6 +1,7 @@
 stages:
   - build
-  - deploy
+  - deploy-sandbox
+  - deploy-prod
 
 variables:
   IMAGE_TAG: 2018-${CI_PIPELINE_ID}
@@ -18,7 +19,6 @@ build-job:
   - apk --no-cache add --update python python-dev py-pip
   - pip install awscli --upgrade --user
   - export PATH=$PATH:~/.local/bin
-  - pip install ecs-deploy
   - docker login -u cgerstle -p $CABINS_SERVER_REGISTRY_ACCESS_KEY registry.gitlab.com
   - docker pull registry.gitlab.com/fnf/cabins-server:latest
   - export AWS_REGION="us-west-1"
@@ -30,15 +30,32 @@ build-job:
   - docker tag fnf/cabins:${IMAGE_TAG} 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
   - docker push 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
 
-build-job:
-  when: manual
+deploy-sandbox:
   image: docker:latest
-  stage: deploy
+  stage: deploy-sandbox
   tags:
   - shared
+  when: manual
   script:
+  - apk update
+  - apk --no-cache add --update python python-dev py-pip
+  - pip install awscli --upgrade --user
+  - export PATH=$PATH:~/.local/bin
+  - pip install ecs-deploy
   - export AWS_REGION="us-west-1"
   - export AWS_ACCESS_KEY_ID=$aws_access_key_id
   - export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
   - ecs deploy --region ${AWS_REGION} cabins-sandbox cabins --tag ${IMAGE_TAG} --timeout ${TIMEOUT}
+
+deploy-prod:
+  image: docker:latest
+  stage: deploy-prod
+  tags:
+  - shared
+  when: manual
+  script:
+  - export AWS_REGION="us-west-1"
+  - export AWS_ACCESS_KEY_ID=$aws_access_key_id
+  - export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
+  - ecs deploy --region ${AWS_REGION} cabins cabins --tag ${IMAGE_TAG} --timeout ${TIMEOUT}
 
