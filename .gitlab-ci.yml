@@ -28,5 +28,5 @@ build-job:
   - docker build -t fnf/cabins:$IMAGE_TAG .
   - docker tag fnf/cabins:${IMAGE_TAG} 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
   - docker push 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
-  - ecs deploy --region ${AWS_REGION} -c cabins-sandbox -n cabins -i fnf/cabins:${IMAGE_TAG} --timeout ${TIMEOUT}
+  - ecs deploy --region ${AWS_REGION} cabins-sandbox cabins --tag ${IMAGE_TAG} --timeout ${TIMEOUT}
 
