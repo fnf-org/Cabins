@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 
 variables:
   IMAGE_TAG: 2018-${CI_PIPELINE_ID}
