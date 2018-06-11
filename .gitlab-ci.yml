@@ -20,9 +20,6 @@ build-job:
   - pip install ecs-deploy
   - docker login -u cgerstle -p $CABINS_SERVER_REGISTRY_ACCESS_KEY registry.gitlab.com
   - docker pull registry.gitlab.com/fnf/cabins-server:latest
-#  - docker build -t registry.gitlab.com/fnf/cabins .
-#  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $REGISTRY
-#  - docker push registry.gitlab.com/fnf/cabins
   - export AWS_REGION="us-west-1"
   - export AWS_ACCESS_KEY_ID=$aws_access_key_id
   - export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
@@ -31,5 +28,5 @@ build-job:
   - docker build -t fnf/cabins:$IMAGE_TAG .
   - docker tag fnf/cabins:${IMAGE_TAG} 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
   - docker push 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
-#  - ecs deploy --region ${AWS_REGION} cabins-dev cabins --tag ${IMAGE_TAG}  --timeout ${TIMEOUT}
+  - ecs deploy --region ${AWS_REGION} -c cabins-sandbox -n cabins -i fnf/cabins:${IMAGE_TAG} --timeout ${TIMEOUT}
 

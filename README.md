@@ -12,6 +12,14 @@ and app specific stuff is built on top of that image.
 
 **TODO**: rip out all the legacy crap below and document the new shit. it's changing... a lot. I hope in a good way.
 
+RUNNING locally
+===============
+
+1. `docker build --build-arg RAILS_ENV=development -t cabins .`
+2. `cp example.cabins.env cabins-dev.env` and update by replacing all the `XXXXXX`'s with your values.
+3. `docker run --rm -it -p 80:80 --env-file ./cabins-dev.env -v /home/cgerstle/src/cabins:/var/www/cabins --name cabins cabins`
+4. `hit localhost:80`
+
 LEGACY BELOW HERE
 ==================
 
