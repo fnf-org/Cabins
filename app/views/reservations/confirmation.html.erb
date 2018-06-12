@@ -1,7 +1,7 @@
 
 <div class="post">
   <h3>It's almost yours!</h3>
-  Your reservation is on hold pending payment. If we don't receive payment by July 14th, the hold on your reservation will be released. Please be nice and send your payment in early.
+  Your reservation is on hold pending payment. If we don't receive payment by <%= instant_string(Instant::INSTANT_PAYMENT_DUE) %>, the hold on your reservation will be released. Please be nice and send your payment in early.
 </div>
 
 <div class="post"><h3>You have asked to reserve...</h3></div>

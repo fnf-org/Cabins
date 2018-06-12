@@ -7,6 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 year = Time.new.year
+instants = Instant.create([
+    {name: 'INSTANT_PAYMENT_DUE', description: 'Payment Due', instant:DateTime.new(year, 7, 17, 19, 30, 0, '-07:00')}
+])
+
 posts = Post.create([
   {
     category: 'home', title: 'Greetings FnFers!',
@@ -22,12 +26,12 @@ posts = Post.create([
   {
       category: 'home', title: 'Registration',
       body:
-        "<p>During the registration period, log into the FnF #{year} Cabins lodging registration page and select the lodging options tab.Please note that you will be able to register for exactly one room*, and NO MORE than one room. Once you select a room, FnF #{year} Cabins will reserve that room in your name until the payment deadline (July 14th), during which time you must send your payment or we will release your reservation.</p><p>Please note that some of the rooms have space for as many as 6 people**, so you can organize a group and split up the room however you wish. Once you have registered and paid for a room, any room changes or cost sharing are your responsibility. <strong>Please note</strong>: you will also be responsible for any damages that may occur and removal of all trash. <strong>FnF campout is a pack in and pack out event and this applies to the cabins as well.</strong><p style=\"font-style: italic; font-size: smaller;\">* The notable exception: In the Main Cabin, you may registerfor individual beds in dormitory-style rooms. These rooms have multiple twin bunk beds for which you can register for more than one.<br/><br/>** Assuming 2 people to a double or queen bed and 1 person to a twin.</p>"
+        "<p>During the registration period, log into the FnF #{year} Cabins lodging registration page and select the lodging options tab.Please note that you will be able to register for exactly one room*, and NO MORE than one room. Once you select a room, FnF #{year} Cabins will reserve that room in your name until the payment deadline, during which time you must send your payment or we will release your reservation.</p><p>Please note that some of the rooms have space for as many as 6 people**, so you can organize a group and split up the room however you wish. Once you have registered and paid for a room, any room changes or cost sharing are your responsibility. <strong>Please note</strong>: you will also be responsible for any damages that may occur and removal of all trash. <strong>FnF campout is a pack in and pack out event and this applies to the cabins as well.</strong><p style=\"font-style: italic; font-size: smaller;\">* The notable exception: In the Main Cabin, you may registerfor individual beds in dormitory-style rooms. These rooms have multiple twin bunk beds for which you can register for more than one.<br/><br/>** Assuming 2 people to a double or queen bed and 1 person to a twin.</p>"
   },
   {
     category: 'home', title: 'Pay',
     body:
-        "<p>Once you have reserved your lodging through FnF #{year} Cabins, you will receive a confirmation email. Please check the FAQ for payment options other than the PayPal button at check-out.</p>Please note that your pre-paid registration only lasts until July 14th. If we have not received your payment within that time, FnF #{year} Cabins will cancel your reservation and make your lodging preference available for other participants.</p>Once we receive payment, FnF #{year} Cabins will send you an email confirming your paid reservation.</p><p>Should you have any questions about the FnF lodging policy, please contact fnfreservations@gmail.com."
+        "<p>Once you have reserved your lodging through FnF #{year} Cabins, you will receive a confirmation email. Please check the FAQ for payment options other than the PayPal button at check-out.</p>Please note that your pre-paid registration only lasts until the payment deadline (usually a week after registrations). If we have not received your payment within that time, FnF #{year} Cabins will cancel your reservation and make your lodging preference available for other participants.</p>Once we receive payment, FnF #{year} Cabins will send you an email confirming your paid reservation.</p><p>Should you have any questions about the FnF lodging policy, please contact fnfreservations@gmail.com."
   },
 
   {
@@ -99,7 +103,7 @@ Once your tier is open, you will be able to sign in using the same email address
   {
       category: 'faq', title: 'When do you need payment for the cabin?',
       body:
-          'If we have not received your payment by July 14th, we will send you a notification that your payment is late. At that time, only Paypal payments will be accepted. In the event that we still have not received payment, we will cancel your room reservation, allowing someone else to register for it. SEND YOUR PAYMENT ON TIME'
+          'If we have not received your payment by the payment deadline, we will send you a notification that your payment is late. At that time, only Paypal payments will be accepted. In the event that we still have not received payment, we will cancel your room reservation, allowing someone else to register for it. SEND YOUR PAYMENT ON TIME'
   },
   {
       category: 'faq', title: 'I forgot to pay for my cabin/room when I reserved it. How can I pay after the fact?',
@@ -277,9 +281,6 @@ Planner.create([
 ])
 
 Reservation.create([
-#   {accommodation: accommodation_c1a, user: user_minty, price: accommodation_c1a.price, quantity: 1, confirmed_time: Time.new},
-#   {accommodation: accommodation_c2a, user: user_asdf, price: accommodation_c2a.price, quantity: 1, confirmed_time: Time.new},
-#   {accommodation: accommodation_c2b, user: user_caseytest, price: accommodation_c2b.price, quantity: 1, confirmed_time: Time.new},
 ])
 
 PaymentType.create(label: 'PayPal');

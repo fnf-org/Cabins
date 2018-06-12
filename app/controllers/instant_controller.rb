@@ -1,0 +1,2 @@
+class InstantController < ApplicationController
+end

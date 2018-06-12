@@ -61,6 +61,10 @@ Rails.application.routes.draw do
   get 'admin/tiers/:id' => 'tiers#show', as: 'tier'
   patch 'admin/tiers/:id' => 'tiers#update'
 
+  get 'admin/instants' => 'instants#index', as: 'instants'
+  get 'admin/instants/:id' => 'instants#show', as: 'instant'
+  patch 'admin/instants/:id' => 'instants#update'
+
   get 'admin/reservations' => 'reservations#index', as: 'admin_reservations'
   get 'admin/reservations/:id/payment' => 'reservations#payment', as: 'admin_payment_reservation'
   patch 'admin/reservations/:id' => 'reservations#paid', as: 'admin_paid_reservation'
