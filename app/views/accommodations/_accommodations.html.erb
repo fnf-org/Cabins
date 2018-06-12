@@ -17,7 +17,7 @@
     <div class="col-xs-4 col-sm-3">
       <% if (l.hold) %>
         <div class="text-right accommodationhighlight">
-        <strong>reserved by management</strong>
+          <strong>reserved by management</strong>
         </div>
       <% end %>
       <% if (quantity_available?(l) > 0) %>
@@ -26,7 +26,7 @@
             <div class="price"><%= number_to_currency l.price %></div>
             <div class="quantity hidden-xs"><%= quantity_available?(l) %> available</div>
             <% if can_book(l) %>
-                <%= button_to 'book!', {:controller => 'reservations', :action => "create", :accommodation_id => l.id }, :method => :post, class: 'btn btn-primary'  %>
+              <%= button_to 'book!', {:controller => 'reservations', :action => "create", :accommodation_id => l.id}, :method => :post, class: 'btn btn-primary' %>
             <% end %>
           </div>
         </div>
@@ -38,9 +38,14 @@
           <div class="reservation">
             <strong>Already in this room</strong>
             <ul class="indent">
-            <% l.reservation.each do |r| %>
-              <li><%= r.user.name %></li>
-            <% end %>
+              <% l.reservation.each do |r| %>
+                <li>
+                  <% if r.user.privacy && r.user.id != current_user.id %>
+                    <%= '[privacy requested]' %></li>
+                  <% else %>
+                    <%= r.user.name %></li>
+                  <% end %>
+              <% end %>
             </ul>
           </div>
         </div>

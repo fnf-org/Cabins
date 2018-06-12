@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :update]
-  before_action :correct_user,   only: [:show, :update]
-  before_action :require_admin,   only: [:tier_approved]
+  before_action :correct_user, only: [:show, :update]
+  before_action :require_admin, only: [:tier_approved]
 
   def new
     @user = User.new
@@ -70,9 +70,9 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone, :role, :notes, :tier_id)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone, :role, :notes, :tier_id, :privacy)
+  end
 
   def correct_user
     @user = User.find(params[:id])
