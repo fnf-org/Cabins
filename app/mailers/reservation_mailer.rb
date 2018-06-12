@@ -1,4 +1,5 @@
 class ReservationMailer < ApplicationMailer
+  helper :instant
 
   def booking_confirmation(reservation)
     @reservation = reservation
