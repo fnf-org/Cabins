@@ -28,7 +28,7 @@ class ReservationsController < ApplicationController
     @accommodation = Accommodation.find(params[:accommodation_id])
     @quantity_available = quantity_available?(@accommodation)
 
-    if (@quantity_available == 0)
+    if (@quantity_available <= 0)
       redirect_to(accommodations_path, {:flash => {:danger => 'Sorry, looks like someone grabbed that one out from under you'}})
       return
     end
@@ -49,6 +49,7 @@ class ReservationsController < ApplicationController
       return
     end
     @error = @reservation
+    @accommodation = @reservation.accommodation
 
     if (is_admin? && params[:reservation][:user_id])
       @reservation.user = User.find(params[:reservation][:user_id])
@@ -56,8 +57,22 @@ class ReservationsController < ApplicationController
       @reservation.user = current_user
     end
     @reservation.quantity = params[:reservation][:quantity]
+
+    # it's possible for 2 users to overbook dorm rooms...
+    # if there are 4 available and 2 people simultaneously hit the `book!` button,
+    # The temporary reservation will only be created with a quantity of 1. If either one
+    # of the users confirm all 4, the other user needs to be rejected.
+    # This should _probably_ be handled by moving quantity to the booking listing, but whatever.
+    quantity_available = quantity_available?(@accommodation)
+    logger.info("quantity available: #{quantity_available}")
+    if (quantity_available < 0)
+      logger.info("NO quantity, deleting reservation")
+      @reservation.destroy
+      redirect_to(accommodations_path, {:flash => {:danger => 'Apologies, but it appears as though someone else has booked that, please try again.'}})
+      return
+    end
+
     @reservation.price = @reservation.accommodation.price * @reservation.quantity
-    @accommodation = @reservation.accommodation
     @error = @reservation # tell _error_messages.html.erb to use this object for form errors
     @reservation.confirmed_time = DateTime.now
 
