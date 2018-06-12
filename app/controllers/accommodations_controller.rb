@@ -7,7 +7,7 @@ class AccommodationsController < ApplicationController
 
   def index
     logger.info("params: #{params.inspect}")
-    @lodgings = Accommodation.search(params, is_admin?).order(sort).page(params[:page]).per(10)
+    @lodgings = Accommodation.search(params, is_admin?).order(sort).page(params[:page]).per(50)
   end
 
   def show
@@ -36,7 +36,7 @@ class AccommodationsController < ApplicationController
     ) end
 
   def sort
-    if (Accommodation.column_names.include?(params[:sort]) && %w[asc desc].include?(params[:direction]))
+    if Accommodation.column_names.include?(params[:sort]) && %w[asc desc].include?(params[:direction])
       "#{params[:sort]} #{params[:direction]}, label"
     else
       :label
