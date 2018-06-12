@@ -39,7 +39,7 @@
   <div class="col-md-10 col-md-offset-1">
     <% if @quantity_available > 1 %>
       <div class="field">
-        <%= f.label "#{:quantity} (limit 4)" %><br>
+        <%= f.label "#{:quantity} (limit #{@quantity_available > 4 ? 4 : @quantity_available})" %><br>
         <%= f.number_field :quantity, value: 1, min: 1, max: (@quantity_available > 4 ? 4 : @quantity_available), onchange: "$('#totalPrice').text('$' + ($('#reservation_quantity')[0].valueAsNumber * #{@reservation.accommodation.price}).toFixed(2));" %>
       </div>
     <% else %>
