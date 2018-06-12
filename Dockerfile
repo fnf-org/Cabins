@@ -14,15 +14,13 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
 RUN bundle install
 
+# Copy the main application
+COPY . .
+
 # assets
-COPY public $RAILS_ROOT/public
-COPY config $RAILS_ROOT/config
 COPY Rakefile $RAILS_ROOT/Rakefile
 RUN bundle exec rake assets:precompile
 RUN cp -r $RAILS_ROOT/public/* /usr/local/apache2/htdocs/
-
-# Copy the main application
-COPY . .
 
 # if we're in dev mode, tell apache to not serve the assets and to not redirect to https
 # default to production
