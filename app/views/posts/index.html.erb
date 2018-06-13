@@ -32,7 +32,7 @@
           <%= p.title %>
         </td>
         <td>
-          <%= p.body %>
+          <%= p.body.try(:html_safe) %>
         </td>
         <td>
           <%= p.sticky %>

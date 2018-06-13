@@ -64,3 +64,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'minitest', '~> 5.1'
+
+gem 'tinymce-rails'
