@@ -8,9 +8,11 @@ Rails.application.routes.draw do
 
   get 'cabins/details' => 'details#index'
   get 'cabins/map' => 'map#index'
+  get 'cabins/kitchen' => 'kitchen#index'
 
   get 'details' => 'details#index', as: 'details'
   get 'map' => 'map#index', as: 'map'
+  get 'kitchen' => 'kitchen#index', as: 'kitchen'
 
   get 'home' => 'blog#home', as: 'home'
   get 'rules' => 'blog#rules', as: 'rules'
