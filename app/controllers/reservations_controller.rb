@@ -101,7 +101,7 @@ class ReservationsController < ApplicationController
   # ADMIN -----------------------------------
 
   def index
-    @reservations = Reservation.search(params).order(sort).page(params[:page])
+    @reservations = Reservation.search(params).order(sort).page(params[:page]).per(20)
   end
 
   def sort
