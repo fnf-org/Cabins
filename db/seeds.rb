@@ -11,12 +11,17 @@ instants = Instant.create([
     {name: 'INSTANT_PAYMENT_DUE', description: 'Payment Due', instant:DateTime.new(year, 7, 17, 19, 30, 0, '-07:00')}
 ])
 
+tier0 = Tier.create(label: 'Tier 0', description: 'Secret', available: DateTime.new(year, 6, 6, 19, 30, 0, '-07:00'));
+tier1 = Tier.create(label: 'Tier 1', description: 'Planners Medical', available: DateTime.new(year, 7, 10, 19, 30, 0, '-07:00'));
+tier2 = Tier.create(label: 'Tier 2', description: 'Planners', available: DateTime.new(year, 7, 11, 15, 30, 0, '-07:00'));
+tier3 = Tier.create(label: 'Tier 3', description: 'All', available: DateTime.new(year, 7, 11, 19, 30, 0, '-07:00'));
+
 posts = Post.create([
   {
     category: 'home', title: 'Greetings FnFers!',
     body:
       "Welcome to the FnF #{year} Cabin Reservation App<br/><br/>"\
-      "This app will help you pre-register for lodging at the FnF Summer Campout, receive notification of lodging registration times, review and reserve specific rooms at the Saratoga Springs resort, and receive confirmation of your reservation and payment. To start using FnF #{year} cabins, please review the lodging reservation instructions below and FAQ. Click here to register.<strong><a href=\"/users/new\">here to register</a></strong>."
+      "This app will help you pre-register for lodging at the FnF Summer Campout, receive notification of lodging registration times, review and reserve specific rooms at the Saratoga Springs resort, and receive confirmation of your reservation and payment. To start using FnF #{year} cabins, please review the lodging reservation instructions below and FAQ. <strong><a href=\"/users/new\">Click here to register</a></strong>."
   },
   {
     category: 'home', title: 'Pre-registration',
@@ -92,13 +97,13 @@ posts = Post.create([
   {
       category: 'faq', title: 'When does cabin registration begin?',
       body:
-          'The tier you have been placed in determines when you can sign up.<br/><br/>
+          "The tier you have been placed in determines when you can sign up.<br/><br/>
 
-Tier 1 - Friday, July 7th @ 7:30pm<br/><br/>
-Tier 2 - Saturday, July 8th @7:30pm<br/><br/>
-Tier 3 – Saturday, July 8th @7:30pm<br/><br/>
+Tier 1 - #{tier1.available.strftime('%A, %B %e @ %l:%M%p')}<br/>
+Tier 2 - #{tier2.available.strftime('%A, %B %e @ %l:%M%p')}<br/>
+Tier 3 - #{tier3.available.strftime('%A, %B %e @ %l:%M%p')}<br/><br/>
 
-Once your tier is open, you will be able to sign in using the same email address and password you pre-registered with and choose to reserve an available room. The Registration app will allow you to choose a specific room from among those that have not yet been registered.'
+Once your tier is open, you will be able to sign in using the same email address and password you pre-registered with and choose to reserve an available room. The Registration app will allow you to choose a specific room from among those that have not yet been registered."
   },
   {
       category: 'faq', title: 'When do you need payment for the cabin?',
@@ -111,11 +116,11 @@ Once your tier is open, you will be able to sign in using the same email address
           'You can pay in two ways:<br/><br/>
 1.  Pay via Paypal: Send $ to paypal@cfaea.org. Be sure to select "Send money to friends or family" and write your cabin/room number in the comments<br/><br/>
 2.  Pay via check: Make your payment to CFAEA by check and send it to the following address:<br/><br/>
-CFAEA<br/><br/>
-c/o Jenny Lee<br/><br/>
-930 Pacific Ave. #1<br/><br/>
+CFAEA<br/>
+c/o Jenny Lee<br/>
+930 Pacific Ave. #1<br/>
 San Francisco, CA 94133<br/><br/>
-Additionally, please include the cabin/room number in the notes on the check.'
+* Please include the cabin/room number in the notes on the check.'
   },
   {
       category: 'faq', title: 'How do I find my cabin when I arrive at Saratoga Springs?',
@@ -147,13 +152,6 @@ Additionally, please include the cabin/room number in the notes on the check.'
 user_minty = User.create(name: 'minty', email:'minty@inappropirates.com', password:'nopenope', password_confirmation:'nopenope', phone: '1111', role: 'planner', admin: true);
 user_asdf = User.create(name: 'asdf', email:'asdf@gmail.com', password:'asdfasdf', password_confirmation:'asdfasdf', phone: '1111', role: 'attendee', admin: false);
 # user_caseytest = User.create(name: 'caseytest', email:'gerstle+test@gmail.com', password:'asdfasdf', password_confirmation:'asdfasdf', phone: '1111', role: 'attendee', admin: false);
-
-Tier.create([
-  {label: 'Tier 0', description: 'Secret', available: DateTime.new(year, 6, 6, 19, 30, 0, '-07:00')},
-  {label: 'Tier 1', description: 'Planners Medical', available: DateTime.new(year, 7, 5, 19, 30, 0, '-07:00')},
-  {label: 'Tier 2', description: 'Planners', available: DateTime.new(year, 7, 6, 19, 30, 0, '-07:00')},
-  {label: 'Tier 3', description: 'All', available: DateTime.new(year, 7, 7, 19, 30, 0, '-07:00')},
-])
 
 summer_cabin = BuildingType.create(label: 'Summer Cabin');
 wood_tent = BuildingType.create(label: 'Wood Tent');
