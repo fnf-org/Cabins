@@ -1,6 +1,6 @@
 <% @lodgings.each do |l| %>
   <div class="row lodging">
-    <div class="col-xs-8 col-sm-6">
+    <div class="col-xs-8 col-sm-6 pb-3">
       <h4><strong>
         <%= "#{l.label}" %>
       </strong></h4>
@@ -31,7 +31,6 @@
           </div>
         </div>
       <% end %>
-
 
       <% if l.reservation.exists? %>
         <div class="accommodationhighlight">
