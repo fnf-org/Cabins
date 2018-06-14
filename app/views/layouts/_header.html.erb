@@ -1,8 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border rounded">
   <%= link_to 'FnF Cabins', home_path, class: 'navbar-brand' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeaderContent" aria-controls="navbarHeaderContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="navbar-collapse-1">
+  <div class="collapse navbar-collapse" id="navbarHeaderContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active"><%= link_to 'rules', rules_path, class: 'nav-link' %></li>
       <li class="nav-item active"><%= link_to 'FAQ', faq_path, class: 'nav-link' %></li>

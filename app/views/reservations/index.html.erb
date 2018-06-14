@@ -1,14 +1,18 @@
 <h3 class="mt-3">reservation management</h3>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border rounded">
+  <a class="navbar-brand" href="#">Search</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSearchContent" aria-controls="navbarSearchContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="search-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="navbarSearchContent">
       <ul class="navbar-nav mr-auto">
         <%= form_tag admin_reservations_path, :style => 'width 100%;', :class => "form-inline", :remote => true, :method => 'get', :id => 'reservations_search' do %>
           <%= text_field_tag :search, params[:search], class: 'form-control form-control-sm ' %>
           <%= hidden_field_tag :direction, params[:direction] %>
           <%= hidden_field_tag :sort, params[:sort] %>
-          <%= submit_tag "Search", :name => nil, :class => 'btn btn-primary btn-sm ml-2' %>
+          <%= submit_tag "go", :name => nil, :class => 'btn btn-primary btn-sm ml-2' %>
         <% end %>
       </ul>
 
@@ -34,6 +38,6 @@
   </div><!-- /.container-fluid -->
 </nav><!-- end search nav -->
 
-<div id="reservations" class="contentcolumn">
+<div id="reservations" class="contentcolumn mt-3">
   <%= render 'reservations' %>
 </div><!-- end content column-->
