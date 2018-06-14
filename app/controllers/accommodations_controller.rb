@@ -30,7 +30,7 @@ class AccommodationsController < ApplicationController
   private
 
   def accommodation_params
-    params.require(:accommodation).permit(:accommodation_type, :air_conditioning, :hold, :bathroom,
+    params.require(:accommodation).permit(:accommodation_type_id, :air_conditioning, :hold, :bathroom,
                                           :description, :kitchen, :label, :occupancy, :price, :quantity,
                                           :column, :available
     ) end
