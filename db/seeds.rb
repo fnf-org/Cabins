@@ -117,9 +117,10 @@ Once your tier is open, you will be able to sign in using the same email address
 1.  Pay via Paypal: Send $ to paypal@cfaea.org. Be sure to select "Send money to friends or family" and write your cabin/room number in the comments<br/><br/>
 2.  Pay via check: Make your payment to CFAEA by check and send it to the following address:<br/><br/>
 CFAEA<br/>
-c/o Jenny Lee<br/>
-930 Pacific Ave. #1<br/>
-San Francisco, CA 94133<br/><br/>
+c/o Michelle Maloy<br/>
+1366 San Bruno Avenue<br/>
+Apt 2<br/>
+San Francisco, CA 95110<br/><br/>
 * Please include the cabin/room number in the notes on the check.'
   },
   {

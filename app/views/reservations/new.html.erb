@@ -6,37 +6,37 @@
       });
     </script>
 <% end %>
-<div class="post">
+<div class="post mt-3">
   <h3>You're NOT Done Yet!</h3>
   Please review the details of your reservation request below. We will reserve your lodging until <%= instant_string(Instant::INSTANT_PAYMENT_DUE) %>. Please follow the payment instructions below to finalize your reservation. Once we receive your payment, we will send you a confirming email. Should we not receive payment by the deadline, FnF will cancel your reservation to make the lodging available to other participants.
 </div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <strong>NOTE:</strong> This form will automatically expire in 10 minutes, you must confirm your reservation before then
+<div class="row justify-content-md-center">
+  <div class="col-md-10">
+    <strong>NOTE:</strong> This form will automatically expire in 5 minutes, you must confirm your reservation before then
   </div>
 </div>
 
 <%= render 'accommodation' %>
 
 <%= form_for(@reservation) do |f| %>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
+<div class="row justify-content-md-center">
+  <div class="col-md-10">
     <%= render 'layouts/error_messages' %>
     <%= hidden_field(:reservation, :accommodation_id) %>
   </div>
 </div>
 
 <% if is_admin? %>
-  <div class="row">
-    <div class="col-md-11 col-md-offset-1">
+  <div class="row justify-content-md-center admin alert-warning">
+    <div class="col-md-11">
       <h4>[ADMINS ONLY] Select a user to use for this reservation:</h4>
       <%= f.collection_select :user_id, User.all, :id, :name %>
     </div>
   </div>
 <% end %>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
+<div class="row justify-content-md-center">
+  <div class="col-md-10">
     <% if @quantity_available > 1 %>
       <div class="field">
         <%= f.label "#{:quantity} (limit #{@quantity_available > 4 ? 4 : @quantity_available})" %><br>
@@ -53,11 +53,11 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-6 text-right">
+  <div class="col-md-6 col-sm-6 col-xs-1 text-right">
     <%= f.submit 'Confirm', data: { confirm: 'You sure you wanna "sleep" in this bed?' }, class: 'btn btn-primary', :onclick => "buttonClicked = true;" %>
   </div>
   <% end %>
-  <div class="col-xs-6">
+  <div class="col-md-6 col-sm-6 col-xs-1">
     <%= button_to 'Cancel', {:controller => 'reservations', :action => "cancel", :id => @reservation.id }, :method => :put, class: 'btn btn-primary', :onclick => "buttonClicked = true;"  %>
   </div>
 </div>

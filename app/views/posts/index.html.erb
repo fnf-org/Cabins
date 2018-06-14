@@ -1,4 +1,4 @@
-<div class="titlewrapper">
+<div class="titlewrapper mt-3">
   <div class="admintitle"><h3><%= @category %> post management</h3></div>
   <div class="right"><h4><%= link_to 'new', @path, class: 'green' %></h4></div>
 </div>
@@ -29,7 +29,7 @@
           <%= p.id%>
         </td>
         <td>
-          <%= p.title %>
+          <%= p.title.try(:html_safe) %>
         </td>
         <td>
           <%= p.body.try(:html_safe) %>

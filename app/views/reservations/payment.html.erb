@@ -2,8 +2,8 @@
   <div class="admintitle"><h3>reservation management :: payment</h3></div>
 </div>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
+<div class="row justify-content-md-center">
+  <div class="col-md-10">
     <%= form_for(@reservation, url: admin_paid_reservation_path(@reservation.id)) do |f| %>
         <%= render 'layouts/error_messages' %>
         <%= hidden_field(:id, @reservation.id) %>

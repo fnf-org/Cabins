@@ -1,18 +1,16 @@
 <% if logged_in? && @category == 'home' %>
-<%= render 'layouts/status' %>
+  <%= render 'layouts/status' %>
 <% end %>
 
-<div class="row">
-<% @posts.each do |p| %>
-  	<% if p.sticky %>
-    <div class="col-md-12">
-    <% else %>
-    <div class="col-md-4">
-    <% end %>
-    	<div class="post">
-    		<h3 class="text-center"><%= p.title %></h3>
-    		<%= p.body.try(:html_safe) %>
-    	</div>
+<div class="card-columns pt-3">
+  <% @posts.each do |p| %>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title"><%= p.title.try(:html_safe) %></div>
+        <p class="card-text">
+          <%= p.body.try(:html_safe) %>
+        </p>
+      </div>
     </div>
-<% end %>
+  <% end %>
 </div>

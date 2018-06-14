@@ -1,10 +1,10 @@
-<h3>Editing building '<%= @building.label %>'</h3>
+<h3 class="mt-3">Editing building '<%= @building.label %>'</h3>
 
 <%= render 'layouts/error_messages' %>
 
 <%= form_for(@building) do |f| %>
-  <div class="row">
-    <div class="col-md-5 col-md-offset-1">
+  <div class="row justify-content-md-center">
+    <div class="col-md-5">
       <div class="field">
         <%= f.label :building_type %>
         <%= f.collection_select :building_type_id, BuildingType.all, :id, :label, class: 'form control' %>

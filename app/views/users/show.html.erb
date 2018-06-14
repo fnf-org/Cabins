@@ -1,25 +1,25 @@
 <%= render 'layouts/status' %>
 
 <% if @user.has_confirmed_reservations? %>
-  <div class="row">
+  <div class="row justify-content-md-center">
     <div class="col-md-12">
       <div class="title">Current reservation<%= (@user.reservations && @user.reservations.count) > 1 ? 's' : '' %></div>
       <div class="content">
         <% @user.reservations.each do |r| %>
           <% if !r.confirmed_time.nil? %>
             <div class="row confirmation">
-              <div class="col-md-10 col-md-offset-1 accommodation">
+              <div class="col-md-10 accommodation">
                 <div class="col-md-8">
                   <% if r.user %>
                     <div class="row heading">
                       <span class="buildinglabel"><%= r.user.name %></span>
                     </div>
                     <div class="row details">
-                      <div class="row">
+                      <div class="row justify-content-md-center">
                         <div class="col-md-2">email:</div>
                         <div class="col-md-3"><%= r.user.email %></div>
                       </div>
-                      <div class="row">
+                      <div class="row justify-content-md-center">
                         <div class="col-md-2">phone:</div>
                         <div class="col-md-3"><%= r.user.phone %></div>
                       </div>
@@ -29,20 +29,20 @@
                     <span class="buildinglabel"><%= "#{r.accommodation.label}" %></span>
                   </div>
                   <div class="row details">
-                    <div class="row"><%= r.accommodation.description %></div>
-                    <div class="row">
+                    <div class="row justify-content-md-center"><%= r.accommodation.description %></div>
+                    <div class="row justify-content-md-center">
                       <div class="col-md-2">Occupancy:</div>
                       <div class="col-md-3"><%= r.accommodation.occupancy %></div>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-md-center">
                       <div class="col-md-2">Bathroom:</div>
                       <div class="col-md-3"><%= r.accommodation.bathroom.eql?(true) ? 'yes' : 'no' %></div>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-md-center">
                       <div class="col-md-2">Kitchen:</div>
                       <div class="col-md-3"><%= r.accommodation.kitchen.eql?(true) ? 'yes' : 'no' %></div>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-md-center">
                       <div class="col-md-2">Air Conditioner:</div>
                       <div class="col-md-3"><%= r.accommodation.air_conditioning.eql?(true) ? 'yes' : 'no' %></div>
                     </div>
@@ -92,15 +92,15 @@
     </div>
   </div>
 <% end %>
-<div class="row">
+<div class="row justify-content-md-center">
   <div class="col-md-12">
     <div class="title">User profile</div>
     <%= form_for(@user) do |f| %>
-      <div class="row">
+      <div class="row justify-content-md-center">
         <%= render 'layouts/error_messages' %>
       </div>
-      <div class="row">
-        <div class="col-md-11 col-md-offset-1">
+      <div class="row justify-content-md-center">
+        <div class="col-md-11">
           <div class="field">
             <%= f.label :name %><br>
             <%= f.text_field :name, :maxlength => 60 %>
@@ -119,8 +119,8 @@
           <div class="field">
             <%= f.label :role, 'Your Role for this event' %>
           </div>
-          <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+          <div class="row justify-content-md-center">
+            <div class="col-md-10">
               <div class="field">
                 <%= f.radio_button :role, 'planner', class: 'form control' %>
                 <%= f.label :role, 'Planners', value: 'what', class: 'same-line' %>
@@ -151,7 +151,7 @@
       <% if is_admin? %>
         <div class="row admin alert-warning">
           <h4>Administrators Only</h4>
-          <div class="col-md-5 col-md-offset-1">
+          <div class="col-md-5">
             <div class="field">
               <%= f.label :tier_id, 'Admin Approved Tier' %>
               <%= f.collection_select :tier_id, Tier.all, :id, :full_label, :include_blank => true, class: 'form control' %>
@@ -160,8 +160,8 @@
         </div>
       <% end %>
 
-      <div class="row">
-        <div class="col-md-2 col-md-offset-1">
+      <div class="row justify-content-md-center">
+        <div class="col-md-2">
           <div class="actions">
             <%= f.submit "Update", class: 'btn btn-primary' %>
           </div>

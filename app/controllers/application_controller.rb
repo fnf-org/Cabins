@@ -46,6 +46,6 @@ class ApplicationController < ActionController::Base
   end
 
   def purge_expired_reservations
-    Reservation.where('confirmed_time IS NULL AND created_at < ?', Time.now - (60 * 10)).destroy_all
+    Reservation.where('confirmed_time IS NULL AND created_at < ?', Time.now - (60 * 5)).destroy_all
   end
 end

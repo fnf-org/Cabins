@@ -38,8 +38,8 @@ gem 'bcrypt', '3.1.11'
 # Use Kaminari for pagination
 gem 'kaminari', '~> 0.16'
 
-# Use Bootstrap SASS for Bootstrap support
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'bootstrap', '~> 4.1.1'
 
 # Use Font Awesome Rails for Font Awesome icons
 gem 'font-awesome-rails', '~> 4.7'
