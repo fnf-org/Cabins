@@ -1,7 +1,6 @@
 stages:
   - build
-  - deploy-sandbox
-  - deploy-prod
+  - deploy
 
 variables:
   IMAGE_TAG: 2018-${CI_PIPELINE_ID}
@@ -46,16 +45,3 @@ deploy-sandbox:
   - export AWS_ACCESS_KEY_ID=$aws_access_key_id
   - export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
   - ecs deploy --region ${AWS_REGION} cabins-sandbox cabins --tag ${IMAGE_TAG} --timeout ${TIMEOUT}
-
-deploy-prod:
-  image: docker:latest
-  stage: deploy-prod
-  tags:
-  - shared
-  when: manual
-  script:
-  - export AWS_REGION="us-west-1"
-  - export AWS_ACCESS_KEY_ID=$aws_access_key_id
-  - export AWS_SECRET_ACCESS_KEY=$aws_secret_access_key
-  - ecs deploy --region ${AWS_REGION} cabins cabins --tag ${IMAGE_TAG} --timeout ${TIMEOUT}
-
