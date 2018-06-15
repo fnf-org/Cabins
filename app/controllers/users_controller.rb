@@ -45,7 +45,7 @@ class UsersController < ApplicationController
         @registrations = User.all
         redirect_to registrations_path
       else
-        @posts = Post.where(category: 'home').order(sticky: :desc, id: :asc)
+        @posts = Post.where(category: 'home').order(display_order: :asc, id: :asc)
         render 'blog/index'
       end
     else

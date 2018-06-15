@@ -48,6 +48,8 @@ Rails.application.routes.draw do
 
   get 'admin/posts/:id' => 'posts#show', as: 'edit_post'
   patch 'admin/posts/:id' => 'posts#update', as: 'post'
+  patch 'admin/posts/:id/up' => 'posts#display_up', as: 'post_up'
+  patch 'admin/posts/:id/down' => 'posts#display_down', as: 'post_down'
   delete 'admin/posts/:id' => 'posts#delete', as: 'delete_post'
 
   get 'admin/registrations' => 'registrations#index', as: 'registrations'

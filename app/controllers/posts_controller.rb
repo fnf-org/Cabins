@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :require_admin
 
   def show_posts
-    @posts = Post.where(category: @category)
+    @posts = Post.where(category: @category).order(display_order: :asc, id: :asc)
     @path = Rails.application.routes.url_helpers.send("new_#{@category}_path")
     render 'posts/index'
   end
@@ -75,6 +75,31 @@ class PostsController < ApplicationController
     end
   end
 
+  # up is down & down is up
+  def display_up
+    display_delta(-1)
+  end
+
+  # up is down & down is up
+  def display_down
+    display_delta(1)
+  end
+
+  def display_delta(inc)
+    @post = Post.find(params[:id])
+    @category = @post.category
+    @display_order = @post.display_order
+    @error = @post # tell _error_messages.html.erb to use this object for form errors
+
+    if @post.display_order
+      @post.display_order += inc
+    else
+      @post.display_order = 50
+    end
+    @post.save
+    show_posts
+  end
+
   def delete
     @post = Post.find(params[:id])
     @category = @post.category
@@ -85,7 +110,7 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :body, :category, :sticky)
+      params.require(:post).permit(:title, :body, :category, :display_order)
     end
 
 end

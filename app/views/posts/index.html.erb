@@ -15,7 +15,7 @@
       Body
     </th>
     <th>
-      Sticky?
+      Order
     </th>
     <th>
       Actions
@@ -24,24 +24,25 @@
   </thead>
   <tbody>
   <% @posts.each do |p| %>
-      <tr data-item-id=<%= "#{p.id}" %> class="item">
-        <td>
-          <%= p.id%>
-        </td>
-        <td>
-          <%= p.title.try(:html_safe) %>
-        </td>
-        <td>
-          <%= p.body.try(:html_safe) %>
-        </td>
-        <td>
-          <%= p.sticky %>
-        </td>
-        <td>
-          <%= link_to 'edit', post_path(p) %>
-          <%= link_to 'delete', p, method: :delete, data: { confirm: 'Are you sure you want to delete this post?' } %>
-        </td>
-      </tr>
+    <tr data-item-id=<%= "#{p.id}" %> class="item">
+      <td>
+        <%= p.id %>
+      </td>
+      <td>
+        <%= p.title.try(:html_safe) %>
+      </td>
+      <td>
+        <%= p.body.try(:html_safe) %>
+      </td>
+      <td title="current order: <%= p.display_order %> (sorted top to bottom, lowest to highest)">
+        <%= link_to post_up_path(p), :method => :patch do %><%= octicon "triangle-up", :height => 32, :class => "right left", :"aria-label" => "up" %><% end %>
+        <%= link_to post_down_path(p), :method => :patch do %><%= octicon "triangle-down", :height => 32, :class => "right left", :"aria-label" => "down" %><% end %>
+      </td>
+      <td>
+        <%= link_to 'edit', post_path(p) %>
+        <%= link_to 'delete', p, method: :delete, data: {confirm: 'Are you sure you want to delete this post?'} %>
+      </td>
+    </tr>
   <% end %>
   </tbody>
 </table>

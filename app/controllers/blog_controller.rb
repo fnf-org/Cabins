@@ -1,6 +1,6 @@
 class BlogController < ApplicationController
   def show_category
-    @posts = Post.where(category: @category).order(sticky: :desc, id: :asc)
+    @posts = Post.where(category: @category).order(display_order: :asc, id: :asc)
     render 'blog/index'
   end
 

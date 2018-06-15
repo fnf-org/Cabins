@@ -15,8 +15,9 @@
         <%= f.text_area :body, class: 'body tinymce' %>
       </div>
       <div class="field">
-        <%= f.label :sticky, class: 'same-line' %>
-        <%= f.check_box :sticky %>
+        <%= f.label :display_order, class: 'same-line' %>
+        <%= f.number_field :display_order, :value => 50%>
+        sorted from top to bottom, lowest to highest
       </div>
       <div class="actions">
         <%= f.submit "Create", class: 'btn btn-primary' %>
