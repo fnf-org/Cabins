@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 20180615040454) do
     t.string   "category",      limit: 40
     t.string   "title"
     t.text     "body",          limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "display_order", default: 50
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "display_order",               default: 50
   end
 
   create_table "reservations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
