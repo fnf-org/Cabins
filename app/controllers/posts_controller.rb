@@ -96,7 +96,13 @@ class PostsController < ApplicationController
     else
       @post.display_order = 50
     end
+
     @post.save
+    if @post.save
+      flash.now[:success] = "display order updated"
+    else
+      flash.now[:danger] = @post.errors.full_messages
+    end
     show_posts
   end
 
