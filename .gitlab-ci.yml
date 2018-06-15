@@ -29,9 +29,9 @@ build-job:
   - docker tag fnf/cabins:${IMAGE_TAG} 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
   - docker push 945305779451.dkr.ecr.us-west-1.amazonaws.com/fnf/cabins:${IMAGE_TAG}
 
-deploy-sandbox:
+deploy:
   image: docker:latest
-  stage: deploy-sandbox
+  stage: deploy
   tags:
   - shared
   when: manual
