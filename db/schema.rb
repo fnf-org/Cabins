@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180615040454) do
+ActiveRecord::Schema.define(version: 20180620023247) do
 
   create_table "accommodation_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "description"
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 20180615040454) do
     t.string   "label",            limit: 40, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "email_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "email_type"
+    t.integer  "user_id"
+    t.integer  "tier_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tier_id"], name: "index_email_logs_on_tier_id", using: :btree
+    t.index ["user_id"], name: "index_email_logs_on_user_id", using: :btree
   end
 
   create_table "instants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -102,6 +112,10 @@ ActiveRecord::Schema.define(version: 20180615040454) do
     t.datetime "available",              null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "sent_date"
+    t.string   "email_html"
+    t.string   "email_text"
+    t.string   "subject"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -123,4 +137,6 @@ ActiveRecord::Schema.define(version: 20180615040454) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "email_logs", "tiers"
+  add_foreign_key "email_logs", "users"
 end

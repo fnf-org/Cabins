@@ -14,10 +14,9 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
 RUN bundle install
 
-# Copy the main application
-COPY . .
-
 # assets
+COPY ./app/assets $RAILS_ROOT/app/assets
+COPY ./config $RAILS_ROOT/config
 COPY Rakefile $RAILS_ROOT/Rakefile
 RUN bundle exec rake assets:precompile
 RUN cp -r $RAILS_ROOT/public/* /usr/local/apache2/htdocs/
@@ -28,3 +27,6 @@ ARG RAILS_ENV=production
 ADD apache-proxy-setup.sh /apache-proxy-setup.sh
 RUN chmod 0755 /apache-proxy-setup.sh
 RUN export RAILS_ENV=$RAILS_ENV; /apache-proxy-setup.sh && rm /apache-proxy-setup.sh
+
+# Copy the main application
+COPY . .

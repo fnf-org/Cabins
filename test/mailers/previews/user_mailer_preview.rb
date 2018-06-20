@@ -20,4 +20,8 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.tier_approved(user)
   end
 
+  def tier_open_email
+    user = User.where.not('tier_id' => nil).first
+    UserMailer.tier_open_email(user)
+  end
 end

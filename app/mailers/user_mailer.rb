@@ -14,4 +14,9 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: "#{Time.new.year} FnF Cabins and Lodging Tier Assignment"
   end
+
+  def tier_open_email(user)
+    @user = user
+    mail to: user.email, subject: "#{user.tier.subject}"
+  end
 end

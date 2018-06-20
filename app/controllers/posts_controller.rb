@@ -98,8 +98,8 @@ class PostsController < ApplicationController
     end
 
     @post.save
-    if @post.save
-      flash.now[:success] = "display order updated"
+    if !@post.save
+      # flash.now[:success] = "display order updated"
     else
       flash.now[:danger] = @post.errors.full_messages
     end

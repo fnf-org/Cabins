@@ -67,3 +67,5 @@ gem 'minitest', '~> 5.1'
 
 gem 'tinymce-rails'
 gem 'octicons_helper'
+
+gem 'time_difference'
