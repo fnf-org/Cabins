@@ -10,13 +10,26 @@
         <%= f.label :description %><br>
         <%= f.text_field :description, :maxlength => 255 %>
       </div>
-        <div class="field date">
-          <%= f.label :available %>
-          <%= f.datetime_select :available %>
-        </div>
+      <div class="field date">
+        <%= f.label :available %>
+        <%= f.datetime_select :available %>
+      </div>
+      <div class="field">
+        <%= f.label :subject %>
+        <%= f.text_field :subject%>
+      </div>
+      <div class="field">
+        <%= f.label :email_text %>
+        <%= f.text_area :email_text %>
+      </div>
+      <div class="field">
+        <%= f.label :email_html %>
+        <%= f.text_area :email_html, :class => 'tinymce' %>
+      </div>
       <div class="actions">
         <%= f.submit "Update", class: 'btn btn-primary' %>
       </div>
     <% end %>
   </div>
 </div>
+<%= tinymce %>

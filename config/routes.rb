@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   get 'admin/tiers' => 'tiers#index', as: 'tiers'
   get 'admin/tiers/:id' => 'tiers#show', as: 'tier'
   patch 'admin/tiers/:id' => 'tiers#update'
+  patch 'admin/tiers/:id/tier_open_email_confirm' => 'tiers#tier_open_email_confirm', as: 'tier_open_email_confirm'
+  patch 'admin/tiers/:id/tier_open_email_send' => 'tiers#tier_open_email_send', as: 'tier_open_email_send'
 
   get 'admin/instants' => 'instants#index', as: 'instants'
   get 'admin/instants/:id' => 'instants#show', as: 'instant'
@@ -73,6 +75,9 @@ Rails.application.routes.draw do
   get 'admin/reservations/:id/payment' => 'reservations#payment', as: 'admin_payment_reservation'
   patch 'admin/reservations/:id' => 'reservations#paid', as: 'admin_paid_reservation'
   delete 'admin/reservations/:id' => 'reservations#delete', as: 'admin_delete_reservation'
+
+  get 'admin/email-logs/tier/:id' => 'email_logs#tier_email_logs', as: 'tier_email_logs'
+  get 'admin/email-logs/tier' => 'email_logs#tier_email_logs_all', as: 'tier_email_logs_all'
 
   resources :password_resets, only: [:new, :create, :edit, :update]
 end

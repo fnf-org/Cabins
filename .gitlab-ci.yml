@@ -11,6 +11,8 @@ build-job:
   services:
   - name: docker:dind
   stage: build
+  only:
+    - master
   tags:
   - shared
   script:
@@ -32,6 +34,8 @@ build-job:
 deploy:
   image: docker:latest
   stage: deploy
+  only:
+    - master
   tags:
   - shared
   when: manual

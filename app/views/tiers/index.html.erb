@@ -1,25 +1,56 @@
-<div class="titlewrapper mt-3">
-  <div class="admintitle"><h3>tier management</h3></div>
+<div class="row pt-3">
+  <div class="col">
+    <h3>tier management</h3>
+  </div>
 </div>
-<table class="table table-hover table-condensed admintable">
-  <thead>
-  <tr>
-    <th>label</th>
-    <th>description</th>
-    <th>available</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @tiers.each do |t| %>
-      <tr data-item-id=<%= "#{t.id}" %> class="item">
-        <td><%= t.label %></td>
-        <td><%= t.description %></td>
-        <td><%= t.available.strftime("%-d %b %Y %T %Z") %></td>
-        <td>
-          <%= link_to 'edit', tier_path(t) %>
-        </td>
-      </tr>
+
+<% i = 0; @tiers.each do |t| %>
+  <% if i % 2 == 0 %>
+    <div class="row">
   <% end %>
-  </tbody>
-</table>
+  <div class="col-6 p-1">
+    <div class="border rounded bg-light">
+      <div class="text-light bg-dark rounded-top p-2 text-center"><%= "#{t.label}: #{t.description}" %></div>
+      <div class="row" title="Time from now: <%= TimeDifference.between(Time.new(), t.available).humanize %>">
+        <div class="col-md-3 text-md-right">Tier Open:</div>
+        <div class="col-md-auto text-value"><%= t.available.strftime("%a %-d %b %Y %T %Z") %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 text-md-right">Sent:</div>
+        <div class="col-auto text-value"><%= t.sent_date ? t.sent_date.strftime("%a %-d %b %Y %T %Z") : '[nope]' %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 text-md-right">Friends:</div>
+        <div class="col-auto text-value"><%= tier_count(t) %></div>
+      </div>
+      <div class="row text-center m-4">
+        <div class="col">
+          <%= link_to tier_path(t) do %>
+            <button type="button" class="btn btn-info w-100" >Edit Tier</button>
+          <% end %>
+        </div>
+      </div>
+      <% if !t.sent_date %>
+        <div class="row text-center m-4">
+          <div class="col">
+            <%= link_to tier_open_email_confirm_path(t), :method => :patch do %>
+              <button type="button" class="btn btn-info w-100">Send Tier Opening Email</button>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row text-center m-4">
+          <div class="col">
+            <%= link_to tier_email_logs_path(t.id) do %>
+              <button type="button" class="btn btn-info w-100">View Email Logs</button>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if i % 2 == 1 %>
+    </div>
+  <% end %>
+  <% i += 1 %>
+<% end %>

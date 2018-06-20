@@ -1,0 +1,63 @@
+<div class="row pt-3 mx-auto">
+  <div class="status alert-danger">
+    <strong>Please confirm</strong>
+    <div>
+      You have requested to send an email from the `fnfreservations@gmail.com` email account to all of the users in
+      the <%= @tier.description %> tier. In order to do this, please confirm the following information and hit send.
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <div class="col-md-10">
+    Subject:
+    <div class="border rounded bg-light m-2 p-2">
+      <%= @tier.subject %>
+    </div>
+    Text version of the email:
+    <div class="border rounded bg-light m-2 p-2">
+      <%= @tier.email_text %>
+    </div>
+    HTML version of the email:
+    <div class="border rounded bg-light m-2 p-2">
+      <%= @tier.email_html.try(:html_safe) %>
+    </div>
+    <div>There are <%= tier_count(@tier) %> Friends & Family members in this tier. They are...</div>
+    <div class="border rounded bg-light m-2 p-2">
+      <% @tier.users.each do |u| %>
+        <div class="row">
+          <div class="col-sm-3 text-sm-right">
+            <%= u.name %>
+          </div>
+          <div class="col-sm-9 col-sm-">
+            <%= u.email%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <h3 class="mt-4">Are you really wanting to send this email to them? If so, answer the following question and hit
+      send</h3>
+    <%
+      number1 = (rand * 100).round(0)
+      number2 = (rand * 100).round(0)
+    %>
+    <input type="hidden" id="number1" value="<%= number1 %>"/>
+    <input type="hidden" id="number2" value="<%= number2 %>"/>
+    <%= form_for @tier, :url => tier_open_email_send_path do |f| %>
+      <%= render 'layouts/error_messages' %>
+      <%= f.hidden_field :id %>
+      <div class="field">
+        <label for="answer"><%= "What is #{number1} + #{number2}?" %></label>
+        <input type="text" id="answer"/>
+      </div>
+      <div class="actions">
+        <%= f.submit "Send", name: 'tier_email_send', class: 'btn btn-primary' %>
+        <%= link_to tiers_path do %><button type="button" class="btn btn-primary">Cancel</button><% end %>
+        <div>
+          *By clicking this button, you agree that you have not had any more than two (2) whiskeys and that you
+          understand the consequences of this action.
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
