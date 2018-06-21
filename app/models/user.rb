@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
 
     if params[:search]
       parm = "%#{params[:search]}%"
-      rv = rv.where('users.name LIKE ?', parm)
+      rv = rv.where('users.name LIKE ? OR users.email LIKE ?', parm, parm)
     end
 
     rv

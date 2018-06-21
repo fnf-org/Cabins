@@ -1,53 +1,53 @@
 <div class="row">
-  <div class="col-md-10 offset-md-1 accommodation mt-1">
+  <div class="col-md-10 offset-md-1 offset-xs-0 accommodation mt-1">
     <% if @reservation.user %>
       <h4><%= @reservation.user.name %></h4>
-      <div class="row">
-        <div class="col-xs-2 offset-sm-1">email:</div>
-        <div class="col-xs-1"><%= @reservation.user.email %></div>
+      <div class="row pl-2">
+        <div class="col-4">email:</div>
+        <div class="col-8"><%= @reservation.user.email %></div>
       </div>
-      <div class="row">
-        <div class="col-xs-2 offset-sm-1">phone:</div>
-        <div class="col-xs-1"><%= @reservation.user.phone %></div>
+      <div class="row pl-2">
+        <div class="col-4">phone:</div>
+        <div class="col-8"><%= @reservation.user.phone %></div>
       </div>
     <% end %>
 
     <h4 class="mt-1"><%= @accommodation.label %></h4>
-    <div class="row">
-      <div class="col-xs-2 offset-sm-1"><%= @accommodation.description %></div>
+    <div class="row pl-2">
+      <div class="col-12"><%= @accommodation.description %></div>
     </div>
 
-    <div class="row">
-      <div class="col-xs-2 offset-sm-1">Occupancy:</div>
-      <div class="col-xs-1"><%= @accommodation.occupancy %></div>
+    <div class="row pl-2">
+      <div class="col-4">Occupancy:</div>
+      <div class="col-8"><%= @accommodation.occupancy %></div>
     </div>
-    <div class="row">
-      <div class="col-xs-2 offset-sm-1">Bathroom:</div>
-      <div class="col-xs-1"><%= @accommodation.bathroom.eql?(true) ? 'yes' : 'no' %></div>
+    <div class="row pl-2">
+      <div class="col-4">Bathroom:</div>
+      <div class="col-8"><%= @accommodation.bathroom.eql?(true) ? 'yes' : 'no' %></div>
     </div>
-    <div class="row">
-      <div class="col-xs-2 offset-sm-1">Kitchen:</div>
-      <div class="col-xs-1"><%= @accommodation.kitchen.eql?(true) ? 'yes' : 'no' %></div>
+    <div class="row pl-2">
+      <div class="col-4">Kitchen:</div>
+      <div class="col-8"><%= @accommodation.kitchen.eql?(true) ? 'yes' : 'no' %></div>
     </div>
-    <div class="row">
-      <div class="col-xs-2 offset-sm-1">A/C:</div>
-      <div class="col-xs-1"><%= @accommodation.air_conditioning.eql?(true) ? 'yes' : 'no' %></div>
+    <div class="row pl-2">
+      <div class="col-4">A/C:</div>
+      <div class="col-8"><%= @accommodation.air_conditioning.eql?(true) ? 'yes' : 'no' %></div>
     </div>
 
     <% if @reservation.id %>
       <h4 class="mt-1">Quantity</h4>
-      <div class="row">
-        <div class="col-xs-2 offset-sm-1"><%= @reservation.quantity %></div>
+      <div class="row pl-2">
+        <div class="col-12"><%= @reservation.quantity %></div>
       </div>
 
       <h4 class="mt-1">Price per</h4>
-      <div class="row">
-        <div class="col-xs-2 offset-sm-1"><%= number_to_currency @reservation.accommodation.price %></div>
+      <div class="row pl-2">
+        <div class="col-12"><%= number_to_currency @reservation.accommodation.price %></div>
       </div>
 
       <h4 class="mt-1">Total price</h4>
-      <div class="row">
-        <div class="col-xs-2 offset-sm-1"><%= number_to_currency @reservation.quantity * @accommodation.price %></div>
+      <div class="row pl-2">
+        <div class="col-12"><%= number_to_currency @reservation.quantity * @accommodation.price %></div>
       </div>
     <% end %>
   </div>
