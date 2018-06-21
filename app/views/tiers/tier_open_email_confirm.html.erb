@@ -30,7 +30,7 @@
             <%= u.name %>
           </div>
           <div class="col-sm-9 col-sm-">
-            <%= u.email%>
+            <%= u.email %>
           </div>
         </div>
       <% end %>
@@ -52,10 +52,13 @@
       </div>
       <div class="actions">
         <%= f.submit "Send", name: 'tier_email_send', class: 'btn btn-primary' %>
-        <%= link_to tiers_path do %><button type="button" class="btn btn-primary">Cancel</button><% end %>
-        <div>
+        <%= link_to tiers_path do %>
+          <button type="button" class="btn btn-primary">Cancel</button>
+        <% end %>
+        <div class="mb-4" style="font-size: 80%">
           *By clicking this button, you agree that you have not had any more than two (2) whiskeys and that you
-          understand the consequences of this action.
+          understand the consequences of this action. If you would like me to talk to you through it, please bring me a
+          bottle of whiskey and we can talk it through.
         </div>
       </div>
     <% end %>
