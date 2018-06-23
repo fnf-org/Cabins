@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180620023247) do
+ActiveRecord::Schema.define(version: 20180623005341) do
 
   create_table "accommodation_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "description"
@@ -107,14 +107,14 @@ ActiveRecord::Schema.define(version: 20180620023247) do
   end
 
   create_table "tiers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "label",       limit: 40, null: false
-    t.string   "description",            null: false
-    t.datetime "available",              null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "label",       limit: 40,    null: false
+    t.string   "description",               null: false
+    t.datetime "available",                 null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.datetime "sent_date"
-    t.string   "email_html"
-    t.string   "email_text"
+    t.text     "email_html",  limit: 65535
+    t.text     "email_text",  limit: 65535
     t.string   "subject"
   end
 

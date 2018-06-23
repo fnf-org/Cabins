@@ -26,6 +26,11 @@ class TiersController < ApplicationController
   def tier_open_email_confirm
     @tier = Tier.find(params[:id])
     @error = @tier
+
+    if !@tier.valid?
+      flash.now[:warning] = "Tier is invalid, please edit first"
+      render 'show'
+    end
   end
 
   def tier_open_email_send

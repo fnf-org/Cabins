@@ -1,6 +1,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8
+  collation: utf8_unicode_ci
   pool: 5
 
 development:
