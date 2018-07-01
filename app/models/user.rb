@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :processed_reservations, class_name: 'Reservation', foreign_key: :processed_by_user_id
   attr_accessor :reset_token
 
-  @allowed_roles = %w(planner planner_medical attendee)
+  @allowed_roles = %w(medical planner volunteer)
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   before_validation { self.phone = phone.gsub(/[^0-9]/, '') }
@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
 
     if params[:search]
       parm = "%#{params[:search]}%"
-      rv = rv.where('users.name LIKE ? OR users.email LIKE ?', parm, parm)
+      rv = rv.where('users.name LIKE ? OR users.email LIKE ? OR users.role LIKE ?', parm, parm, parm)
     end
 
     rv

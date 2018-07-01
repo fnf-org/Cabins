@@ -106,20 +106,20 @@
 
   <div class="row">
     <div class="col-11 offset-1">
+      <%= f.radio_button :role, 'medical', class: 'form control' %>
+      <%= f.label :role, 'Medical', value: 'what', class: 'same-line' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-11 offset-1">
       <%= f.radio_button :role, 'planner', class: 'form control' %>
-      <%= f.label :role, 'Planners', value: 'what', class: 'same-line' %>
+      <%= f.label :role, 'Coordinator/Planner', value: 'what', class: 'same-line' %>
     </div>
   </div>
   <div class="row">
     <div class="col-11 offset-1">
-      <%= f.radio_button :role, 'planner_medical', class: 'form control' %>
-      <%= f.label :role, 'Planner / Medical', value: 'qwer', class: 'same-line' %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-11 offset-1">
-      <%= f.radio_button :role, 'attendee', class: 'form control' %>
-      <%= f.label :role, 'Other / Attendee', value: 'qwer', class: 'same-line' %>
+      <%= f.radio_button :role, 'volunteer', class: 'form control' %>
+      <%= f.label :role, 'Other/Volunteer', value: 'qwer', class: 'same-line' %>
     </div>
   </div>
 
