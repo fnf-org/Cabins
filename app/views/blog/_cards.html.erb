@@ -1,7 +1,3 @@
-<% if logged_in? && @category == 'home' %>
-  <%= render 'layouts/status' %>
-<% end %>
-
 <div class="card-columns pt-3">
   <% @posts.each do |p| %>
     <div class="card">
