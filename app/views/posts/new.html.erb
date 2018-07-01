@@ -8,11 +8,11 @@
         <%= hidden_field(:post, :category) %>
       <div class="field">
         <%= f.label :title %><br>
-        <%= f.text_field :title %>
+        <%= f.text_area :title, :class => 'tinymce' %>
       </div>
       <div class="field">
         <%= f.label :body %><br>
-        <%= f.text_area :body, class: 'body tinymce' %>
+        <%= f.text_area :body, class: 'tinymce' %>
       </div>
       <div class="field">
         <%= f.label :display_order, class: 'same-line' %>

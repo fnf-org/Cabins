@@ -2,15 +2,8 @@
   <%= render 'layouts/status' %>
 <% end %>
 
-<div class="card-columns pt-3">
-  <% @posts.each do |p| %>
-    <div class="card">
-      <div class="card-body">
-        <div class="card-title"><%= p.title.try(:html_safe) %></div>
-        <p class="card-text">
-          <%= p.body.try(:html_safe) %>
-        </p>
-      </div>
-    </div>
-  <% end %>
-</div>
+<% if @category == 'home' %>
+  <%= render 'rows' %>
+<% else %>
+  <%= render 'cards' %>
+<% end %>
