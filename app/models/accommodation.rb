@@ -27,7 +27,7 @@ class Accommodation < ActiveRecord::Base
           parm, parm, parm).joins("LEFT OUTER JOIN buildings b ON b.id=accommodations.building_id")
     end
 
-    if (!params.has_key?(:only_show_available) || params[:only_show_available].eql?('1'))
+    if (params[:only_show_available].eql?('1'))
       holdWhereClause = is_admin ? '' : 'accommodations.hold=0 AND '
       rv = rv.where("#{holdWhereClause} (accommodations.quantity > r.reserved_count OR r.reserved_count IS NULL)")
         .joins("LEFT OUTER JOIN (SELECT accommodation_id, SUM(quantity) AS reserved_count FROM reservations GROUP BY accommodation_id) "\
