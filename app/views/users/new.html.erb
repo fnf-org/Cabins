@@ -95,10 +95,12 @@
 
       <div class="field mt-4">
         <%= f.label :notes, 'List specific Planner Role(s) and Medical Accommodation needed if applicable.' %>
-        <%= f.text_area :notes, class: 'form control' %>
         <div class="description">
-          e.g. Cabins Coordinator, and signed up for 1 SC shift and 1 parking shift.
+          example: Cabins Coordinator, and signed up for 1 SC shift and 1 parking shift.  Also, please let us know 
+          if your need requires specific amenities (electricity for a CPAP, AC for a heat-related condition) or a 
+          specific cabin/room/bed (cabin with a wheelchair ramp, room with windows).
         </div>
+        <%= f.text_area :notes, class: 'form control' %>
       </div>
 
       <div class="field">
