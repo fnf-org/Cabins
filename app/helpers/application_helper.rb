@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def user_has_reservation
-    Reservation.find_by_user_id(current_user.id).nil? ? false : true
+    Reservation.find_by_user_id(session[:user_id]).nil? ? false : true
   end
 
   def mobile_device?

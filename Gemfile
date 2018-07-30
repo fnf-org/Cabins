@@ -69,3 +69,10 @@ gem 'tinymce-rails'
 gem 'octicons_helper'
 
 gem 'time_difference'
+
+# DB debugging... shows where queries are coming from
+# add this to an initializer: ActiveRecordQueryTrace.enabled = true
+# gem 'active_record_query_trace'
+
+gem 'okcomputer'
+gem "lograge"

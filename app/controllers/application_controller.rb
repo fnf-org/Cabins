@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_admin?
   def is_admin?
-    current_user ||= User.find_by(id: session[:user_id])
     !current_user.nil? && current_user.admin
   end
 

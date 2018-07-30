@@ -23,6 +23,7 @@ module Cabins
     logger.formatter = config.log_formatter
     config.log_tags  = [:subdomain, :uuid]
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    OkComputer.logger = logger
 
     # Action mailer settings.
     config.action_mailer.delivery_method = :smtp
