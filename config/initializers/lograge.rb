@@ -1,5 +1,6 @@
 Rails.application.configure do
   config.lograge.enabled = true
+  config.lograge.ignore_actions = ['OkComputer::OkComputerController#show']
 
   config.lograge.custom_payload do |controller|
     user = if defined? controller.current_user
