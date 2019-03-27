@@ -1,3 +1,4 @@
+# For local changes to cabins-server, use `FROM cabins-server:latest`
 FROM registry.gitlab.com/fnf/cabins-server:latest
 
 MAINTAINER Casey Gerstle <gerstle@gmail.com>
@@ -11,7 +12,8 @@ RUN mkdir -p $RAILS_ROOT
 WORKDIR $RAILS_ROOT
 
 # gems
-COPY Gemfile Gemfile.lock ./
+# this used to copy the Gemfile.lock, but I don't think it's necessary and
+COPY Gemfile ./
 RUN gem install bundler
 RUN bundle install
 

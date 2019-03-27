@@ -54,5 +54,5 @@ Rails.application.configure do
 
   # this is for enabling the web console, you might have to tweak if your
   # docker network setups up on a different IP
-  config.web_console.whitelisted_ips = '172.18.0.0/16'
+  config.web_console.whitelisted_ips = '172.17.0.0/16'
 end
