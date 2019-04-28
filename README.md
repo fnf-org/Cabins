@@ -21,6 +21,8 @@ RUNNING locally
 2. `cp example.cabins.env cabins-dev.env` and update by replacing all the `XXXXXX`'s with your values.
 3. `docker run --rm -it -p 80:80 --env-file ./cabins-dev.env -v /home/cgerstle/src/cabins:/var/www/cabins --name cabins cabins`
 4. `hit localhost:80`
+5. for console `bin/rails console` from inside the container
+
 
 # email previews
 http://localhost/rails/mailers/user_mailer/
