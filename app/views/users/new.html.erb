@@ -61,7 +61,7 @@
       </div>
 
       <div class="field mt-4">
-        <%= f.label :role, 'Your Role for this event' %>
+        <%= f.label :role, 'Your tier for this event' %>
       </div>
       <div class="field">
         <%= f.radio_button :role, 'medical', class: 'form control' %>
@@ -94,11 +94,11 @@
       </div>
 
       <div class="field mt-4">
-        <%= f.label :notes, 'List specific Planner Role(s) and Medical Accommodation needed if applicable.' %>
+        <%= f.label :notes, 'Please describe your specific tier and any medical needs. For example, if you need ' \
+          'specific amenities (electricity for a CPAP, AC for a heat-related condition) or a ' \
+          'specific cabin/room/bed (cabin with a wheelchair ramp, room with windows)'  %>
         <div class="description">
-          example: Cabins Coordinator, and signed up for 1 SC shift and 1 parking shift.  Also, please let us know 
-          if your need requires specific amenities (electricity for a CPAP, AC for a heat-related condition) or a 
-          specific cabin/room/bed (cabin with a wheelchair ramp, room with windows).
+          Example: Cabins Coordinator, and signed up for 1 SC shift and 1 parking shift.
         </div>
         <%= f.text_area :notes, class: 'form control' %>
       </div>
