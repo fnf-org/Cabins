@@ -1,111 +1,120 @@
 <% provide(:title, 'Register') %>
 
-<div class="post mt-3">
-  <h3>FnF <%= Time.new.year %> Cabin Registration</h3>
-  Welcome to the Friends and Family Accommodation Registration System (a.k.a. FnF 2018)! We are currently registering
-  people who are interested in renting a room in a cabin for this year's FnF Campout. Once you register, we will verify
-  that you are eligible and place you into a signup tier, based on your contributions to the event. <%= link_to 'Learn about the full
+<% if instant_passed(Instant::INSTANT_REGISTRATIONS_CLOSED) %>
+  <div class="row pt-3 mx-auto">
+    <div class="status alert-danger col-8 offset-2">
+      Registration is now closed. Please contact the cabins crew if you have questions - <a href="mailto:fnfreservations@gmail.com">fnfreservations@gmail.com</a>
+    </div>
+  </div> <!-- end status row -->
+<% else %>
+  <div class="post mt-3">
+    <h3>FnF <%= Time.new.year %> Cabin Registration</h3>
+    Welcome to the Friends and Family Accommodation Registration System (a.k.a. FnF 2018)! We are currently registering
+    people who are interested in renting a room in a cabin for this year's FnF Campout. Once you register, we will verify
+    that you are eligible and place you into a signup tier, based on your contributions to the event. <%= link_to 'Learn about the full
   signup process', home_path %>.
-  <h4 class="mt-4">Do you have to re-register if you already have a cabin sign-up account from last year?</h4>
-  <strong>YES!</strong>
-</div>
-
-<div class="post"><h3>Are you Eligible for a Cabin?</h3>
-  <ol>
-    <li>Do you already have FnF Tickets?</li>
-    <li>Are you: an attendee with medical need, a Coordinator/planner working this year’s campout, and/or an attendee
-      signed up on the staffing sheet?
-    </li>
-  </ol>
-  <div>
-    If the answer is YES to all of these questions, you're eligible! Note: in some years the ticket process is not
-    complete or the staffing sheet is not live by the time pre-registration opens. If that's the case, and you have a
-    solid belief / intention to meet the above criteria, go ahead and pre-register. We’ll confirm your status with
-    whatever information is available.
+    <h4 class="mt-4">Do you have to re-register if you already have a cabin sign-up account from last year?</h4>
+    <strong>YES!</strong>
   </div>
-</div>
 
-<div class="row mt-4">
-  <div class="col">
-    <h4>Please fill out the form below:</h4>
+  <div class="post"><h3>Are you Eligible for a Cabin?</h3>
+    <ol>
+      <li>Do you already have FnF Tickets?</li>
+      <li>Are you: an attendee with medical need, a Coordinator/planner working this year’s campout, and/or an attendee
+        signed up on the staffing sheet?
+      </li>
+    </ol>
+    <div>
+      If the answer is YES to all of these questions, you're eligible! Note: in some years the ticket process is not
+      complete or the staffing sheet is not live by the time pre-registration opens. If that's the case, and you have a
+      solid belief / intention to meet the above criteria, go ahead and pre-register. We’ll confirm your status with
+      whatever information is available.
+    </div>
   </div>
-</div>
 
-<div class="row justify-content-md-center">
-  <div class="col-md-8">
-    <%= form_for(@user) do |f| %>
-      <%= render 'layouts/error_messages' %>
-      <div class="field">
-        <%= f.label :name, 'Full Name' %>
-        <%= f.text_field :name, class: 'form control' %>
-      </div>
+  <div class="row mt-4">
+    <div class="col">
+      <h4>Please fill out the form below:</h4>
+    </div>
+  </div>
 
-      <div class="field">
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'form control' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form control' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :password_confirmation, 'Password Confirmation' %>
-        <%= f.password_field :password_confirmation, class: 'form control' %>
-      </div>
-
-      <div class="field">
-        <%= f.label :phone, 'Phone Number' %>
-        <%= f.text_field :phone, class: 'form control' %>
-      </div>
-
-      <div class="field mt-4">
-        <%= f.label :role, 'Your tier for this event' %>
-      </div>
-      <div class="field">
-        <%= f.radio_button :role, 'medical', class: 'form control' %>
-        <%= f.label :role, 'Medical:', value: 'what', class: 'same-line font-weight-bold' %>
-        <div class="description">
-          On planner’s list with reasonable medical need for accommodation. This includes medical conditions, injuries,
-          disabilities and women in the third trimester of pregnancy. We respect your privacy and ask that you provide
-          only what is needed to determine your tier. Examples: “chronic illness which requires easy access to restroom
-          facilities “ or “recent surgery requires no stairs and minimal walking.” We may follow up with you for
-          additional information within reason, which will be kept confidential. This tier is decided on a case-by-case
-          basis, at our discretion.
+  <div class="row justify-content-md-center">
+    <div class="col-md-8">
+      <%= form_for(@user) do |f| %>
+        <%= render 'layouts/error_messages' %>
+        <div class="field">
+          <%= f.label :name, 'Full Name' %>
+          <%= f.text_field :name, class: 'form control' %>
         </div>
-      </div>
-      <div class="field">
-        <%= f.radio_button :role, 'planner', class: 'form control' %>
-        <%= f.label :role, 'Coordinator/Planner:', value: 'qwer', class: 'same-line font-weight-bold' %>
-        <div class="description">
-          You are on the FnF Planners email list and are working this year’s campout.
-        </div>
-      </div>
-      <div class="field">
-        <%= f.radio_button :role, 'volunteer', class: 'form control' %>
-        <%= f.label :role, 'Other/Volunteer:', value: 'qwer', class: 'same-line font-weight-bold' %>
-        <div class="description">
-          Did you buy a ticket through a friend, and you’re working a shift, but aren't one of the Planners /
-          Coordinators? Now you can sign up for a cabin spot! Just make sure to let us know who bought your tickets /
-          what committee you are volunteering with. (And be absolutely sure that you have a ticket - there are NO
-          refunds on cabins!)
-        </div>
-      </div>
 
-      <div class="field mt-4">
-        <%= f.label :notes, 'Please describe your specific tier and any medical needs. For example, if you need ' \
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form control' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form control' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, 'Password Confirmation' %>
+          <%= f.password_field :password_confirmation, class: 'form control' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :phone, 'Phone Number' %>
+          <%= f.text_field :phone, class: 'form control' %>
+        </div>
+
+        <div class="field mt-4">
+          <%= f.label :role, 'Your tier for this event' %>
+        </div>
+        <div class="field">
+          <%= f.radio_button :role, 'medical', class: 'form control' %>
+          <%= f.label :role, 'Medical:', value: 'what', class: 'same-line' %>
+          <div class="description">
+            On planner’s list with reasonable medical need for accommodation. This includes medical conditions, injuries,
+            disabilities and women in the third trimester of pregnancy. We respect your privacy and ask that you provide
+            only what is needed to determine your tier. Examples: “chronic illness which requires easy access to restroom
+            facilities “ or “recent surgery requires no stairs and minimal walking.” We may follow up with you for
+            additional information within reason, which will be kept confidential. This tier is decided on a case-by-case
+            basis, at our discretion.
+          </div>
+        </div>
+        <div class="field">
+          <%= f.radio_button :role, 'planner', class: 'form control' %>
+          <%= f.label :role, 'Coordinator/Planner:', value: 'qwer', class: 'same-line' %>
+          <div class="description">
+            You are on the FnF Planners email list and are working this year’s campout.
+          </div>
+        </div>
+        <div class="field">
+          <%= f.radio_button :role, 'volunteer', class: 'form control' %>
+          <%= f.label :role, 'Other/Volunteer:', value: 'qwer', class: 'same-line' %>
+          <div class="description">
+            Did you buy a ticket through a friend, and you’re working a shift, but aren't one of the Planners /
+            Coordinators? Now you can sign up for a cabin spot! Just make sure to let us know who bought your tickets /
+            what committee you are volunteering with. (And be absolutely sure that you have a ticket - there are NO
+            refunds on cabins!)
+          </div>
+        </div>
+
+        <div class="field mt-4">
+          <%= f.label :notes, 'Please describe your specific tier and any medical needs. For example, if you need ' \
           'specific amenities (electricity for a CPAP, AC for a heat-related condition) or a ' \
           'specific cabin/room/bed (cabin with a wheelchair ramp, room with windows)'  %>
-        <div class="description">
-          Example: Cabins Coordinator, and signed up for 1 SC shift and 1 parking shift.
+          <div class="description">
+            Example: Cabins Coordinator, and signed up for 1 SC shift and 1 parking shift.
+          </div>
+          <%= f.text_area :notes, class: 'form control' %>
         </div>
-        <%= f.text_area :notes, class: 'form control' %>
-      </div>
 
-      <div class="field">
-        <%= f.submit "Register", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+        <div class="field">
+          <%= f.submit "Register", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
+

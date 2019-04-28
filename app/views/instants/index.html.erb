@@ -13,7 +13,7 @@
   <% @instants.each do |t| %>
       <tr data-item-id=<%= "#{t.id}" %> class="item">
         <td><%= t.description %></td>
-        <td><%= t.instant.strftime("%-d %b %Y %T %Z") %></td>
+        <td><%= t.instant.strftime("%-d %b %Y %T %Z") if t.instant %></td>
         <td>
           <%= link_to 'edit', instant_path(t) %>
         </td>
