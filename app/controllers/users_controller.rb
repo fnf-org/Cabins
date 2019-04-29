@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
     set_planner_found
     if @user.save
+      logger.info "user registered - id: #{@user.id} email: #{@user.email}"
       log_in @user
       @user.send_pre_registration_email
       flash[:success] = 'Thank you for pre-registering!'
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    logger.info "user updated - id: #{@user.id} by user #{@current_user.id}"
     if params[:password].blank?
       params.delete(:password)
       params.delete(:password_confirmation)
@@ -59,6 +61,8 @@ class UsersController < ApplicationController
       @user.send_tier_approved_email
       @user.tier_approved_email = DateTime.now
       @user.save
+
+      logger.info "admin #{@current_user.email} approved tier #{@user.tier.label} for user id: #{@user.id} email: #{@user.email}"
       flash.now[:success] = 'tier approval email sent'
     else
       flash.now[:danger] = 'please set the tier first'
@@ -84,6 +88,7 @@ class UsersController < ApplicationController
     @user.planner_found = planner.blank? ? false : true
 
     if (@user.planner_found && params[:user][:tier_id].blank?)
+      logger.info "found matching planner email and setting tier - id: #{@user.id} email: #{@user.email}"
       tier = Tier.find_by(label: 'Tier 2')
       if (@user.id.blank?)
         @user.tier = tier unless tier.nil?

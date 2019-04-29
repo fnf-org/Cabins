@@ -11,6 +11,7 @@ class ReservationsController < ApplicationController
     # check that they don't already have a reservation
     existing_reservation = Reservation.find_by_user_id(current_user.id)
     if (!is_admin? && !existing_reservation.nil?)
+      logger.info "user #{@user.id} attempted to book a second reservation"
       flash.now[:danger] = 'What are you doing, you already have a reservation!'
       @user = User.find(current_user.id)
       @error = @user
@@ -36,8 +37,10 @@ class ReservationsController < ApplicationController
     @reservation.accommodation = @accommodation
     @reservation.price = @accommodation.price
     if @reservation.save
+      logger.info "user #{current_user.id} created reservation: #{@reservation.id} against accommodation #{@accommodation.id}"
       render 'reservations/new'
     else
+      logger.info "user #{current_user.id} attempted to reserve #{@accommodation.id} but failed: #{@reservation.errors.messages.inspect}"
       redirect_to(accommodations_path, {:flash => {:danger => 'An unexpected error occurred: ' + @reservation.errors.messages.inspect }})
     end
   end
@@ -45,6 +48,7 @@ class ReservationsController < ApplicationController
   def confirmation
     @reservation = Reservation.find_by(:id => params[:id])
     if (!@reservation)
+      logger.info "user #{@user.id} missed window to confirm reservation on accommodation #{@accommodation.id}"
       redirect_to(accommodations_path, {:flash => {:danger => 'Sorry, your reservation expired because you did not confirm it within 10 minutes.'}})
       return
     end
@@ -64,9 +68,9 @@ class ReservationsController < ApplicationController
     # of the users confirm all 4, the other user needs to be rejected.
     # This should _probably_ be handled by moving quantity to the booking listing, but whatever.
     quantity_available = quantity_available?(@accommodation)
-    logger.info("quantity available: #{quantity_available}")
+    logger.info("user #{@reservation.user.id} quantity available: #{quantity_available}")
     if (quantity_available < 0)
-      logger.info("NO quantity, deleting reservation")
+      logger.info("user #{@reservation.user.id} NO quantity, deleting reservation")
       @reservation.destroy
       redirect_to(accommodations_path, {:flash => {:danger => 'Apologies, but it appears as though someone else has booked that, please try again.'}})
       return
@@ -77,6 +81,7 @@ class ReservationsController < ApplicationController
     @reservation.confirmed_time = DateTime.now
 
     if @reservation.save
+      logger.info("user #{@reservation.user.id} confirmed reservation #{@reservation.id} by user #{@current_user.id}")
       @reservation.send_booking_confirmation_email
       render 'confirmation'
     else
@@ -90,10 +95,8 @@ class ReservationsController < ApplicationController
       query.where('user_id=?', current_user.id)
     end
 
-    @reservation = query
-    if (@reservation)
-      @reservation.first().destroy
-    end
+    logger.info("user #{current_user.id} canceled #{params[:id]} admin? #{is_admin?}")
+    query.first().destroy
 
     redirect_to accommodations_path
   end
@@ -123,6 +126,7 @@ class ReservationsController < ApplicationController
   def delete
     @reservation = Reservation.find(params[:id])
     @reservation.destroy
+    logger.info("user #{current_user.id} deleted #{params[:id]} admin? #{is_admin?}")
     flash[:success] = "reservation #{@reservation.id} deleted"
 
     index
@@ -139,6 +143,7 @@ class ReservationsController < ApplicationController
     @error = @reservation # tell _error_messages.html.erb to use this object for form errors
 
     if @reservation.update_attributes(reservation_params) && @reservation.update(paid_date: DateTime.now(), processed_by_user_id: current_user.id)
+      logger.info("user #{current_user.id} marked reservation #{@reservation.id} paid")
       flash[:success] = "reservation #{@reservation.id} marked as paid"
       index
       @reservation.send_paid_confirmation_email

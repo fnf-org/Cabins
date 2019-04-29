@@ -15,6 +15,7 @@ class TiersController < ApplicationController
     @error = @tier # tell _error_messages.html.erb to use this object for form errors
 
     if @tier.update_attributes(tier_params)
+      logger.info("user #{current_user.id} updated tier #{@tier.id}")
       flash[:success] = 'tier updated'
       index
       redirect_to tiers_path
@@ -34,7 +35,7 @@ class TiersController < ApplicationController
   end
 
   def tier_open_email_send
-    logger.info("sending open email")
+    logger.info("user #{current_user.id} sending open email")
     @tier = Tier.find(params[:id])
     @error = @tier
 

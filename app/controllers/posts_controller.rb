@@ -50,6 +50,7 @@ class PostsController < ApplicationController
     @error = @post # tell _error_messages.html.erb to use this object for form errors
 
     if @post.save
+      logger.info("user #{current_user.id} created post #{@post.id} in category #{@category}")
       flash.now[:success] = "#{@category} post created!"
       show_posts
     else
@@ -68,6 +69,7 @@ class PostsController < ApplicationController
     @error = @post # tell _error_messages.html.erb to use this object for form errors
 
     if @post.update_attributes(post_params)
+      logger.info("user #{current_user.id} updated post #{@post.id} in category #{@category}")
       flash.now[:success] = 'post updated'
       show_posts
     else
@@ -110,6 +112,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @category = @post.category
     @post.destroy
+    logger.info("user #{current_user.id} deleted post #{@post.id} in category #{@category}")
     flash.now[:success] = "post deleted"
     show_posts
   end
