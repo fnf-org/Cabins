@@ -29,7 +29,7 @@ module ApplicationHelper
     end
   end
 
-  def user_has_reservation
+  def user_reservation?
     Reservation.find_by_user_id(session[:user_id]).nil? ? false : true
   end
 

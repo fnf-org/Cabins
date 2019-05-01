@@ -6,8 +6,8 @@
 
 <div class="row pt-3">
   <div class="col-6 offset-3">
-    <%= link_to tier_open_email_confirm_path(1), :method => :patch do %>
-      <button type="button" class="btn btn-info w-100">Close Registration</button>
+    <%= link_to instant_path(Instant.find_by(name: Instant::INSTANT_REGISTRATIONS_CLOSED).id), :method => :get do %>
+      <button type="button" class="btn btn-info w-100">Close Registrations</button>
     <% end %>
   </div>
 </div>

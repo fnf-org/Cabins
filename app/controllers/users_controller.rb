@@ -48,7 +48,7 @@ class UsersController < ApplicationController
         redirect_to registrations_path
       else
         @posts = Post.where(category: 'home').order(display_order: :asc, id: :asc)
-        render 'blog/index'
+        redirect_to home_path
       end
     else
       render 'show'
