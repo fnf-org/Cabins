@@ -13,9 +13,8 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.search(params)
-    rv = where('confirmed_time IS NOT NULL')
-          .joins("LEFT OUTER JOIN users u ON u.id=reservations.user_id")
-          .joins("LEFT OUTER JOIN accommodations a ON a.id=reservations.accommodation_id")
+    rv = joins("LEFT OUTER JOIN users u ON u.id=reservations.user_id")
+             .joins("LEFT OUTER JOIN accommodations a ON a.id=reservations.accommodation_id")
 
     if params[:search]
       parm = "%#{params[:search]}%"

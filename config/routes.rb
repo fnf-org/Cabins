@@ -22,10 +22,11 @@ Rails.application.routes.draw do
   get 'accommodations/:id' => 'accommodations#show', as: 'accommodation'
   patch 'accommodations/:id' => 'accommodations#update'
 
-  post 'reserve/:accommodation_id' => 'reservations#create', as: 'reserve'
-  patch 'reservations/:id/confirmation' => 'reservations#confirmation', as: 'reservation'
-  put 'reservations/:id/cancel' => 'reservations#cancel'
+  post 'quantity/:accommodation_id' => 'reservations#quantity', as: 'quantity'
+  post 'confirmation/:accommodation_id' => 'reservations#confirmation', as: 'confirmation'
   get 'reservations/:id' => 'reservations#show', as: 'edit_reservation'
+  patch 'reservations/:id' => 'reservations#update', as: 'reservation'
+  put 'reservations/:id/cancel' => 'reservations#cancel'
 
   get 'users/new', as: 'signup'
   post 'users' => 'users#create'
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
 
   get 'admin/registrations' => 'registrations#index', as: 'registrations'
   get 'users/:id' => 'users#show', as: 'user'
+  get 'users/:id/reservations' => 'users#reservations', as: 'user_reservations'
   patch 'users/:id' => 'users#update'
   patch 'users/:id/tier_approved' => 'users#tier_approved', as: 'tier_approved'
 

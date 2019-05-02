@@ -1,14 +1,14 @@
-<div class="row">
-  <div class="col-md-10 offset-md-1 offset-xs-0 accommodation mt-1">
-    <% if @reservation.user %>
-      <h4><%= @reservation.user.name %></h4>
+<div class="row ">
+  <div class="col bg-white border rounded p-3">
+    <% if @user %>
+      <h4><%= @user.name %></h4>
       <div class="row pl-2">
         <div class="col-4">email:</div>
-        <div class="col-8"><%= @reservation.user.email %></div>
+        <div class="col-8"><%= @user.email %></div>
       </div>
       <div class="row pl-2">
         <div class="col-4">phone:</div>
-        <div class="col-8"><%= @reservation.user.phone %></div>
+        <div class="col-8"><%= @user.phone %></div>
       </div>
     <% end %>
 

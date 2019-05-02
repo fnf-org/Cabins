@@ -29,6 +29,16 @@ class UsersController < ApplicationController
     @error = @user
   end
 
+  def reservations
+    @user = User.find(params[:id])
+    @error = @user
+
+    if @user.reservations.empty?
+      redirect_to accommodations_path
+      return
+    end
+  end
+
   def update
     logger.info "user updated - id: #{@user.id} by user #{@current_user.id}"
     if params[:password].blank?

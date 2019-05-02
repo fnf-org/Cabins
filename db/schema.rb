@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180701000001) do
+ActiveRecord::Schema.define(version: 20190501045036) do
 
   create_table "accommodation_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "description"
@@ -100,7 +100,6 @@ ActiveRecord::Schema.define(version: 20180701000001) do
     t.integer  "quantity",                                      null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
-    t.datetime "confirmed_time"
     t.decimal  "payment_amount",       precision: 12, scale: 2
     t.integer  "payment_types_id"
     t.index ["payment_types_id"], name: "index_reservations_on_payment_types_id", using: :btree

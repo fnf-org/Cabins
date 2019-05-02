@@ -20,13 +20,14 @@
           <strong>reserved by management</strong>
         </div>
       <% end %>
-      <% if (quantity_available?(l) > 0) %>
+      <% quantity_available = quantity_available?(l) %>
+      <% if quantity_available > 0 && allowed_to_book? %>
         <div class="text-right accommodationhighlight">
           <div class="book">
             <div class="price"><%= number_to_currency l.price %></div>
-            <div class="quantity hidden-xs"><%= quantity_available?(l) %> available</div>
+            <div class="quantity hidden-xs"><%= quantity_available %> available</div>
             <% if can_book(l) %>
-              <%= button_to 'book!', {:controller => 'reservations', :action => "create", :accommodation_id => l.id}, :method => :post, class: 'btn btn-primary' %>
+              <%= button_to 'book!', {:controller => 'reservations', :action => (quantity_available > 1 || is_admin? ? 'quantity' : 'confirmation'), :accommodation_id => l.id}, :method => :post, class: 'btn btn-primary' %>
             <% end %>
           </div>
         </div>

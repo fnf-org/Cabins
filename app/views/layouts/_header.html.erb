@@ -11,7 +11,8 @@
       <li class="nav-item active"><%= link_to 'FAQ', faq_path, class: 'nav-link' %></li>
       <li class="nav-item active"><%= link_to 'book!', accommodations_path, class: 'nav-link' %></li>
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">cabin info</a>
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">cabin
+          info</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to 'Saratoga Springs map', map_path, class: 'dropdown-item' %>
           <%= link_to 'Saratoga Springs kitchen guide', kitchen_path, class: 'dropdown-item' %>
@@ -48,6 +49,10 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <% if logged_in? %>
             <%= link_to 'profile', user_path(@current_user), class: 'dropdown-item' %>
+            <% logger.info("reservations: #{@current_user.reservations} - #{@current_user.reservations.empty?}") %>
+            <% if !@current_user.reservations.empty? %>
+              <%= link_to 'reservations', user_reservations_path(@current_user), class: 'dropdown-item' %>
+            <% end %>
             <%= link_to 'log out', logout_path, method: :delete, class: 'dropdown-item' %>
           <% else %>
             <%= link_to 'login', login_path, class: 'dropdown-item' %>

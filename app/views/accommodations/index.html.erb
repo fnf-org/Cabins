@@ -2,6 +2,14 @@
   <%= render 'layouts/status' %>
 <% end %>
 
+<% if !allowed_to_book? %>
+  <div class="row pt-3">
+    <div class="col-10 offset-1 status alert-info">
+      Reservations are limited to one per user. If you would like to cancel your existing reservation and book another one, click <%= link_to 'here', user_path(current_user) %>.
+    </div>
+  </div>
+<% end %>
+
 <div class="row pt-3">
   <div class="col-md-12">
     <h3>Lodging</h3>
@@ -64,7 +72,7 @@
   </div><!-- /.container-fluid -->
 </nav><!-- end search nav -->
 
-<div class="row">
+<div class="row mt-2">
   <div id="accommodations" class="col-md-12 contentcolumn">
     <%= render 'accommodations' %>
   </div><!-- end content column-->

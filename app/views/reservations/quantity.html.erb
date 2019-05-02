@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col p-3">
+    <h3>You've requested to reserve:</h3>
+  </div>
+</div>
+
+<%= render 'accommodation' %>
+
+<%= form_for(@reservation, :url => {:action => "confirmation"}) do |f| %>
+  <div class="row justify-content-md-center">
+    <div class="col-md-10">
+      <%= render 'layouts/error_messages' %>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col">
+      <% if @quantity_available > 1 %>
+        <%= f.label "#{:quantity} (limit #{@quantity_available > 4 ? 4 : @quantity_available})" %><br>
+        <%= f.number_field :quantity, value: 1, min: 1, max: (@quantity_available > 4 ? 4 : @quantity_available), onchange: "$('#totalPrice').text('$' + ($('#reservation_quantity')[0].valueAsNumber * #{@reservation.accommodation.price}).toFixed(2));" %>
+      <% else %>
+        <%= hidden_field(:reservation, :quantity) %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if is_admin? %>
+    <div class="row justify-content-md-center admin alert-warning mt-4">
+      <div class="col-md-11">
+        <h4>[ADMINS ONLY] Select a user for this reservation:</h4>
+        <%= f.collection_select :user_id, User.all, :id, :name %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row justify-content-center">
+    <div class="col-4 text-center">
+      <%= f.submit 'Confirm', class: 'btn btn-primary', :onclick => "buttonClicked = true;" %>
+    </div>
+<% end %>
+<div class="col-4 text-center">
+  <%= button_to 'Cancel', {:controller => 'accommodations', :action => "index"}, :method => :get, class: 'btn btn-primary', :onclick => "buttonClicked = true;" %>
+</div>
+</div>

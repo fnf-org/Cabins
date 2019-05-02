@@ -1,31 +1,23 @@
 class ReservationsController < ApplicationController
   before_action :require_admin,   only: [:index, :update, :delete]
-  before_action :purge_expired_reservations
 
   def new
     @reservation = Reservation.new
     @error = @reservation
   end
 
-  def create
+  def quantity
     # check that they don't already have a reservation
     existing_reservation = Reservation.find_by_user_id(current_user.id)
     if (!is_admin? && !existing_reservation.nil?)
-      logger.info "user #{@user.id} attempted to book a second reservation"
-      flash.now[:danger] = 'What are you doing, you already have a reservation!'
+      logger.info "user #{current_user.id} attempted to book a second reservation"
+      flash.now[:danger] = 'Reservations are limited to one per user.'
       @user = User.find(current_user.id)
       @error = @user
-      render 'users/show'
+      redirect_to user_path(current_user.id)
       return
     end
 
-    # create the initial reservation record
-    @reservation = Reservation.new
-    @reservation.quantity = 1
-    @reservation.user = current_user
-    @error = @reservation
-
-    # check that the accommodation is still available
     @accommodation = Accommodation.find(params[:accommodation_id])
     @quantity_available = quantity_available?(@accommodation)
 
@@ -34,18 +26,57 @@ class ReservationsController < ApplicationController
       return
     end
 
+    @reservation = Reservation.new
+    @reservation.quantity = 1
+    @reservation.user = current_user
+    @reservation.accommodation = @accommodation
+    @error = @reservation
+    render 'reservations/quantity'
+  end
+
+  def confirmation
+    # TODO handle accidental refreshes
+    # check that they don't already have a reservation
+    existing_reservation = Reservation.find_by_user_id(current_user.id)
+    if (!is_admin? && !existing_reservation.nil?)
+      logger.info "user #{current_user.id} attempted to book a second reservation"
+      flash.now[:danger] = 'Reservations are limited to one per user.'
+      @user = User.find(current_user.id)
+      @error = @user
+      render 'users/show'
+      return
+    end
+
+    # create the initial reservation record
+    @reservation = Reservation.new
+    @reservation.quantity = params[:reservation] && params[:reservation][:quantity] ? params[:reservation][:quantity] : 1
+    @reservation.user = is_admin? && params[:reservation] && params[:reservation][:user_id] ? User.find(params[:reservation][:user_id]) : current_user
+    @user = @reservation.user
+    logger.info("making reservation for user #{@reservation.user.id} - #{@reservation.user.name}")
+    @error = @reservation
+
+    # check that the accommodation is still available
+    @accommodation = Accommodation.find(params[:accommodation_id])
+    @quantity_available = quantity_available?(@accommodation)
+    @quantity_requested = params[:requested_quantity].nil? ? 0 : params[:requested_quantity]
+
+    if (@quantity_available <= @quantity_requested)
+      redirect_to(accommodations_path, {:flash => {:danger => "Sorry, looks like someone grabbed that one out from under you. There are #{@quantity_available} spaces available for that booking"}})
+      return
+    end
+
     @reservation.accommodation = @accommodation
     @reservation.price = @accommodation.price
     if @reservation.save
       logger.info "user #{current_user.id} created reservation: #{@reservation.id} against accommodation #{@accommodation.id}"
-      render 'reservations/new'
+      render 'reservations/confirmation'
     else
       logger.info "user #{current_user.id} attempted to reserve #{@accommodation.id} but failed: #{@reservation.errors.messages.inspect}"
       redirect_to(accommodations_path, {:flash => {:danger => 'An unexpected error occurred: ' + @reservation.errors.messages.inspect }})
     end
   end
 
-  def confirmation
+  def update
     @reservation = Reservation.find_by(:id => params[:id])
     if (!@reservation)
       logger.info "user #{@user.id} missed window to confirm reservation on accommodation #{@accommodation.id}"
@@ -64,13 +95,13 @@ class ReservationsController < ApplicationController
 
     # it's possible for 2 users to overbook dorm rooms...
     # if there are 4 available and 2 people simultaneously hit the `book!` button,
-    # The temporary reservation will only be created with a quantity of 1. If either one
+    # The temporary reservation will only be created with a confirm of 1. If either one
     # of the users confirm all 4, the other user needs to be rejected.
-    # This should _probably_ be handled by moving quantity to the booking listing, but whatever.
+    # This should _probably_ be handled by moving confirm to the booking listing, but whatever.
     quantity_available = quantity_available?(@accommodation)
-    logger.info("user #{@reservation.user.id} quantity available: #{quantity_available}")
+    logger.info("user #{@reservation.user.id} confirm available: #{quantity_available}")
     if (quantity_available < 0)
-      logger.info("user #{@reservation.user.id} NO quantity, deleting reservation")
+      logger.info("user #{@reservation.user.id} NO confirm, deleting reservation")
       @reservation.destroy
       redirect_to(accommodations_path, {:flash => {:danger => 'Apologies, but it appears as though someone else has booked that, please try again.'}})
       return
@@ -78,27 +109,29 @@ class ReservationsController < ApplicationController
 
     @reservation.price = @reservation.accommodation.price * @reservation.quantity
     @error = @reservation # tell _error_messages.html.erb to use this object for form errors
-    @reservation.confirmed_time = DateTime.now
-
     if @reservation.save
       logger.info("user #{@reservation.user.id} confirmed reservation #{@reservation.id} by user #{@current_user.id}")
       @reservation.send_booking_confirmation_email
-      render 'confirmation'
+      render 'confirm'
     else
       new
     end
   end
 
   def cancel
-    query = Reservation.where('id=? AND confirmed_time IS NULL', params[:id])
-    if (!is_admin?)
-      query.where('user_id=?', current_user.id)
+    @reservation = Reservation.find_by(:id => params[:id])
+    logger.info("user #{current_user.id} canceled #{params[:id]} admin? #{is_admin?}")
+
+    if (!@reservation || !@reservation.destroy)
+      logger.warn("failed to cancel reservation #{params[:id]} user: #{current_user.id}")
+      flash[:danger] = "failed to cancel reservation"
     end
 
-    logger.info("user #{current_user.id} canceled #{params[:id]} admin? #{is_admin?}")
-    query.first().destroy
-
-    redirect_to accommodations_path
+    if (params[:prev])
+      redirect_to params[:prev]
+    else
+      redirect_to accommodations_path
+    end
   end
 
   # ADMIN -----------------------------------

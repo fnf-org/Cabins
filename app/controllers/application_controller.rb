@@ -32,19 +32,17 @@ class ApplicationController < ActionController::Base
         "(SELECT accommodation_id, SUM(quantity) AS reserved_count FROM reservations WHERE accommodation_id=#{accommodation.id} GROUP BY accommodation_id) "\
         "r ON r.accommodation_id=a.id WHERE a.id=#{accommodation.id}")
 
+    rv = 0
     if (result[0]['hold'].to_i.eql?(0) || is_admin?)
       return result[0]['quantity'].to_i
     end
 
-    0
+    logger.debug("confirm check for #{accommodation.id} --> #{rv}")
+    rv
   end
 
   helper_method :sku
   def sku(reservation)
     "#{reservation.id}-#{reservation.accommodation.building.id}-#{reservation.accommodation.id}-#{reservation.user_id}"
-  end
-
-  def purge_expired_reservations
-    Reservation.where('confirmed_time IS NULL AND created_at < ?', Time.now - (60 * 5)).destroy_all
   end
 end

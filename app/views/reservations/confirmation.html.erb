@@ -1,58 +1,76 @@
-<div class="post">
-  <h3>It's almost yours!</h3>
-  Your reservation is on hold pending payment. If we don't receive payment
-  by <%= instant_string(Instant::INSTANT_PAYMENT_DUE) %>, the hold on your reservation will be released. Please be nice
-  and send your payment in early.
+<div class="row">
+  <div class="col bg-white border rounded p-3">
+    <h3>Reservation confirmed... and... It's almost yours!</h3>
+    Your reservation is on hold pending payment. If we don't receive payment
+    by <%= instant_string(Instant::INSTANT_PAYMENT_DUE) %>, the hold on your reservation will be released. Please be
+    nice and send your payment in early.
+    <p>
+    </p>
+  </div>
 </div>
 
-<div class="post"><h3>You have asked to reserve...</h3></div>
-
+<div class="row">
+  <div class="col p-3">
+    <h3>You have asked to reserve...</h3>
+  </div>
+</div>
 <%= render 'accommodation' %>
 
-<div class="post mt=4">
-  <h3>Now in order to keep it, you must pay us via one of these options...</h3>
-  <h4 class="mt-4">Payment Option 1 - PayPal</h4>
-  <p>
-    Please complete your payment with PayPal for : <%= number_to_currency @reservation.price %><br/>
-    Please include a note with your payment in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room
-    <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> --> <!-- TEST -->
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_xclick">
-    <!-- <input type="hidden" name="business" value="FCNX9KTXRNJ7S"> --> <!-- TEST -->
-    <input type="hidden" name="business" value="ZJJPT64U2437J">
-    <input type="hidden" name="lc" value="US">
-    <input type="hidden" name="item_name" value="<%= @reservation.accommodation.label %>">
-    <input type="hidden" name="item_number" value="SKU: <%= sku(@reservation) %>">
-    <input type="hidden" name="amount" value="<%= @reservation.price %>">
-    <input type="hidden" name="currency_code" value="USD">
-    <input type="hidden" name="button_subtype" value="services">
-    <input type="hidden" name="no_note" value="1">
-    <input type="hidden" name="no_shipping" value="2">
-    <input type="hidden" name="rm" value="1">
-    <input type="hidden" name="return" value="<%= accommodations_url %>">
-    <input type="hidden" name="cancel_return" value="<%= home_url %>">
-    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-  </form>
+<div class="row">
+  <div class="col p-3">
+    <h3>Now in order to keep it, you must pay us via one of these options...</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col bg-white border rounded p-3">
+    <h4 class="mt-4">Payment Option 1 - PayPal</h4>
+    <p>
+      Please complete your payment with PayPal for : <%= number_to_currency @reservation.price %><br/>
+      Please include a note with your payment in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room
+      <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> --> <!-- TEST -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+      <input type="hidden" name="cmd" value="_xclick">
+      <!-- <input type="hidden" name="business" value="FCNX9KTXRNJ7S"> --> <!-- TEST -->
+      <input type="hidden" name="business" value="ZJJPT64U2437J">
+      <input type="hidden" name="lc" value="US">
+      <input type="hidden" name="item_name" value="<%= @reservation.accommodation.label %>">
+      <input type="hidden" name="item_number" value="SKU: <%= sku(@reservation) %>">
+      <input type="hidden" name="amount" value="<%= @reservation.price %>">
+      <input type="hidden" name="currency_code" value="USD">
+      <input type="hidden" name="button_subtype" value="services">
+      <input type="hidden" name="no_note" value="1">
+      <input type="hidden" name="no_shipping" value="2">
+      <input type="hidden" name="rm" value="1">
+      <input type="hidden" name="return" value="<%= accommodations_url %>">
+      <input type="hidden" name="cancel_return" value="<%= home_url %>">
+      <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    </form>
 
-  <h4 class="mt-4">Payment Option 2 - Snail Check</h4>
-  <p>Please make your payment of <%= number_to_currency @reservation.price %> payable to CFAEA by check or money order,
-    and send it to the following address:</p>
+    <h4 class="mt-4">Payment Option 2 - Snail Check</h4>
+    <p>Please make your payment of <%= number_to_currency @reservation.price %> payable to CFAEA by check or money
+      order,
+      and send it to the following address:</p>
     <div class="border border-info rounded m-4 p-2">
       CFAEA
       c/o Michelle Maloy<br/>
       1366 San Bruno Avenue, Apt 2<br/>
       San Francisco, CA 94110
     </div>
-  <p>Please include a note on the check in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room</p>
-  <p>A copy of this registration hold has also been sent to you. If you have not received this in a few minutes, please
-    check your
-    spam filters for a message from 'fnfreservations@gmail.com'.</p>
-  <p>If you don’t receive the hold email, please contact
-    <a href="mailto:fnfreservations@gmail.com">fnfreservations@gmail.com</a></p>
-  <h4 class="mt-4">Payment Option 3 - Internal Transfer</h4>
-  <p>
-    If you expect to be due reimbursement from FnF for your role, please contact
-    <a href="mailto:fnfreservations@gmail.com">fnfreservations@gmail.com</a> and we will confirm the internal transfer
-  </p>
+    <p>Please include a note on the check in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room</p>
+    <p>A copy of this registration hold has also been sent to you. If you have not received this in a few minutes,
+      please
+      check your
+      spam filters for a message from 'fnfreservations@gmail.com'.</p>
+    <p>If you don’t receive the hold email, please contact
+      <a href="mailto:fnfreservations@gmail.com">fnfreservations@gmail.com</a></p>
+    <h4 class="mt-4">Payment Option 3 - Internal Transfer</h4>
+    <p>
+      If you expect to be due reimbursement from FnF for your role, please contact
+      <a href="mailto:fnfreservations@gmail.com">fnfreservations@gmail.com</a> and we will confirm the internal transfer
+    </p>
+    <div class="float-right">
+      <%= button_to 'Cancel Reservation', {:controller => 'reservations', :action => "cancel", :id => @reservation.id, :prev => '/accommodations'}, data: {confirm: 'Are you sure you want to cancel? This will delete your reservation.'}, :method => :put, class: 'btn btn-primary', :onclick => "buttonClicked = true;" %>
+    </div>
+  </div>
 </div>

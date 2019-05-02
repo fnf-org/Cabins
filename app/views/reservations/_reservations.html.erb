@@ -33,7 +33,7 @@
           <% if r.paid_date.nil? %>
             <%= link_to 'record&nbsp;payment'.html_safe, admin_payment_reservation_path(r) %><br/>
           <% end %>
-          <%= link_to 'delete', admin_delete_reservation_path(r), method: :delete, data: {confirm: 'Kinda harsh to swipe someone\'s bed, are you sure you want to delete this reservation?'} %>
+          <%= link_to 'delete', admin_delete_reservation_path(r), method: :delete, data: {confirm: 'Are you sure you want to delete this reservation?'} %>
         </td>
       </tr>
   <% end %>
