@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
     # TODO handle accidental refreshes
     # check that they don't already have a reservation
     existing_reservation = Reservation.find_by_user_id(current_user.id)
-    if (!is_admin? && !existing_reservation.nil?)
+    if !is_admin? && !existing_reservation.nil?
       logger.info "user #{current_user.id} attempted to book a second reservation"
       flash.now[:danger] = 'Reservations are limited to one per user.'
       @user = User.find(current_user.id)
@@ -58,10 +58,11 @@ class ReservationsController < ApplicationController
     # check that the accommodation is still available
     @accommodation = Accommodation.find(params[:accommodation_id])
     @quantity_available = quantity_available?(@accommodation)
-    @quantity_requested = params[:requested_quantity].nil? ? 0 : params[:requested_quantity]
+    @quantity_requested = params[:reservation] && params[:reservation][:quantity] ? params[:reservation][:quantity].to_i : 0
 
-    if (@quantity_available <= @quantity_requested)
-      redirect_to(accommodations_path, {:flash => {:danger => "Sorry, looks like someone grabbed that one out from under you. There are #{@quantity_available} spaces available for that booking"}})
+    logger.info("user #{current_user.id} quantity available: #{@quantity_available} requested: #{@quantity_requested}")
+    if (@quantity_available < @quantity_requested)
+      redirect_to(accommodations_path, {:flash => {:danger => "Sorry, looks like someone grabbed that one out from under you. There are #{quantity_available?(@accommodation)} spaces left for that booking"}})
       return
     end
 

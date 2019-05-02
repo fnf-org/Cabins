@@ -8,7 +8,7 @@ module InstantHelper
   def instant_passed(instant_name)
     i = Instant.find_by(name: instant_name)
     now = DateTime.now.utc
-    logger.debug "instant time: #{i.instant.utc} now: #{now}"
-    i.instant ? now > i.instant.utc : false
+    logger.debug "instant time: #{i.instant.nil? ? [nil] : i.instant.utc} now: #{now}"
+    i.instant.nil? ? false : now > i.instant.utc
   end
 end

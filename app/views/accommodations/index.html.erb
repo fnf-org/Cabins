@@ -5,7 +5,7 @@
 <% if !allowed_to_book? %>
   <div class="row pt-3">
     <div class="col-10 offset-1 status alert-info">
-      Reservations are limited to one per user. If you would like to cancel your existing reservation and book another one, click <%= link_to 'here', user_path(current_user) %>.
+      Reservations are limited to one per user. If you would like to cancel your existing reservation and book another one, click <%= link_to 'here', user_reservations_path(current_user) %>.
     </div>
   </div>
 <% end %>
