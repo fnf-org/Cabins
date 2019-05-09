@@ -154,7 +154,7 @@ Accommodation.create(accommodation_type: semi_private_room, building: building, 
                      label: "Cabin 2 (RA staff) - Room B", description: 'Front of cabin. 2x queen (bunked) + 1x full (futon)',
                      occupancy: 6, price: 500.0, quantity: 1, air_conditioning: false, bathroom: true, kitchen: false)
 Accommodation.create(accommodation_type: semi_private_room, building: building, hold: true,
-                     label: "Cabin 2 (RA staff) - Room C", description: 'Back of cabin. 2x queen (bunked)',
+                     label: "Cabin 2 (RA staff) - Room C", description: 'Back of cabin. 2x full',
                      occupancy: 4, price: 370.0, quantity: 1, air_conditioning: false, bathroom: true, kitchen: false)
 Accommodation.create(accommodation_type: semi_private_room, building: building, hold: true,
                      label: "Cabin 2 (RA staff) - Room D", description: 'Back of cabin. 2x twin',
