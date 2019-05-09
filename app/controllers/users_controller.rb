@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:tier_approved]
 
   def new
+    redirect_to user_path(current_user) if current_user
     @user = User.new
     @error = @user # tell _error_messages.html.erb to use this object for form errors
   end
