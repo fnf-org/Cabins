@@ -186,7 +186,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  autoprefixer-rails (= 9.5.1)
   bcrypt (= 3.1.11)
   bootstrap (~> 4.1.1)
   bundler (~> 2.0, >= 2.0.1)

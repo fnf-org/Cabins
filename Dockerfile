@@ -11,9 +11,8 @@ RUN mkdir -p $RAILS_ROOT
 # Set working directory, where the commands will be ran:
 WORKDIR $RAILS_ROOT
 
-# gems
-# this used to copy the Gemfile.lock, but I don't think it's necessary and
-COPY Gemfile ./
+# gem-ey gems
+COPY Gemfile Gemfile.lock ./
 RUN gem install bundler
 RUN bundle install
 
