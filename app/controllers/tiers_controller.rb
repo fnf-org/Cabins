@@ -39,19 +39,19 @@ class TiersController < ApplicationController
     @tier = Tier.find(params[:id])
     @error = @tier
 
-    for u in @tier.users do
-      UserMailer.tier_open_email(u).deliver_now
-      EmailLog.create(email_type: 'tier_open_email', user: u, tier: @tier)
-    end
+    UserMailer.tier_open_email(@tier, @tier.users.map {|u| u.email}).deliver_now
+    @tier.users.each {|u| EmailLog.create(email_type: 'tier_open_email', user: u, tier: @tier)}
+
     flash[:success] = "tier opening email sent for #{@tier.description} tier."
     index
-    @tier.sent_date=Time.new
+    @tier.sent_date = Time.new
     @tier.save
     redirect_to tiers_path
   end
 
   private
-    def tier_params
-      params.require(:tier).permit(:label, :description, :available, :email_text, :email_html, :subject)
-    end
+
+  def tier_params
+    params.require(:tier).permit(:label, :description, :available, :email_text, :email_html, :subject)
+  end
 end
