@@ -14,7 +14,43 @@
     <h3>You have asked to reserve...</h3>
   </div>
 </div>
+
 <%= render 'accommodation' %>
+
+<button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#noteModal">
+  Add a note to your reservation
+</button>
+
+<!-- Note Modal -->
+<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="noteModal">Add a note to your reservation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please let us know anything needed about your reservation. This could be a paypal transaction ID or who is staying in the room with you.
+
+        <%= form_for @reservation, :url => reservation_note_path(@reservation.id) do |f| %>
+          <div class="row">
+            <div class="col">
+              <div class="field">
+                <%= f.text_area :note, class: 'form control' %>
+              </div>
+
+              <div class="actions">
+                <%= f.submit "Update Note", class: 'btn btn-primary mr-2' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row">
   <div class="col p-3">

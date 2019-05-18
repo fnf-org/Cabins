@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   post 'quantity/:accommodation_id' => 'reservations#quantity', as: 'quantity'
   post 'confirmation/:accommodation_id' => 'reservations#confirmation', as: 'confirmation'
   get 'reservations/:id' => 'reservations#show', as: 'edit_reservation'
-  patch 'reservations/:id' => 'reservations#update', as: 'reservation'
+  patch 'reservations/:id' => 'reservations#add_note', as: 'reservation_note'
   put 'reservations/:id/cancel' => 'reservations#cancel'
 
   get 'users/new', as: 'signup'

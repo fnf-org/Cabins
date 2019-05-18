@@ -37,10 +37,23 @@
           <div class="col-8"><%= r.accommodation.air_conditioning.eql?(true) ? 'yes' : 'no' %></div>
         </div>
 
+        <h4>Cost</h4>
+        <div class="row">
+          <div class="col-3 offset-1">Price:</div>
+          <div class="col-8"><%= number_to_currency r.accommodation.price %></div>
+        </div>
+        <div class="row">
+          <div class="col-3 offset-1">Quantity:</div>
+          <div class="col-8"><%= r.quantity %></div>
+        </div>
+        <div class="row">
+          <div class="col-3 offset-1">Total:</div>
+          <div class="col-8"><%= number_to_currency r.price %></div>
+        </div>
+
         <div class="row mt-4">
           <div class="col">
-            <h4><%= number_to_currency r.price %></h4>
-            <div class="book">
+            <div class="col-11 offset-1">
               <% if r.paid_date.nil? %>
                 <p>Pay us all the money!</p>
                 <p>Please include a note with your payment in the form of 'CABIN: xxxxx', where xxxxx is the
@@ -69,9 +82,56 @@
             </div>
           </div>
         </div>
+
+        <h4>Note for the cabins team:</h4>
+        <div class="row">
+          <div class="col">
+            <%= r.note %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <%= button_to 'Cancel Reservation', {:controller => 'reservations', :action => "cancel", :id => r.id, :prev => "/users/#{current_user.id}/reservations"}, data: {confirm: 'Are you sure you want to cancel? This will delete your reservation.'}, :method => :put, class: 'float-right btn btn-primary', :onclick => "buttonClicked = true;" %>
+            <button type="button" class="btn btn-primary mr-2 float-right" data-toggle="modal" data-target="#note-<%= r.id %>">
+              Edit Reservation Note
+            </button>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col mb-2">
-            <%= button_to 'Cancel Reservation', {:controller => 'reservations', :action => "cancel", :id => r.id, :prev => "/users/#{current_user.id}/reservations"}, data: {confirm: 'Are you sure you want to cancel? This will delete your reservation.'}, :method => :put, class: 'float-right btn btn-primary', :onclick => "buttonClicked = true;" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- note modal-->
+    <div class="modal fade" id="note-<%= r.id %>" tabindex="-1" role="dialog" aria-labelledby="noteModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noteModal">Add a note to your reservation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Please let us know anything needed about your reservation. This could be a paypal transaction ID or who is staying in the room with you.
+
+            <%= form_for r, :url => reservation_note_path(r.id) do |f| %>
+              <div class="row">
+                <div class="col">
+                  <div class="field">
+                    <%= f.text_area :note, class: 'form control' %>
+                  </div>
+
+                  <div class="actions">
+                    <%= f.submit "Update Note", class: 'btn btn-primary mr-2' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

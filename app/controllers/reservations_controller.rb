@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :require_admin,   only: [:index, :update, :delete]
+  before_action :require_admin, only: [:index, :delete]
 
   def new
     @reservation = Reservation.new
@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
       return
     end
 
-    # create the initial reservation record
+    # create the reservation record
     @reservation = Reservation.new
     @reservation.quantity = params[:reservation] && params[:reservation][:quantity] ? params[:reservation][:quantity] : 1
     @reservation.user = is_admin? && params[:reservation] && params[:reservation][:user_id] ? User.find(params[:reservation][:user_id]) : current_user
@@ -67,53 +67,33 @@ class ReservationsController < ApplicationController
     end
 
     @reservation.accommodation = @accommodation
-    @reservation.price = @accommodation.price
+    @reservation.price = @accommodation.price * @reservation.quantity
     if @reservation.save
       logger.info "user #{current_user.id} created reservation: #{@reservation.id} against accommodation #{@accommodation.id}"
       render 'reservations/confirmation'
     else
       logger.info "user #{current_user.id} attempted to reserve #{@accommodation.id} but failed: #{@reservation.errors.messages.inspect}"
-      redirect_to(accommodations_path, {:flash => {:danger => 'An unexpected error occurred: ' + @reservation.errors.messages.inspect }})
+      redirect_to(accommodations_path, {:flash => {:danger => 'An unexpected error occurred: ' + @reservation.errors.messages.inspect}})
     end
   end
 
-  def update
+  def add_note
     @reservation = Reservation.find_by(:id => params[:id])
     if (!@reservation)
-      logger.info "user #{@user.id} missed window to confirm reservation on accommodation #{@accommodation.id}"
-      redirect_to(accommodations_path, {:flash => {:danger => 'Sorry, your reservation expired because you did not confirm it within 10 minutes.'}})
+      logger.info "user #{current_user.id} - could not find reservation #{params[:id]}"
+      redirect_to(accommodations_path, {:flash => {:danger => 'Sorry, we could not find that reservation.'}})
       return
     end
     @error = @reservation
-    @accommodation = @reservation.accommodation
+    @reservation.note = params[:reservation][:note]
 
-    if (is_admin? && params[:reservation][:user_id])
-      @reservation.user = User.find(params[:reservation][:user_id])
-    else
-      @reservation.user = current_user
-    end
-    @reservation.quantity = params[:reservation][:quantity]
-
-    # it's possible for 2 users to overbook dorm rooms...
-    # if there are 4 available and 2 people simultaneously hit the `book!` button,
-    # The temporary reservation will only be created with a confirm of 1. If either one
-    # of the users confirm all 4, the other user needs to be rejected.
-    # This should _probably_ be handled by moving confirm to the booking listing, but whatever.
-    quantity_available = quantity_available?(@accommodation)
-    logger.info("user #{@reservation.user.id} confirm available: #{quantity_available}")
-    if (quantity_available < 0)
-      logger.info("user #{@reservation.user.id} NO confirm, deleting reservation")
-      @reservation.destroy
-      redirect_to(accommodations_path, {:flash => {:danger => 'Apologies, but it appears as though someone else has booked that, please try again.'}})
-      return
-    end
-
-    @reservation.price = @reservation.accommodation.price * @reservation.quantity
-    @error = @reservation # tell _error_messages.html.erb to use this object for form errors
     if @reservation.save
-      logger.info("user #{@reservation.user.id} confirmed reservation #{@reservation.id} by user #{@current_user.id}")
-      @reservation.send_booking_confirmation_email
-      render 'confirm'
+      logger.info("user #{@reservation.user.id} updated note on reservation #{@reservation.id} by user #{current_user.id}")
+      if is_admin?
+        redirect_to accommodations_path
+      else
+        redirect_to user_reservations_path(current_user.id)
+      end
     else
       new
     end
@@ -188,7 +168,8 @@ class ReservationsController < ApplicationController
   end
 
   private
-    def reservation_params
-      params.require(:reservation).permit(:price, :quantity, :accommodation_id, :payment_amount, :payment_types_id)
-    end
+
+  def reservation_params
+    params.require(:reservation).permit(:price, :quantity, :accommodation_id, :payment_amount, :payment_types_id, :note)
+  end
 end

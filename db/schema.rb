@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190501045036) do
+ActiveRecord::Schema.define(version: 20190518193921) do
 
   create_table "accommodation_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "description"
@@ -92,16 +92,17 @@ ActiveRecord::Schema.define(version: 20190501045036) do
   end
 
   create_table "reservations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "accommodation_id",                              null: false
+    t.integer  "accommodation_id",                                            null: false
     t.integer  "processed_by_user_id"
-    t.integer  "user_id",                                       null: false
+    t.integer  "user_id",                                                     null: false
     t.datetime "paid_date"
-    t.decimal  "price",                precision: 12, scale: 2, null: false
-    t.integer  "quantity",                                      null: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.decimal  "payment_amount",       precision: 12, scale: 2
+    t.decimal  "price",                              precision: 12, scale: 2, null: false
+    t.integer  "quantity",                                                    null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.decimal  "payment_amount",                     precision: 12, scale: 2
     t.integer  "payment_types_id"
+    t.text     "note",                 limit: 65535
     t.index ["payment_types_id"], name: "index_reservations_on_payment_types_id", using: :btree
   end
 
