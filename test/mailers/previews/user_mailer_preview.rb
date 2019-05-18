@@ -10,18 +10,17 @@ class UserMailerPreview < ActionMailer::Preview
 
   def pre_registration
     user = User.first
-    user.reset_token = User.new_token
     UserMailer.pre_registration(user)
   end
 
   def tier_approved
     user = User.first
-    user.reset_token = User.new_token
+    user.tier = Tier.first
     UserMailer.tier_approved(user)
   end
 
   def tier_open_email
     user = User.where.not('tier_id' => nil).first
-    UserMailer.tier_open_email(user)
+    UserMailer.tier_open_email(Tier.first, ['invalid@invalid.com'])
   end
 end
