@@ -49,10 +49,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <% if logged_in? %>
             <%= link_to 'profile', user_path(@current_user), class: 'dropdown-item' %>
-            <% logger.info("reservations: #{@current_user.reservations} - #{@current_user.reservations.empty?}") %>
-            <% if !@current_user.reservations.empty? %>
-              <%= link_to 'reservations', user_reservations_path(@current_user), class: 'dropdown-item' %>
-            <% end %>
+            <%= link_to 'reservations', user_reservations_path(@current_user), class: 'dropdown-item' %>
             <%= link_to 'log out', logout_path, method: :delete, class: 'dropdown-item' %>
           <% else %>
             <%= link_to 'login', login_path, class: 'dropdown-item' %>

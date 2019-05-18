@@ -35,8 +35,7 @@ class UsersController < ApplicationController
     @error = @user
 
     if @user.reservations.empty?
-      redirect_to accommodations_path
-      return
+      flash.now[:danger] = 'No reservations found for this user'
     end
   end
 
