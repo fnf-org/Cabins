@@ -41,8 +41,8 @@
       <input type="hidden" name="no_note" value="1">
       <input type="hidden" name="no_shipping" value="2">
       <input type="hidden" name="rm" value="1">
-      <input type="hidden" name="return" value="<%= accommodations_url %>">
-      <input type="hidden" name="cancel_return" value="<%= home_url %>">
+      <input type="hidden" name="return" value="<%= user_reservations_url(current_user.id) %>">
+      <input type="hidden" name="cancel_return" value="<%= user_reservations_url(current_user.id) %>">
       <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
       <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
     </form>
