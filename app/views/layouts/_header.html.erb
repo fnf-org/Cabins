@@ -15,7 +15,6 @@
           info</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to 'Saratoga Springs map', map_path, class: 'dropdown-item' %>
-          <%= link_to 'Saratoga Springs kitchen guide', kitchen_path, class: 'dropdown-item' %>
           <% if logged_in? %>
             <%= link_to 'cabin layout', details_path, class: 'dropdown-item' %>
           <% end %>
