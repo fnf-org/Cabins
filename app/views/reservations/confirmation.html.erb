@@ -32,7 +32,12 @@
         </button>
       </div>
       <div class="modal-body">
-        Please let us know anything needed about your reservation. This could be a paypal transaction ID or who is staying in the room with you.
+        Please let us know anything needed about your reservation (you can edit this note later from your reservations page). Examples:
+        <ul>
+        <li>A paypal transaction ID (if you paid without clicking the button on this site)</li>
+        <li>The name(s) on the PayPal transaction (if someone not you paid for the room or a portion of it)</li>
+        <li>The name(s) of people or age(s) of children who are staying in the room with you</li>
+        </ul>
 
         <%= form_for @reservation, :url => reservation_note_path(@reservation.id) do |f| %>
           <div class="row">
@@ -62,7 +67,8 @@
     <h4 class="mt-4">Payment Option 1 - PayPal</h4>
     <p>
       Please complete your payment with PayPal for : <%= number_to_currency @reservation.price %><br/>
-      Please include a note with your payment in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room
+      Please include a note with your payment in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room.
+      Also, if someone other than you is paying, please have them include your name in the payment note.
       <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> --> <!-- TEST -->
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <input type="hidden" name="cmd" value="_xclick">
@@ -90,10 +96,11 @@
     <div class="border border-info rounded m-4 p-2">
       CFAEA
       c/o Michelle Maloy<br/>
-      1366 San Bruno Avenue, Apt 2<br/>
-      San Francisco, CA 94110
+      1909 Lake Street Apt 5<br/>
+      San Francisco, CA 94121
     </div>
     <p>Please include a note on the check in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room</p>
+    <p> </p>
     <p>A copy of this registration hold has also been sent to you. If you have not received this in a few minutes,
       please
       check your
