@@ -30,7 +30,7 @@
 
       <div class="row mt-4">
         <div class="col-12">
-          <%= f.label :role, 'Your tier for this event' %>
+          <%= f.label :role, 'Tier you are requesting for this event' %>
         </div>
       </div>
 
@@ -38,26 +38,52 @@
         <div class="col-11 offset-1">
           <%= f.radio_button :role, 'medical', class: 'form control' %>
           <%= f.label :role, 'Medical', value: 'what', class: 'same-line' %>
+          <div class="description">
+            Reasonable medical need for a room. This includes medical conditions, injuries,
+            disabilities and women in the third trimester of pregnancy. This tier is decided on a case-by-case
+            basis, at our discretion.
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-11 offset-1">
           <%= f.radio_button :role, 'planner', class: 'form control' %>
-          <%= f.label :role, 'Coordinator/Planner', value: 'what', class: 'same-line' %>
+          <%= f.label :role, 'Coordinator/Key Volunteer', value: 'what', class: 'same-line' %>
+          <div class="description">
+            You are on the FnF Planners email list and have a significant role in this year’s campout.  If you're 
+            not sure that's you, give us your details!  A good rule of thumb is if you are working more than 20
+            hours before and during the event.
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-11 offset-1">
           <%= f.radio_button :role, 'volunteer', class: 'form control' %>
-          <%= f.label :role, 'Other/Volunteer', value: 'qwer', class: 'same-line' %>
+          <%= f.label :role, 'General Volunteer', value: 'qwer', class: 'same-line' %>
+          <div class="description">
+            Are you on the planners list, but taking a light work year? Did you buy a ticket through a friend, and 
+            you’re working a shift, but aren't one of the Planners /
+            Coordinators? You can sign up for a cabin spot if you are working at least one volunteer shift! 
+            Just make sure to let us know who bought your tickets /
+            what committee you are volunteering with. (And be absolutely sure that you have a ticket - there are NO
+            refunds on cabins!)
+          </div>
         </div>
       </div>
 
       <div class="row mt-4">
         <div class="col">
-          <%= f.label :notes, 'Please describe your specific tier and any medical needs. For example, if you need ' \
-          'specific amenities (electricity for a CPAP, AC for a heat-related condition) or a ' \
-          'specific cabin/room/bed (cabin with a wheelchair ramp, room with windows)' %>
+          <%= f.label :notes, 'This is the comments box!'  %>
+          <div class="description">
+            <b>If requesting Medical tier:</b> use the comments box to tell us why your condition requires a room.  We respect your privacy and ask that you provide only what is needed to determine your tier.  If your condition requires specific amenities or a specific bed or cabin, tell us this too. We may follow up with you for more information within reason.  All info provided will be kept confidential.</p>
+            <i>NOTE: We do pre-assign some rooms before general medical reservations open, if there is a medical need for an amenity that not a lot of rooms have.</i></p>
+            Examples: "chronic illness which requires easy access to restroom facilities" or "recent surgery requires no stairs and minimal walking".</p>
+            </p>
+            <b>If requesting Coordinator / Key Volunteer tier:</b> use the comments box to tell us your role at this year's campout, how many hours/shifts you are working, or any other info you think is relevant.</p>
+            Example: "Cabins Coordinator, and signed up for 1 Site Coordinator shift and 1 kitchen shift."</p>
+            </p>
+            <b>If requesting General Volunteer tier:</b> use the comments box to tell us who bought your ticket (even if it was you) and how you're volunteering this year.
+          </div>
           <%= f.text_area :notes, class: 'form control' %>
         </div>
       </div>
