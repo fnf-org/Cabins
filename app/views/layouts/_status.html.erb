@@ -8,14 +8,14 @@
             (select <%= link_to 'book!', accommodations_path %> above)
           </div>
         <% else %>
-          <strong>Your pre-registration has been approved!</strong>
-          <div>Your pre-registration has been processed and you will be able to book accommodations starting on
+          <strong>Your tier has been assigned!</strong>
+          <div>Your tier request has been processed and you will be able to book accommodations starting on
             <strong><%= current_user.tier.available.strftime("%a %-d %b %Y %T %Z") %></strong>. In the meantime, feel free to
               browse the lodgings, but you won't be able to reserve.</div>
         <% end %>
       <% else %>
-        <strong>You are pre-registered and waiting approval!</strong>
-        <div>Your pre-registration has not yet been processed. Please contact
+        <strong>You are registered as a user and waiting on tier approval!</strong>
+        <div>Your tier request has not yet been processed. Please contact
           <a href="mailto:fnfreservations@gmail.com">fnfreservations@gmail.com</a> if you think an error has occurred.
           In the meantime, feel free to browse the lodgings, but you won't be able to reserve until your tier opens up.
         </div>
