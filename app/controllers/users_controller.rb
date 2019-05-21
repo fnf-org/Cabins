@@ -97,18 +97,21 @@ class UsersController < ApplicationController
     planner = Planner.where(email: params[:user][:email].blank? ? @user.email : params[:user][:email])
     @user.planner_found = planner.blank? ? false : true
 
-    if (@user.planner_found && params[:user][:tier_id].blank?)
-      logger.info "found matching planner email and setting tier - id: #{@user.id} email: #{@user.email}"
-      tier = Tier.find_by(label: 'Tier 2')
-      if (@user.id.blank?)
-        @user.tier = tier unless tier.nil?
-      else
-        params[:user][:tier_id] = tier.id unless tier.nil?
-      end
-
-      if is_admin?
-        flash.now[:info] = "Planner email '#{@user.email}' recognized and automagically moved to #{tier.label}"
-      end
-    end
+    # 20 may 2019 - Cabins team decided we didn't want any auto-approval of tiers for this year.
+    # Commenting this out so I can import the planners email list and just set User.planner_found
+    #
+    # if (@user.planner_found && params[:user][:tier_id].blank?)
+    #   logger.info "found matching planner email and setting tier - id: #{@user.id} email: #{@user.email}"
+    #   tier = Tier.find_by(label: 'Tier 2')
+    #   if (@user.id.blank?)
+    #     @user.tier = tier unless tier.nil?
+    #   else
+    #     params[:user][:tier_id] = tier.id unless tier.nil?
+    #   end
+    #
+    #   if is_admin?
+    #     flash.now[:info] = "Planner email '#{@user.email}' recognized and automagically moved to #{tier.label}"
+    #   end
+    # end
   end
 end
