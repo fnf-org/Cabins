@@ -70,6 +70,7 @@ class ReservationsController < ApplicationController
     @reservation.price = @accommodation.price * @reservation.quantity
     if @reservation.save
       logger.info "user #{current_user.id} created reservation: #{@reservation.id} against accommodation #{@accommodation.id}"
+      @reservation.send_booking_confirmation_email
       render 'reservations/confirmation'
     else
       logger.info "user #{current_user.id} attempted to reserve #{@accommodation.id} but failed: #{@reservation.errors.messages.inspect}"
@@ -103,10 +104,13 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find_by(:id => params[:id])
     logger.info("user #{current_user.id} canceled #{params[:id]} admin? #{is_admin?}")
 
+    user = @reservation.user
+    accommodation = @reservation.accommodation
     if (!@reservation || !@reservation.destroy)
-      logger.warn("failed to cancel reservation #{params[:id]} user: #{current_user.id}")
-      flash[:danger] = "failed to cancel reservation"
+      logger.error("failed to cancel reservation #{params[:id]} user: #{current_user.id}")
+      flash[:danger] = "failed to cancel reservation, please contact the cabins crew at fnfreserations@gmail.com"
     end
+    @reservation.send_booking_canceled_email(user, accommodation)
 
     if (params[:prev])
       redirect_to params[:prev]

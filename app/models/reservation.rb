@@ -8,6 +8,10 @@ class Reservation < ActiveRecord::Base
     ReservationMailer.booking_confirmation(self).deliver_now
   end
 
+  def send_booking_canceled_email(user, accommodation)
+    ReservationMailer.booking_canceled(user, accommodation).deliver_now
+  end
+
   def send_paid_confirmation_email
     ReservationMailer.paid_confirmation(self).deliver_now
   end
