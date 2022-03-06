@@ -9,7 +9,7 @@
 
       <div class="field">
         <%= f.label :password, class: 'same-line' %>
-        <%= link_to "(forgot password)", new_password_reset_path %>
+        <%= link_to "(forgot password)", password_resets_new_path %>
         <%= f.password_field :password, class: 'form-control' %>
       </div>
       <%= f.submit "Log in", class: "btn btn-primary" %>

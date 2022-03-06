@@ -1,4 +1,4 @@
-class CreateAccommodations < ActiveRecord::Migration
+class CreateAccommodations < ActiveRecord::Migration[5.0]
   def change
     create_table :accommodations do |t|
       t.references :accommodation_type, null: false

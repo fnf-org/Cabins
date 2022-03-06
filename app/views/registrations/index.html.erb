@@ -6,48 +6,45 @@
 
 <div class="row pt-3">
   <div class="col-6 offset-3">
-    <%= link_to instant_path(Instant.find_by(name: Instant::INSTANT_REGISTRATIONS_CLOSED).id), :method => :get do %>
+    <%= link_to instants_path(Instant.find_by(name: Instant::INSTANT_REGISTRATIONS_CLOSED).id), :method => :get do %>
       <button type="button" class="btn btn-info w-100">Close Registrations</button>
     <% end %>
   </div>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border rounded">
-  <a class="navbar-brand" href="#">Search</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSearchContent" aria-controls="navbarSearchContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
   <div class="container-fluid">
+    <a class="navbar-brand" href="#">Search</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarSearchContent" aria-controls="navbarSearchContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSearchContent">
-      <ul class="navbar-nav mr-auto">
-        <%= form_tag registrations_path, :class => "form-inline my-2 my-lg-0", :remote => true, :method => 'get', :id => 'registrations_search' do %>
-          <%= text_field_tag :search, params[:search], class: 'form-control form-control-sm ' %>
+      <ul class="navbar-nav me-auto">
+        <%= form_tag registrations_path, :class => "d-flex", :remote => true, :method => 'get', :id => 'registrations_search' do %>
+          <%= text_field_tag :search, params[:search], class: 'form-control me-2' %>
           <%= hidden_field_tag :direction, params[:direction] %>
           <%= hidden_field_tag :sort, params[:sort] %>
-          <%= submit_tag "go", :name => nil, :class => 'btn btn-primary btn-sm ml-2' %>
+          <%= submit_tag "go", :name => nil, :class => 'btn btn-outline-success' %>
         <% end %>
-      </ul>
 
-      <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">sort...</a>
-          <div class="dropdown-menu">
-            <%= sortable 'name', 'a-z', 'asc' %>
-            <%= sortable 'name', 'z-a', 'desc' %>
-            <%= sortable 'requested_tier', 'a-z', 'asc' %>
-            <%= sortable 'requested_tier', 'z-a', 'desc' %>
-            <%= sortable 'approved_tier', 'asc', 'asc' %>
-            <%= sortable 'approved_tier', 'desc', 'desc' %>
-            <%= sortable 'created_at', 'asc', 'asc' %>
-            <%= sortable 'created_at', 'desc', 'desc' %>
-          </div>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">sort...</a>
+          <ul class="dropdown-menu">
+            <li><%= sortable 'name', 'a-z', 'asc' %></li>
+            <li><%= sortable 'name', 'z-a', 'desc' %></li>
+            <li><%= sortable 'requested_tier', 'a-z', 'asc' %></li>
+            <li><%= sortable 'requested_tier', 'z-a', 'desc' %></li>
+            <li><%= sortable 'approved_tier', 'asc', 'asc' %></li>
+            <li><%= sortable 'approved_tier', 'desc', 'desc' %></li>
+            <li><%= sortable 'created_at', 'asc', 'asc' %></li>
+            <li><%= sortable 'created_at', 'desc', 'desc' %></li>
+          </ul>
         </li>
+
       </ul>
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav><!-- end search nav -->
-
+    </div>
+  </div>
+</nav>
 
 <div class="row mt-3">
   <div id="registrations" class="col-md-12">

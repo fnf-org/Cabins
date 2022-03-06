@@ -14,7 +14,7 @@ class BuildingsController < ApplicationController
     @building = Building.find(params[:id])
     @error = @building # tell _error_messages.html.erb to use this object for form errors
 
-    if @building.update_attributes(building_params)
+    if @building.update(building_params)
       logger.info("user #{current_user.id} updated building #{@building.id}")
       flash[:success] = 'building updated'
       redirect_to buildings_path

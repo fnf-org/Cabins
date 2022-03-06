@@ -18,7 +18,7 @@ class AccommodationsController < ApplicationController
     @accommodation = Accommodation.find(params[:id])
     @error = @accommodation # tell _error_messages.html.erb to use this object for form errors
 
-    if @accommodation.update_attributes(accommodation_params)
+    if @accommodation.update(accommodation_params)
       logger.info("user #{current_user.id} updated accommodation #{@accommodation.id}")
       flash[:success] = 'accommodation updated'
       redirect_to building_path(@accommodation.building)

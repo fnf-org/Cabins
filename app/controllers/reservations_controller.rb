@@ -160,7 +160,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     @error = @reservation # tell _error_messages.html.erb to use this object for form errors
 
-    if @reservation.update_attributes(reservation_params) && @reservation.update(paid_date: DateTime.now(), processed_by_user_id: current_user.id)
+    if @reservation.update(reservation_params) && @reservation.update(paid_date: DateTime.now(), processed_by_user_id: current_user.id)
       logger.info("user #{current_user.id} marked reservation #{@reservation.id} paid")
       flash[:success] = "reservation #{@reservation.id} marked as paid"
       index

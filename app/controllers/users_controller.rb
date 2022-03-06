@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     @error = @user # tell _error_messages.html.erb to use this object for form errors
 
     set_planner_found
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flash[:success] = 'user updated'
       if is_admin?
         @registrations = User.all

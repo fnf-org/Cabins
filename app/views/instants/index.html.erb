@@ -15,7 +15,7 @@
         <td><%= t.description %></td>
         <td><%= t.instant.strftime("%-d %b %Y %T %Z") if t.instant %></td>
         <td>
-          <%= link_to 'edit', instant_path(t) %>
+          <%= link_to 'edit', instants_path(t) %>
         </td>
       </tr>
   <% end %>

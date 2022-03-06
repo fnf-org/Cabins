@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'reservations/:id' => 'reservations#show', as: 'edit_reservation'
   patch 'reservations/:id' => 'reservations#add_note', as: 'reservation_note'
   put 'reservations/:id/cancel' => 'reservations#cancel'
+  get 'reservations' => 'reservations#index'
 
   get 'users/new', as: 'signup'
   post 'users' => 'users#create'
@@ -61,23 +62,12 @@ Rails.application.routes.draw do
   get 'admin/buildings/:id' => 'buildings#show', as: 'building'
   patch 'admin/buildings/:id' => 'buildings#update'
 
-  get 'admin/tiers' => 'tiers#index', as: 'tiers'
-  get 'admin/tiers/:id' => 'tiers#show', as: 'tier'
-  patch 'admin/tiers/:id' => 'tiers#update'
-  patch 'admin/tiers/:id/tier_open_email_confirm' => 'tiers#tier_open_email_confirm', as: 'tier_open_email_confirm'
-  patch 'admin/tiers/:id/tier_open_email_send' => 'tiers#tier_open_email_send', as: 'tier_open_email_send'
+  get 'tiers' => 'tiers#index'
+  get 'tiers/:id' => 'tiers#show', as: 'tier_edit'
+  patch'tiers/:id' => 'tiers#update', as: 'tier'
+  patch 'tiers/:id/tier_open_confirmation' => 'tiers#tier_open_email_confirm', as: 'tier_open_confirm'
+  patch 'tiers/:id/send_open_confirmation' => 'tiers#tier_open_email_send', as: 'tier_open_send'
+  get 'tiers/:id/email_logs' => 'email_logs#tier_email_logs', as: 'tier_email_logs'
 
-  get 'admin/instants' => 'instants#index', as: 'instants'
-  get 'admin/instants/:id' => 'instants#show', as: 'instant'
-  patch 'admin/instants/:id' => 'instants#update'
-
-  get 'admin/reservations' => 'reservations#index', as: 'admin_reservations'
-  get 'admin/reservations/:id/payment' => 'reservations#payment', as: 'admin_payment_reservation'
-  patch 'admin/reservations/:id' => 'reservations#paid', as: 'admin_paid_reservation'
-  delete 'admin/reservations/:id' => 'reservations#delete', as: 'admin_delete_reservation'
-
-  get 'admin/email-logs/tier/:id' => 'email_logs#tier_email_logs', as: 'tier_email_logs'
-  get 'admin/email-logs/tier' => 'email_logs#tier_email_logs_all', as: 'tier_email_logs_all'
-
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  get 'instants' => 'instants#index'
 end

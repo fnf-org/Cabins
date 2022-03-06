@@ -25,7 +25,7 @@
       </div>
       <div class="row text-center m-4">
         <div class="col">
-          <%= link_to tier_path(t) do %>
+          <%= link_to tier_edit_path(t) do %>
             <button type="button" class="btn btn-info w-100" >Edit Tier</button>
           <% end %>
         </div>
@@ -33,7 +33,7 @@
       <% if !t.sent_date %>
         <div class="row text-center m-4">
           <div class="col">
-            <%= link_to tier_open_email_confirm_path(t), :method => :patch do %>
+            <%= link_to tier_open_confirm_path(t), :method => :patch do %>
               <button type="button" class="btn btn-info w-100">Send Tier Opening Email</button>
             <% end %>
           </div>

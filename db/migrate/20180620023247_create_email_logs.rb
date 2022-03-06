@@ -1,4 +1,4 @@
-class CreateEmailLogs < ActiveRecord::Migration[5.0]
+class CreateEmailLogs < ActiveRecord::Migration[5.0][5.0]
   def change
     create_table :email_logs do |t|
       t.string :email_type

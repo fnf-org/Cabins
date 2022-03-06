@@ -1,61 +1,65 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border rounded mb-3">
-  <%= link_to 'FnF Cabins', home_path, class: 'navbar-brand' %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeaderContent" aria-controls="navbarHeaderContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container-fluid">
+    <%= link_to 'FnF Cabins', home_path, class: 'navbar-brand' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarHeaderContent" aria-controls="navbarHeaderContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="navbarHeaderContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active"><%= link_to 'rules', rules_path, class: 'nav-link' %></li>
-      <li class="nav-item active"><%= link_to 'FAQ', faq_path, class: 'nav-link' %></li>
-      <li class="nav-item active"><%= link_to 'book!', accommodations_path, class: 'nav-link' %></li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">cabin
-          info</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to 'Saratoga Springs map', map_path, class: 'dropdown-item' %>
-          <% if logged_in? %>
-            <%= link_to 'cabin layout', details_path, class: 'dropdown-item' %>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><%= link_to 'rules', rules_path, class: 'nav-link' %></li>
+          <li class="nav-item active"><%= link_to 'FAQ', faq_path, class: 'nav-link' %></li>
+          <li class="nav-item active"><%= link_to 'book!', accommodations_path, class: 'nav-link' %></li>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">cabin
+              info</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to 'Saratoga Springs map', map_path, class: 'dropdown-item' %></li>
+              <% if logged_in? %>
+                <li><%= link_to 'cabin layout', details_path, class: 'dropdown-item' %></li>
+              <% end %>
+            </ul>
+          </li>
+          <% if logged_in? && is_admin? %>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">admin</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><%= link_to 'users', registrations_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'reservations', reservations_path, class: 'dropdown-item' %></li>
+                <div class="dropdown-divider"></div>
+                <li><%= link_to 'home posts', admin_home_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'rule posts', admin_rule_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'FAQ posts', admin_faq_path, class: 'dropdown-item' %></li>
+                <div class="dropdown-divider"></div>
+                <li><%= link_to 'buildings', buildings_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'tiers', tiers_path, class: 'dropdown-item' %></li>
+                <div class="dropdown-divider"></div>
+                <li><%= link_to 'instants', instants_path, class: 'dropdown-item' %></li>
+              </ul>
+            </li>
           <% end %>
-        </div>
-      </li>
-      <% if logged_in? && is_admin? %>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'users', registrations_path, class: 'dropdown-item' %>
-            <%= link_to 'reservations', admin_reservations_path, class: 'dropdown-item' %>
-            <div class="dropdown-divider"></div>
-            <%= link_to 'home posts', admin_home_path, class: 'dropdown-item' %>
-            <%= link_to 'rule posts', admin_rule_path, class: 'dropdown-item' %>
-            <%= link_to 'FAQ posts', admin_faq_path, class: 'dropdown-item' %>
-            <div class="dropdown-divider"></div>
-            <%= link_to 'buildings', buildings_path, class: 'dropdown-item' %>
-            <%= link_to 'tiers', tiers_path, class: 'dropdown-item' %>
-            <div class="dropdown-divider"></div>
-            <%= link_to 'instants', instants_path, class: 'dropdown-item' %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+        </ul>
 
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <%= logged_in? ? current_user.name : 'login' %> <span class="caret"></span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if logged_in? %>
-            <%= link_to 'profile', user_path(@current_user), class: 'dropdown-item' %>
-            <%= link_to 'reservations', user_reservations_path(@current_user), class: 'dropdown-item' %>
-            <%= link_to 'log out', logout_path, method: :delete, class: 'dropdown-item' %>
-          <% else %>
-            <%= link_to 'login', login_path, class: 'dropdown-item' %>
-            <%= link_to 'register', signup_path, class: 'dropdown-item' %>
-          <% end %>
-        </div>
-      </li>
-    </ul>
-  </div><!-- /.navbar-collapse -->
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+              <%= logged_in? ? current_user.name : 'login' %> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if logged_in? %>
+                <li><%= link_to 'profile', user_path(@current_user), class: 'dropdown-item' %></li>
+                <li><%= link_to 'reservations', user_reservations_path(@current_user), class: 'dropdown-item' %></li>
+                <li><%= link_to 'log out', logout_path, method: :delete, class: 'dropdown-item' %></li>
+              <% else %>
+                <li><%= link_to 'login', login_path, class: 'dropdown-item' %></li>
+                <li><%= link_to 'register', signup_path, class: 'dropdown-item' %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
 </nav>

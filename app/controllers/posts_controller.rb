@@ -68,7 +68,7 @@ class PostsController < ApplicationController
     @category = @post.category
     @error = @post # tell _error_messages.html.erb to use this object for form errors
 
-    if @post.update_attributes(post_params)
+    if @post.update(post_params)
       logger.info("user #{current_user.id} updated post #{@post.id} in category #{@category}")
       flash.now[:success] = 'post updated'
       show_posts

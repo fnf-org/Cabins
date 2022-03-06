@@ -14,7 +14,7 @@ class InstantsController < ApplicationController
     @instant = Instant.find(params[:id])
     @error = @instant # tell _error_messages.html.erb to use this object for form errors
 
-    if @instant.update_attributes(instant_params)
+    if @instant.update(instant_params)
       logger.info("user #{current_user.id} updated instant #{@instant.id}")
       flash[:success] = 'instant updated'
       index

@@ -1,4 +1,4 @@
-class AddRegistrationFields < ActiveRecord::Migration
+class AddRegistrationFields < ActiveRecord::Migration[5.0]
   def change
     add_column :users, :notes, :text, null: true, after: :admin
     add_column :users, :phone, :string, null: false, limit: 16, after: :password_digest

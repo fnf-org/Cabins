@@ -1,4 +1,4 @@
-class CreatePlanners < ActiveRecord::Migration
+class CreatePlanners < ActiveRecord::Migration[5.0]
   def change
     create_table :planners do |t|
       t.string :email, null: false

@@ -5,7 +5,9 @@
 <% if !allowed_to_book? %>
   <div class="row pt-3">
     <div class="col-10 offset-1 status alert-info">
-      Reservations are limited to one per user. If you would like to cancel your existing reservation and book another one, click <%= link_to 'here', user_reservations_path(current_user) %>.
+      Reservations are limited to one per user. If you would like to cancel your existing
+      reservation and book another one,
+      click <%= link_to 'here', user_reservations_path(current_user) %>.
     </div>
   </div>
 <% end %>
@@ -17,60 +19,59 @@
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border rounded">
-  <a class="navbar-brand" href="#">Search</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSearchContent" aria-controls="navbarSearchContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
   <div class="container-fluid">
-    <!-- Collect the nav links, forms, and other content for toggling -->
+    <a class="navbar-brand" href="#">Search</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarSearchContent" aria-controls="navbarSearchContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="navbarSearchContent">
-      <ul class="navbar-nav mr-auto">
-        <%= form_tag accommodations_path, :class => "form-inline my-2 my-lg-0", :remote => true, :method => 'get', :id => 'accommodations_search' do %>
-          <%= text_field_tag :search, params[:search], class: 'form-control form-control-sm ' %>
+      <ul class="navbar-nav w-100">
+        <%= form_tag accommodations_path, :class => "d-flex me-auto", :remote => true, :method => 'get', :id => 'accommodations_search' do %>
+          <%= text_field_tag :search, params[:search], class: 'form-control me-2' %>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">filters</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <div class="custom-control-inline">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">filters</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="custom-control-inline">
                 <%= check_box_tag :available, 1, false %>
                 <%= label :available, 'available', 'available', class: 'dropdown-item' %>
-              </div>
-              <div class="custom-control-inline">
+              </li>
+              <li class="custom-control-inline">
                 <%= check_box_tag :air_conditioning, 1, false %>
                 <%= label :air_conditioning, 'air_conditioning', 'a/c', class: 'dropdown-item' %>
-              </div>
-              <div class="custom-control-inline">
+              </li>
+              <li class="custom-control-inline">
                 <%= check_box_tag :kitchen, 1, false %>
                 <%= label :kitchen, 'kitchen', 'kitchen', class: 'dropdown-item' %>
-              </div>
-              <div class="custom-control-inline">
+              </li>
+              <li class="custom-control-inline">
                 <%= check_box_tag :bathroom, 1, false %>
                 <%= label :bathroom, 'bathroom', 'bathroom', class: 'dropdown-item' %>
-              </div>
-            </div>
+              </li>
+            </ul>
           </li>
           <%= hidden_field_tag :only_show_available, 0 %>
           <%= hidden_field_tag :direction, params[:direction] %>
           <%= hidden_field_tag :sort, params[:sort] %>
-          <%= submit_tag "go", :name => nil, :class => 'btn btn-primary btn-sml ml-2' %>
+          <%= submit_tag "go", :name => nil, :class => 'btn btn-outline-success' %>
         <% end %>
-      </ul>
 
-      <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">sort...</a>
-          <div class="dropdown-menu">
-            <%= sortable 'label', 'a-z', 'asc' %>
-            <%= sortable 'label', 'z-a', 'desc' %>
-            <%= sortable 'occupancy', 'low to high', 'asc' %>
-            <%= sortable 'occupancy', 'high to low', 'desc' %>
-            <%= sortable 'price', 'low to high', 'asc' %>
-            <%= sortable 'price', 'high to low', 'desc' %>
-          </div>
-        </li>
+        <div class="w-auto"></div>
+          <li class="nav-item dropdown ms-auto">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">sort...</a>
+            <ul class="dropdown-menu">
+              <li><%= sortable 'label', 'a-z', 'asc' %></li>
+              <li><%= sortable 'label', 'z-a', 'desc' %></li>
+              <li><%= sortable 'occupancy', 'low to high', 'asc' %></li>
+              <li><%= sortable 'occupancy', 'high to low', 'desc' %></li>
+              <li><%= sortable 'price', 'low to high', 'asc' %></li>
+              <li><%= sortable 'price', 'high to low', 'desc' %></li>
+            </ul>
+          </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav><!-- end search nav -->
+    </div>
+  </div>
+</nav>
 
 <div class="row mt-2">
   <div id="accommodations" class="col-md-12 contentcolumn">

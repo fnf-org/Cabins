@@ -43,7 +43,7 @@
     %>
     <input type="hidden" id="number1" value="<%= number1 %>"/>
     <input type="hidden" id="number2" value="<%= number2 %>"/>
-    <%= form_for @tier, :url => tier_open_email_send_path do |f| %>
+    <%= form_for @tier, :url => tier_open_send_path do |f| %>
       <%= render 'layouts/error_messages' %>
       <%= f.hidden_field :id %>
       <div class="field">
