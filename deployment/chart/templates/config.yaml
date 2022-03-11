@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  RAILS_ENV: "{{ .Values.cabinsEnvironment }}"
+  SMTP_ADDRESS: "{{ .Values.cabinsSMTPHost }}"
+  SMTP_PORT: "{{ .Values.cabinsSMTPPort }}"
+  SMTP_DOMAIN: "{{ .Values.cabinsSMTPDomain }}"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-secrets
+type: Opaque
+stringData:
+  SECRET_KEY_BASE: "{{ .Values.cabinsSecretToken  }}"
+  SMTP_USERNAME: "{{ .Values.cabinsSMTPlUser }}"
+  SMTP_PASSWORD: "{{ .Values.cabinsSMTPPassword }}"

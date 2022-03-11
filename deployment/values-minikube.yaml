@@ -1,0 +1,14 @@
+
+cabinsEnvironment: "development"
+cabinsSecretToken: "this-is-a-very-bogus-key"
+cabinsSMTPHost: ""
+cabinsSMTPPort: ""
+cabinsSMTPUser: ""
+cabinsSMTPPassword: ""
+
+mariadb:
+  auth:
+    database: cabins
+    username: cabinsuser
+    password: "test"
+    rootPassword: "test"
