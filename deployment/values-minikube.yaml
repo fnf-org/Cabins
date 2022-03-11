@@ -1,3 +1,7 @@
+image:
+  repository: cabins
+  pullPolicy: Never
+  tag: "latest"
 
 cabinsEnvironment: "development"
 cabinsSecretToken: "this-is-a-very-bogus-key"
