@@ -52,6 +52,7 @@ gem 'octicons_helper'
 gem 'time_difference'
 gem 'okcomputer'
 gem 'lograge', '~> 0.10.0'
+gem 'silencer'
 
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
