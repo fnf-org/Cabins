@@ -11,7 +11,7 @@
   <div class="col-6 p-1">
     <div class="border rounded bg-light">
       <div class="text-light bg-dark rounded-top p-2 text-center"><%= "#{t.label}: #{t.description}" %></div>
-      <div class="row" title="Time from now: <%= TimeDifference.between(Time.new(), t.available).humanize %>">
+      <div class="row" title="Time from now: <%= duration(t.available - Time.new) %>">
         <div class="col-md-3 text-md-right">Tier Open:</div>
         <div class="col-md-auto text-value"><%= t.available.strftime("%a %-d %b %Y %T %Z") %></div>
       </div>

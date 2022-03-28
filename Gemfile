@@ -5,7 +5,7 @@ ruby "3.1.1"
 
 gem 'bundler', '~> 2.3', '>= 2.3.7'
 
-gem "rails", "~> 7.0.2", ">= 7.0.2.2"
+gem 'rails', '~> 7.0', '>= 7.0.2.3'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -47,11 +47,10 @@ gem 'jquery-rails', '~> 4.4'
 gem 'tinymce-rails'
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
 # Use Kaminari for pagination
-gem 'kaminari', '~> 0.16'
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
 gem 'octicons_helper'
-gem 'time_difference'
 gem 'okcomputer'
-gem 'lograge', '~> 0.10.0'
+gem 'lograge', '~> 0.11'
 gem 'silencer'
 
 
