@@ -7,6 +7,7 @@ data:
   SMTP_ADDRESS: "{{ .Values.cabinsSMTPHost }}"
   SMTP_PORT: "{{ .Values.cabinsSMTPPort }}"
   SMTP_DOMAIN: "{{ .Values.cabinsSMTPDomain }}"
+  DB_SEED: "{{ .Values.cabinsDBSeed }}"
 ---
 apiVersion: v1
 kind: Secret
@@ -14,6 +15,6 @@ metadata:
   name: {{ .Release.Name }}-secrets
 type: Opaque
 stringData:
-  SECRET_KEY_BASE: "{{ .Values.cabinsSecretToken  }}"
+  RAILS_MASTER_KEY: "{{ .Values.cabinsSecretToken  }}"
   SMTP_USERNAME: "{{ .Values.cabinsSMTPlUser }}"
   SMTP_PASSWORD: "{{ .Values.cabinsSMTPPassword }}"

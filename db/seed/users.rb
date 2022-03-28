@@ -1,6 +1,6 @@
 User.create(
   name: 'blah',
-  email: 'blah@blah.com',
+  email: 'blah@invalid.com',
   password: 'nopenope',
   password_confirmation: 'nopenope',
   phone: '1111',

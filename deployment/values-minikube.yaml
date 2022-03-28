@@ -4,11 +4,12 @@ image:
   tag: "latest"
 
 cabinsEnvironment: "development"
-cabinsSecretToken: "this-is-a-very-bogus-key"
+cabinsSecretToken: "70f1368ac145410d9e6771e645e7183a"
 cabinsSMTPHost: ""
 cabinsSMTPPort: ""
 cabinsSMTPUser: ""
 cabinsSMTPPassword: ""
+cabinsDBSeed: ""
 
 mariadb:
   auth:

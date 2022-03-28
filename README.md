@@ -4,23 +4,30 @@ California Foundation for the Advancement of Electronic Arts cabins reservations
 
 ## Overview
 
-This is a ruby on rails app that has been containerized into a single image/container running an apache2 httpd web server
-and a puma application server. Some static content is served via httpd, the ruby app is all served via puma. httpd is
-exposed on port 80, puma is on 3000 but is not exposed. The non-app image is separated out into the cabins-server image
-and app specific stuff is built on top of that image.
+This is a ruby on rails app providing the cabins reservations system. 
 
-**TODO**: rip out all the legacy crap below and document the new shit. it's changing... a lot. I hope in a good way.
+## local dev
 
-## RUNNING locally
+1. drop a `.env` file into place that looks something like
 
-1. docker run --name mysql -e MYSQL_ROOT_PASSWORD=\<PASSWORD\> -d -p 3306:3306 mysql:5.6
-1. login to gitlab docker registry: `docker login registry.gitlab.com` (use an access token if you have 2fa setup)
-1. `docker build --build-arg RAILS_ENV=development -t cabins .`
-2. `cp example.cabins.env cabins-dev.env` and update by replacing all the `XXXXXX`'s with your values.
-3. `docker run --rm -it -p 80:80 --env-file ./cabins-dev.env -v /Users/cgerstle/src/personal/cabins:/var/www/cabins --name cabins cabins`
-4. `hit localhost:80`
-5. for console `bin/rails console` from inside the container
+   ```
+   # MARIA DB CONTAINER
 
+   MARIADB_USER=cabins
+   MARIADB_PASSWORD=password
+   MARIADB_ROOT_PASSWORD=password
+
+   # cabins
+
+   RAILS_MASTER_KEY=70f1368ac145410d9e6771e645e7183a
+   CABINS_DATABASE_PASSWORD=password
+   RAILS_ENV=development
+   ```
+
+2. `docker-compose up -d`
+3. `docker-compose run web bundle exec rake db:reset`
+4. You can then hit the app on `http://localhost:3000`
+5. Seeded admin login is `blah@invalid.com`. Password is `nopenope`
 
 ## email previews
 
