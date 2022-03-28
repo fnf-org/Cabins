@@ -15,7 +15,7 @@ RUN set -eus; \
 
 RUN mkdir /cabins
 WORKDIR /cabins
-COPY Gemfile  ./
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . /cabins
