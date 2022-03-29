@@ -11,6 +11,10 @@ module Cabins
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
+    # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
+    config.require_master_key = true
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

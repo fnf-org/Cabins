@@ -81,13 +81,14 @@ tolerations: []
 
 affinity: {}
 
-cabinsEnvironment: "development"
-cabinsSecretToken: "this-is-a-very-bogus-key"
-#099aa45d71975d6b7fc3655ef4bd2ac6e3523e47815df85ffaa3bb0f6f847c14f48154213348e9c0eff683383476aa2fe5c01294f2b2962242e72b6380a415fa
+cabinsEnvironment: "production"
+# needs to be 32 characters...
+cabinsSecretToken: "70f1368ac145410d9e6771e645e7183a"
 cabinsSMTPHost: ""
 cabinsSMTPPort: ""
 cabinsSMTPUser: ""
 cabinsSMTPPassword: ""
+cabinsDBSeed: ""
   
 mariadb:
   auth:

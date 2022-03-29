@@ -19,3 +19,6 @@
 .env
 cabins*.env
 .DS_Store
+
+/config/master.key
+/config/credentials.yml.enc

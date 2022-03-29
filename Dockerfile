@@ -1,15 +1,24 @@
-FROM ruby:3.1.1
+FROM ruby:3.1.1-slim-bullseye
 
-RUN apt-get update -qq \
-&& apt-get install -y nodejs libmariadb-dev-compat libmariadb-dev
+RUN set -eus; \
+    apt-get update -qq; \
+    apt-get install -y \
+    nodejs \
+    libmariadb-dev-compat \
+    libmariadb-dev \
+    shared-mime-info \
+    libmysql++-dev \
+    build-essential \
+    ; \
+    apt-get clean; \
+    rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*;
 
 RUN mkdir /cabins
 WORKDIR /cabins
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-ADD . /cabins
+COPY . /cabins
 
 EXPOSE 3000
 CMD "./entrypoint.sh"
-

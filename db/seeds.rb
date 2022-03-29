@@ -1,11 +1,4 @@
-seeds = [
-  'users',
-  'instants',
-  'tiers',
-  'cabins',
-  'payments',
-  'posts',
-]
+seeds = %w[users instants tiers cabins payments posts]
 
 @year = Time.new.year
 seed_start = Time.now
