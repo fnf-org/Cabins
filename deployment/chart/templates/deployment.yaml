@@ -68,6 +68,11 @@ spec:
               name: {{ .Release.Name }}-secrets
           - configMapRef:
               name: {{ .Release.Name }}-config
+          # Fix for: https://github.com/puma/puma/issues/2343
+          lifecycle:
+            preStop:
+              exec:
+                command: ['/bin/sh', '-c', 'sleep 15']
       initContainers:
       - name: init-wait-db
         image: busybox:1.31
