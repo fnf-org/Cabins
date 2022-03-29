@@ -20,5 +20,7 @@ RUN bundle install
 
 COPY . /cabins
 
+RUN RAILS_MASTER_KEY=must-be-set-not-relevant bundle exec rake assets:precompile
+
 EXPOSE 3000
 CMD "./entrypoint.sh"
