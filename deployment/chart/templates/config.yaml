@@ -19,6 +19,6 @@ metadata:
 type: Opaque
 stringData:
   SECRET_KEY_BASE: "{{ .Values.cabinsSecretToken }}"
-  RAILS_SERVE_STATIC_FILES: "{{ .Values.cabinsServeStaticFiles }}""
-  SMTP_USERNAME: "{{ .Values.cabinsSMTPlUser }}"
+  RAILS_SERVE_STATIC_FILES: "{{ .Values.cabinsServeStaticFiles }}"
+  SMTP_USERNAME: "{{ .Values.cabinsSMTPUser }}"
   SMTP_PASSWORD: "{{ .Values.cabinsSMTPPassword }}"
