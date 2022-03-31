@@ -16,7 +16,7 @@ class UserMailer < ApplicationMailer
   end
 
   def tier_open_email(tier, user_emails)
-    mail(to: 'fnfreservations@gmail.com', bcc: user_emails) do |format|
+    mail(to: 'cabins@fnf.org', bcc: user_emails) do |format|
       format.text {render plain: tier.email_text}
       format.html {render html: tier.email_html.try(:html_safe)}
     end

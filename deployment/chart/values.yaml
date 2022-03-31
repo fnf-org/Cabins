@@ -90,7 +90,9 @@ cabinsSMTPPort: ""
 cabinsSMTPUser: ""
 cabinsSMTPPassword: ""
 cabinsDBSeed: ""
-  
+cabinsHost: "cabins.app.fnf.org"
+cabinsEmailAddress: "cabins@fnf.org""
+
 mariadb:
   auth:
     database: cabins

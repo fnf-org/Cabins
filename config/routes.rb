@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'blog#home'
 
   get 'password_resets/new'
-  get 'password_resets/edit'
+  post 'password_resets/create' => 'password_resets#create', as: 'create_password_reset'
+  get 'password_resets/edit' => 'password_resets#edit', as: 'password_reset'
+  patch 'password_resets/update' => 'password_resets#update', as: 'password_update'
 
   get 'sessions/new'
 

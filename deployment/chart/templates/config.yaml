@@ -8,6 +8,9 @@ data:
   SMTP_PORT: "{{ .Values.cabinsSMTPPort }}"
   SMTP_DOMAIN: "{{ .Values.cabinsSMTPDomain }}"
   DB_SEED: "{{ .Values.cabinsDBSeed }}"
+  CABINS_HOST: "{{ .Values.cabinsHost }}"
+  ACTION_MAILER_DEFAULT_FROM: "{{ .Values.cabinsEmailAddress }}"
+  ACTION_MAILER_DEFAULT_TO: "{{ .Values.cabinsEmailAddress }}"
 ---
 apiVersion: v1
 kind: Secret

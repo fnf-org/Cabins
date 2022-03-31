@@ -12,6 +12,8 @@ cabinsSMTPPort: ""
 cabinsSMTPUser: ""
 cabinsSMTPPassword: ""
 cabinsDBSeed: ""
+cabinsHost: "localhost"
+cabinsEmailAddress: "cabins@fnf.org""
 
 mariadb:
   auth:
