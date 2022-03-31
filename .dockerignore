@@ -9,5 +9,4 @@
 !/tmp/.keep
 
 .env
-cabins.env
-example.cabins.env
+**/master.key

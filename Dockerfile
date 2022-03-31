@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.2
 FROM ruby:3.1.1-slim-bullseye
 
 RUN set -eus; \
@@ -13,14 +14,13 @@ RUN set -eus; \
     apt-get clean; \
     rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*;
 
-RUN mkdir /cabins
 WORKDIR /cabins
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . /cabins
 
-RUN RAILS_MASTER_KEY=must-be-set-not-relevant bundle exec rake assets:precompile
+RUN RAILS_ENV=production SECRET_KEY_BASE=1 bundle exec rake assets:precompile
 
 EXPOSE 3000
 CMD "./entrypoint.sh"

@@ -19,7 +19,6 @@ This is a ruby on rails app providing the cabins reservations system.
 
    # cabins
 
-   RAILS_MASTER_KEY=70f1368ac145410d9e6771e645e7183a
    CABINS_DATABASE_PASSWORD=password
    RAILS_ENV=development
    ```
@@ -27,7 +26,8 @@ This is a ruby on rails app providing the cabins reservations system.
 2. `docker-compose up -d`
 3. `docker-compose run web bundle exec rake db:reset`
 4. You can then hit the app on `http://localhost:3000`
-5. Seeded admin login is `blah@invalid.com`. Password is `nopenope`
+5. for logs, `docker-compose logs -f web`
+6. Seeded admin login is `blah@invalid.com`. Password is `nopenope`
 
 ## email previews
 

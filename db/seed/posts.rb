@@ -39,7 +39,7 @@ Post.create(
       body: '<p>Once you have registered for a room, you will receive a confirmation email (step 4), and you will immediately see a screen with an option to pay by PayPal. We suggest you be ready to pay immediately after registration. If you do not pay at checkout, payment is more complicated! Please check the <strong><a href="../../faq">FAQ</a></strong> for payment options other than the PayPal button at check-out.</p>
 <p>Please remember that a non-paid registration only lasts until July 20. If we have not received your payment before then, we will cancel your registration and make your lodging available for other participants.</p>
 <p>Once we receive payment, we will send you a final email confirming your paid reservation.</p>
-<p>If you have any questions about the FnF lodging process, please contact <a href="mailto:fnfreservations@gmail.com?subject=Registration%20Question">fnfreservations@gmail.com</a>.</p>'
+<p>If you have any questions about the FnF lodging process, please contact <a href="mailto:cabins@fnf.org?subject=Registration%20Question">cabins@fnf.org</a>.</p>'
     },
     {
       category: 'rule',
@@ -109,7 +109,7 @@ Once your tier is open, you will be able to sign in using the same email address
     {
       category: 'faq',
       title: 'I forgot to pay for my cabin/room when I registered for it. How can I pay after the fact?',
-      body: '<p>You can pay after registration in two ways:<br /><br /><Strong>1.</strong> Pay via Paypal: Send $ to paypal@cfaea.org. Be sure to select "Send money to friends or family" and (VERY IMPORTANT) write "CABIN: [your cabin/room number]" in the comments.&nbsp; If you do not indicate CABIN somewhere in the comments we may not know you have paid!<br /><br /><strong>2.</strong> Pay via check: Make your payment to CFAEA by check and send it to the following address:<br /><br />CFAEA<br />c/o Michelle Maloy<br />1366 San Bruno Avenue<br />Apt 2<br />San Francisco, CA 94110<br /><br />* Please include the cabin/room number in the notes on the check.&nbsp; Then please email us at <a href="mailto:fnfreservations@gmail.com?subject=Incoming%20Check">fnfreservations@gmail.com</a> to let us know to watch for the check.</p>'
+      body: '<p>You can pay after registration in two ways:<br /><br /><Strong>1.</strong> Pay via Paypal: Send $ to paypal@cfaea.org. Be sure to select "Send money to friends or family" and (VERY IMPORTANT) write "CABIN: [your cabin/room number]" in the comments.&nbsp; If you do not indicate CABIN somewhere in the comments we may not know you have paid!<br /><br /><strong>2.</strong> Pay via check: Make your payment to CFAEA by check and send it to the following address:<br /><br />CFAEA<br />c/o Michelle Maloy<br />1366 San Bruno Avenue<br />Apt 2<br />San Francisco, CA 94110<br /><br />* Please include the cabin/room number in the notes on the check.&nbsp; Then please email us at <a href="mailto:cabins@fnf.org?subject=Incoming%20Check">cabins@fnf.org</a> to let us know to watch for the check.</p>'
     },
     {
       category: 'faq',
@@ -130,7 +130,7 @@ Once your tier is open, you will be able to sign in using the same email address
     {
       category: 'faq',
       title: 'I didn\'t receive a confirmation email. Am I pre-registered/registered/confirmed paid?',
-      body: '<p>Check your SPAM folder and email us at fnfreservations@gmail.com for confirmation.</p>'
+      body: '<p>Check your SPAM folder and email us at cabins@fnf.org for confirmation.</p>'
     },
     {
       category: 'faq',
@@ -144,7 +144,7 @@ Once your tier is open, you will be able to sign in using the same email address
       body: "<p>While we strive to keep our community a safe place, issues do occur.</p>
 <p>Belongings: FnF and Saratoga Springs are not responsible for protecting your belongings. Please keep private, important, or valuable personal belongings on your person or safely stowed away.</p>
 <p>Guest conduct: All attendees must follow the <strong><a href='https://cfaea.net/the-fnf-way/'>FnF Way</a></strong> and the <strong><a href='https://fnforg.files.wordpress.com/#{@year}/06/cfaea-and-fnf-conduct-policy-v-2-0-final.pdf'> Code of Conduct</a></strong>. If you have trouble with a guest in your room or cabin, and you cannot work it out among yourselves, please consider contacting Karma Patrol or a Site Coordinator at the event.</p>
-<p>If you have any other guest-related issues, please contact a Site Coordinator at the campout as soon as possible. You may also contact <a href='mailto:fnfreservations@gmail.com?subject=Guest%2Issue&quot;&gt;fnfreservations@gmail.com'>the Cabin Crew</a> by email after the event.</p>"
+<p>If you have any other guest-related issues, please contact a Site Coordinator at the campout as soon as possible. You may also contact <a href='mailto:cabins@fnf.org?subject=Guest%2Issue&quot;&gt;cabins@fnf.org'>the Cabin Crew</a> by email after the event.</p>"
     },
     {
       category: 'rule',
