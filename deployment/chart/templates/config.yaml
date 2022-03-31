@@ -15,6 +15,7 @@ metadata:
   name: {{ .Release.Name }}-secrets
 type: Opaque
 stringData:
-  RAILS_MASTER_KEY: "{{ .Values.cabinsSecretToken  }}"
+  SECRET_KEY_BASE: "{{ .Values.cabinsSecretToken }}"
+  RAILS_SERVE_STATIC_FILES: "{{ .Values.cabinsServeStaticFiles }}""
   SMTP_USERNAME: "{{ .Values.cabinsSMTPlUser }}"
   SMTP_PASSWORD: "{{ .Values.cabinsSMTPPassword }}"
