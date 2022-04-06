@@ -31,32 +31,30 @@
       <td><%= !r.paid_date.nil? ? r.paid_date.strftime("%-d %b %Y %T %Z") : '' %></td>
       <td>
         <% if r.paid_date.nil? %>
-          <%= link_to 'record&nbsp;payment'.html_safe, admin_payment_reservation_path(r) %><br/>
+          <%= link_to 'record&nbsp;payment'.html_safe, admin_reservation_payment_path(r) %><br/>
         <% end %>
-        <%= link_to 'delete', admin_delete_reservation_path(r), method: :delete, data: {confirm: 'Are you sure you want to delete this reservation?'} %>
+        <%= link_to 'delete', admin_reservation_delete_path(r), method: :delete, data: {confirm: 'Are you sure you want to delete this reservation?'} %>
         <% if r.note && !r.note.empty? %>
           <br>
-          <a href="" data-toggle="modal" data-target="#note-<%= r.id %>">view note</a>
+          <a href="" data-bs-toggle="modal" data-bs-target="#note-<%= r.id %>">view note</a>
         <% end %>
       </td>
     </tr>
 
     <% if r.note && !r.note.empty? %>
       <!-- Modal -->
-      <div class="modal fade" id="note-<%= r.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="note-<%= r.id %>" tabindex="-1" aria-labelledby="note-<%= r.id %>" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Reservation <%= r.id %> Note</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <h5 class="modal-title" id="note-<%= r.id %>">Reservation <%= r.id %> Note</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <%= r.note %>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
