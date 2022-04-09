@@ -27,7 +27,10 @@ Rails.application.routes.draw do
   get 'reservations/:id' => 'reservations#show', as: 'edit_reservation'
   patch 'reservations/:id' => 'reservations#add_note', as: 'reservation_note'
   put 'reservations/:id/cancel' => 'reservations#cancel'
-  get 'reservations' => 'reservations#index'
+  get 'reservations' => 'reservations#index', as: 'admin_reservations'
+  get 'reservations/:id/payment' => 'reservations#payment', as: 'admin_reservation_payment'
+  delete 'reservations/:id' => 'reservations#delete', as: 'admin_reservation_delete'
+  patch 'reservations/:id/paid' => 'reservations#paid', as: 'admin_reservation_paid'
 
   get 'users/new', as: 'signup'
   post 'users' => 'users#create'

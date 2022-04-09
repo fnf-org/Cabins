@@ -31,8 +31,8 @@ This is a ruby on rails app providing the cabins reservations system.
 
 ## email previews
 
-http://localhost/rails/mailers/user_mailer/
-http://localhost/rails/mailers/reservation_mailer/
+http://localhost:3000/rails/mailers/user_mailer/
+http://localhost:3000/rails/mailers/reservation_mailer/
 
 ## Deploy to Kubernetes
 

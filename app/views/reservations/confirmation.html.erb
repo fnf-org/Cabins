@@ -22,21 +22,20 @@
 </button>
 
 <!-- Note Modal -->
-<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModal" aria-hidden="true">
+<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="noteModal">Add a note to your reservation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Please let us know anything needed about your reservation (you can edit this note later from your reservations page). Examples:
+        Please let us know anything needed about your reservation (you can edit this note later from your reservations
+        page). Examples:
         <ul>
-        <li>A paypal transaction ID (if you paid without clicking the button on this site)</li>
-        <li>The name(s) on the PayPal transaction (if someone not you paid for the room or a portion of it)</li>
-        <li>The name(s) of people or age(s) of children who are staying in the room with you</li>
+          <li>A paypal transaction ID (if you paid without clicking the button on this site)</li>
+          <li>The name(s) on the PayPal transaction (if someone not you paid for the room or a portion of it)</li>
+          <li>The name(s) of people or age(s) of children who are staying in the room with you</li>
         </ul>
 
         <%= form_for @reservation, :url => reservation_note_path(@reservation.id) do |f| %>
@@ -69,25 +68,8 @@
       Please complete your payment with PayPal for : <%= number_to_currency @reservation.price %><br/>
       Please include a note with your payment in the form of 'CABIN: xxxxx', where xxxxx is the name of your cabin/room.
       Also, if someone other than you is paying, please have them include your name in the payment note.
-      <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> --> <!-- TEST -->
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-      <input type="hidden" name="cmd" value="_xclick">
-      <!-- <input type="hidden" name="business" value="FCNX9KTXRNJ7S"> --> <!-- TEST -->
-      <input type="hidden" name="business" value="ZJJPT64U2437J">
-      <input type="hidden" name="lc" value="US">
-      <input type="hidden" name="item_name" value="<%= @reservation.accommodation.label %>">
-      <input type="hidden" name="item_number" value="SKU: <%= sku(@reservation) %>">
-      <input type="hidden" name="amount" value="<%= @reservation.price %>">
-      <input type="hidden" name="currency_code" value="USD">
-      <input type="hidden" name="button_subtype" value="services">
-      <input type="hidden" name="no_note" value="1">
-      <input type="hidden" name="no_shipping" value="2">
-      <input type="hidden" name="rm" value="1">
-      <input type="hidden" name="return" value="<%= user_reservations_url(current_user.id) %>">
-      <input type="hidden" name="cancel_return" value="<%= user_reservations_url(current_user.id) %>">
-      <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    </form>
+
+      <%= render 'paypal' %>
 
     <h4 class="mt-4">Payment Option 2 - Snail Check</h4>
     <p>Please make your payment of <%= number_to_currency @reservation.price %> payable to CFAEA by check or money
@@ -112,7 +94,7 @@
       <a href="mailto:cabins@fnf.org">cabins@fnf.org</a> and we will confirm the internal transfer
     </p>
     <div class="float-right">
-      <%= button_to 'Cancel Reservation', {:controller => 'reservations', :action => "cancel", :id => @reservation.id, :prev => '/accommodations'}, data: {confirm: 'Are you sure you want to cancel? This will delete your reservation.'}, :method => :put, class: 'btn btn-primary', :onclick => "buttonClicked = true;" %>
+      <%= button_to 'Cancel Reservation', { :controller => 'reservations', :action => "cancel", :id => @reservation.id, :prev => '/accommodations' }, data: { confirm: 'Are you sure you want to cancel? This will delete your reservation.' }, :method => :put, class: 'btn btn-primary', :onclick => "buttonClicked = true;" %>
     </div>
   </div>
 </div>

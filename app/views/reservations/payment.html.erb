@@ -2,7 +2,7 @@
 
 <div class="row bg-white border rounded p-3">
   <div class="col">
-    <%= form_for(@reservation, url: admin_paid_reservation_path(@reservation.id)) do |f| %>
+    <%= form_for(@reservation, url: admin_reservation_paid_path(@reservation.id)) do |f| %>
         <%= render 'layouts/error_messages' %>
         <%= hidden_field(:id, @reservation.id) %>
       <div class="field">
