@@ -7,10 +7,11 @@ data:
   SMTP_ADDRESS: "{{ .Values.cabinsSMTPHost }}"
   SMTP_PORT: "{{ .Values.cabinsSMTPPort }}"
   SMTP_DOMAIN: "{{ .Values.cabinsSMTPDomain }}"
-  DB_SEED: "{{ .Values.cabinsDBSeed }}"
   CABINS_HOST: "{{ .Values.cabinsHost }}"
   ACTION_MAILER_DEFAULT_FROM: "{{ .Values.cabinsEmailAddress }}"
   ACTION_MAILER_DEFAULT_TO: "{{ .Values.cabinsEmailAddress }}"
+  CABINS_ADMIN_USERNAME: "{{ .Values.cabinsAdminUsername }}"
+  CABINS_ADMIN_EMAIL: "{{ .Values.cabinsAdminEmail }}"
 ---
 apiVersion: v1
 kind: Secret
@@ -22,3 +23,4 @@ stringData:
   RAILS_SERVE_STATIC_FILES: "{{ .Values.cabinsServeStaticFiles }}"
   SMTP_USERNAME: "{{ .Values.cabinsSMTPUser }}"
   SMTP_PASSWORD: "{{ .Values.cabinsSMTPPassword }}"
+  CABINS_ADMIN_PASSWORD: "{{ .Values.cabinsAdminPassword }}"

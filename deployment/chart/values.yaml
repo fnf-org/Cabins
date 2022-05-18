@@ -79,9 +79,11 @@ cabinsSMTPPort: ""
 cabinsSMTPDomain: ""
 cabinsSMTPUser: ""
 cabinsSMTPPassword: ""
-cabinsDBSeed: ""
 cabinsHost: ""
 cabinsEmailAddress: ""
+cabinsAdminUsername: "admin"
+cabinsAdminEmail: "admin@admin.com"
+cabinsAdminPassword: "admintesttest"
 
 mariadb:
   auth:
