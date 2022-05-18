@@ -15,7 +15,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      CABINS_DATABASE_HOST: db
+      CABINS_DB_HOST: db
     env_file:
       - .env
     depends_on:

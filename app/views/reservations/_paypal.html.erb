@@ -1,77 +1,20 @@
-<div id="smart-button-container">
-  <div style="text-align: center;">
-    <% if @reservation.paid_date.nil? %>
-        <div id="paypal-button-container"></div>
-    <% end %>
-  </div>
-</div>
-<% if @reservation.paid_date.nil? %>
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
-<script>
-    function initPayPalButton() {
-        paypal.Buttons({
-            style: {
-                shape: 'pill',
-                color: 'silver',
-                layout: 'horizontal',
-                label: 'pay',
-
-            },
-
-            createOrder: function (data, actions) {
-                return actions.order.create({
-                    purchase_units: [
-                        {
-                            "description": "FnF 2022 Cabin Reservation",
-                            "amount": {
-                                "currency_code": "USD",
-                                "value":<%= @reservation.price %>,
-                                "breakdown": {
-                                    "item_total": {
-                                        "currency_code": "USD",
-                                        "value": <%= @reservation.price %>
-                                    }
-                                }
-                            },
-                            "items": [
-                                {
-                                    "name": "<%= @reservation.accommodation.label %>",
-                                    "description": "SKU: <%= sku(@reservation) %>",
-                                    "unit_amount": {
-                                        "currency_code": "USD",
-                                        "value": "<%= @reservation.accommodation.price %>"
-                                    },
-                                    "quantity": <%= @reservation.quantity %>
-                                }
-                            ]
-                        },
-                    ]
-                });
-            },
-
-            onApprove: function (data, actions) {
-                return actions.order.capture().then(function (orderData) {
-
-                    // Full available details
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-                    // Show a success message within this page, e.g.
-                    // TODO: Mark payment as received and paid instead of just showing a message
-                    const element = document.getElementById('paypal-button-container');
-                    element.innerHTML = '';
-                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
-
-                    // actions.redirect('<%= user_reservations_url(current_user.id) %>');
-
-                });
-            },
-
-            onError: function (err) {
-                console.log(err);
-            }
-        }).render('#paypal-button-container');
-    }
-
-    initPayPalButton();
-</script>
-<% end %>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_xclick"/>
+  <!-- TEST -->
+<!--   <input type="hidden" name="business" value="FCNX9KTXRNJ7S"> -->
+  <!-- FnF -->
+  <input type="hidden" name="business" value="ZJJPT64U2437J">
+  <input type="hidden" name="lc" value="US">
+  <input type="hidden" name="item_name" value="<%= @reservation.accommodation.label %>">
+  <input type="hidden" name="item_number" value="SKU: <%= sku(@reservation) %>">
+  <input type="hidden" name="amount" value="<%= @reservation.price %>">
+  <input type="hidden" name="currency_code" value="USD">
+  <input type="hidden" name="button_subtype" value="services">
+  <input type="hidden" name="no_note" value="1">
+  <input type="hidden" name="no_shipping" value="2">
+  <input type="hidden" name="rm" value="1">
+  <input type="hidden" name="return" value="<%= user_reservations_url(current_user.id) %>">
+  <input type="hidden" name="cancel_return" value="<%= user_reservations_url(current_user.id) %>">
+  <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+</form>
