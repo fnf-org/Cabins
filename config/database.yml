@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: <%= ENV["CABINS_DATABASE_PASSWORD"] %>
-  host: <%= ENV["CABINS_DATABASE_HOST"] %>
+  username: <%= ENV["CABINS_DB_USER"] %>
+  password: <%= ENV["CABINS_DB_PASSWORD"] %>
+  host: <%= ENV["CABINS_DB_HOST"] %>
 
 development:
   <<: *default

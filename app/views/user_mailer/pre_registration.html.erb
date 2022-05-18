@@ -1,4 +1,4 @@
 <p>Greetings!</p>
 <p>Thank you for pre-registering through the FnF cabin registration system. Your tier request is being reviewed and you will be sent an email with your tier assignment from the cabins crew in the near future. Please add <strong>cabins@fnf.org</strong> to your approved senders list.</p>
 <br/>
-<p>FnF <%= Time.new.year %> Cabins<br/><a href="https://cabins.inappropirates.com">https://cabins.inappropirates.com</a></p>
+<p>FnF <%= Time.new.year %> Cabins<br/><a href="<%= Cabins::Application.config.scheme %>://<%= Cabins::Application.config.host %>"><%= Cabins::Application.config.scheme %>://<%= Cabins::Application.config.host %></a></p>
