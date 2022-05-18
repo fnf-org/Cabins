@@ -143,7 +143,7 @@ Once your tier is open, you will be able to sign in using the same email address
       title: 'Room Rules: Guest Issues',
       body: "<p>While we strive to keep our community a safe place, issues do occur.</p>
 <p>Belongings: FnF and Saratoga Springs are not responsible for protecting your belongings. Please keep private, important, or valuable personal belongings on your person or safely stowed away.</p>
-<p>Guest conduct: All attendees must follow the <strong><a href='https://cfaea.net/the-fnf-way/'>FnF Way</a></strong> and the <strong><a href='https://fnforg.files.wordpress.com/#{@year}/06/cfaea-and-fnf-conduct-policy-v-2-0-final.pdf'> Code of Conduct</a></strong>. If you have trouble with a guest in your room or cabin, and you cannot work it out among yourselves, please consider contacting Karma Patrol or a Site Coordinator at the event.</p>
+<p>Guest conduct: All attendees must follow the <strong><a href='https://cfaea.net/the-fnf-way/'>FnF Way</a></strong> and the <strong><a href='https://fnforg.files.wordpress.com/2018/06/cfaea-and-fnf-conduct-policy-v-2-0-final.pdf'> Code of Conduct</a></strong>. If you have trouble with a guest in your room or cabin, and you cannot work it out among yourselves, please consider contacting Karma Patrol or a Site Coordinator at the event.</p>
 <p>If you have any other guest-related issues, please contact a Site Coordinator at the campout as soon as possible. You may also contact <a href='mailto:cabins@fnf.org?subject=Guest%2Issue&quot;&gt;cabins@fnf.org'>the Cabin Crew</a> by email after the event.</p>"
     },
     {

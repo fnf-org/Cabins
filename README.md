@@ -12,27 +12,32 @@ This is a ruby on rails app providing the cabins reservations system.
 
    ```
    # MARIA DB CONTAINER
-
    MARIADB_USER=cabins
    MARIADB_PASSWORD=password
    MARIADB_ROOT_PASSWORD=password
+   MARIADB_DATABASE=cabins
 
    # cabins
-
-   CABINS_DATABASE_PASSWORD=password
    RAILS_ENV=development
+   CABINS_DB_USER=cabins
+   CABINS_DB_PASSWORD=password
+   CABINS_DB_HOST=db
+   CABINS_DB_PORT=3306
+   CABINS_DB_NAME=cabins
+   DATABASE_URL="mysql2://${CABINS_DB_USER}:${CABINS_DB_PASSWORD}@${CABINS_DB_HOST}:${CABINS_DB_PORT}/${CABINS_DB_NAME}?"
    ```
 
-2. `docker-compose up -d`
-3. `docker-compose run web bundle exec rake db:reset`
-4. You can then hit the app on `http://localhost:3000`
-5. for logs, `docker-compose logs -f web`
-6. Seeded admin login is `blah@invalid.com`. Password is `nopenope`
+2. Might need to do a `docker compose build`...
+3. `docker compose up -d`
+4. `docker compose run web bundle exec rake db:reset`
+5. You can then hit the app on `http://localhost:3000`
+6. for logs, `docker compose logs -f web`
+7. Seeded admin login is `blah@invalid.com`. Password is `nopenope`
 
 ## email previews
 
-http://localhost/rails/mailers/user_mailer/
-http://localhost/rails/mailers/reservation_mailer/
+http://localhost:3000/rails/mailers/user_mailer/
+http://localhost:3000/rails/mailers/reservation_mailer/
 
 ## Deploy to Kubernetes
 
