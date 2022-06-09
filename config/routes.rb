@@ -75,4 +75,6 @@ Rails.application.routes.draw do
   get 'tiers/:id/email_logs' => 'email_logs#tier_email_logs', as: 'tier_email_logs'
 
   get 'instants' => 'instants#index'
+  get 'instants/:id' => 'instants#show', as: 'instant_edit'
+  patch'instants/:id' => 'instants#update', as: 'instant_update'
 end
