@@ -1,0 +1,31 @@
+<div class="col bg-white border rounded p-3">
+  <p>
+    Please complete your payment with PayPal for <%= number_to_currency @reservation.price %>. To do so:
+    <br/>
+  <ol>
+    <li>go to <a href="https://paypal.com">https://paypal.com</a></li>
+    <li>Login</li>
+    <li>On the top of the page, select <a href="https://www.paypal.com/myaccount/transfer/homepage">Send and Request</a></li>
+    <li>Put <strong>paypal@cfaea.org</strong> into the search field</li>
+    <li>Next</li>
+    <li>Enter <strong><%= number_to_currency @reservation.price %></strong> for the cost</li>
+    <li>In the 'What's this payment for?' box, put <strong><%= current_user.name %>: <%= @reservation.accommodation.label %></strong></li>
+    <li>Continue</li>
+    <li>Select your payment method and select 'Next'</li>
+    <li><strong>IMPORTANT!</strong> Next to 'Paying for an item or service', click on the 'Change' link and select 'Sending to a friend'</li>
+    <li>Send Payment Now</li>
+  </ol>
+  </p>
+  <h4 class="mt-4">Alternative Payment Methods</h4>
+  <p>
+    If you need an alternative payment method, please contact <a href="mailto:cabins@fnf.org">cabins@fnf.org</a>
+  </p>
+  <p>A copy of this registration hold has also been sent to you. If you have not received this in a few minutes,
+    please
+    check your
+    spam filters for a message from 'cabins@fnf.org'.
+  </p>
+  <p>
+    If you don’t receive the hold email, please contact <a href="mailto:cabins@fnf.org">cabins@fnf.org</a>
+  </p>
+</div>

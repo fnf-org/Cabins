@@ -1,6 +1,6 @@
 <div class="row mt-3 justify-content-md-center">
   <div class="col-md-10">
-    <%= form_for(@instant) do |f| %>
+    <%= form_for(@instant, url: instant_update_path(@instant.id)) do |f| %>
       <%= render 'layouts/error_messages' %>
       <div class="field">
         <%= f.label :name, 'Fixed Name'%><br>
@@ -12,7 +12,7 @@
       </div>
         <div class="field date">
           <%= f.label :instant %>
-          <%= f.datetime_select :instant %>
+          <%= f.datetime_select :instant %> UTC
         </div>
       <div class="actions">
         <%= f.submit "Update", class: 'btn btn-primary' %>
