@@ -78,6 +78,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.9.3, < 3)
       sassc-rails (>= 2.0.0)
+    bson (4.15.0)
     builder (3.2.4)
     capybara (3.36.0)
       addressable
@@ -148,8 +149,13 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.15.0)
+    mongo (2.18.2)
+      bson (>= 4.14.1, < 5.0.0)
+    mongoid (8.0.3)
+      activemodel (>= 5.1, < 7.1, != 7.0.0)
+      mongo (>= 2.18.0, < 3.0.0)
+      ruby2_keywords (~> 0.0.5)
     msgpack (1.5.0)
-    mysql2 (0.5.3)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -214,6 +220,7 @@ GEM
     request_store (1.5.1)
       rack (>= 1.4)
     rexml (3.2.5)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -281,7 +288,7 @@ DEPENDENCIES
   jquery-rails (~> 4.4)
   kaminari (~> 1.2, >= 1.2.2)
   lograge (~> 0.11)
-  mysql2 (~> 0.5.3)
+  mongoid
   octicons_helper
   okcomputer
   puma (~> 5.0)
