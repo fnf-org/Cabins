@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.2
-FROM ruby:3.1.1-slim-bullseye
+FROM docker.io/ruby:3.1.1-slim-bullseye
 
 RUN set -eus; \
     apt-get update -qq; \
