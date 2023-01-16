@@ -1,4 +1,6 @@
-class Tier < ActiveRecord::Base
+class Tier 
+  include Mongoid::Document
+
   has_many :users
 
   before_save :strip_whitespace

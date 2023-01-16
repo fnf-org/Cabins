@@ -1,4 +1,6 @@
-class User < ActiveRecord::Base
+class User 
+  include Mongoid::Document
+
   belongs_to :tier, optional: true
   has_many :reservations, foreign_key: :user_id
   has_many :processed_reservations, class_name: 'Reservation', foreign_key: :processed_by_user_id

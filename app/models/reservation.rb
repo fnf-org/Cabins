@@ -1,4 +1,6 @@
-class Reservation < ActiveRecord::Base
+class Reservation 
+  include Mongoid::Document
+
   belongs_to :accommodation
   belongs_to :processed_by_user, :class_name => 'User', optional: true
   belongs_to :user, :class_name => 'User'

@@ -1,3 +1,4 @@
-class PaymentType < ActiveRecord::Base
+class PaymentType 
+  include Mongoid::Document
   has_many :reservations
 end

@@ -1,2 +1,3 @@
-class Planner < ActiveRecord::Base
+class Planner 
+    include Mongoid::Document
 end

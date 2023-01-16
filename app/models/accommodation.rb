@@ -1,4 +1,5 @@
-class Accommodation < ActiveRecord::Base
+class Accommodation 
+  include Mongoid::Document
   belongs_to :accommodation_type
   belongs_to :building
   has_many :reservation

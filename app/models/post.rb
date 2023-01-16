@@ -1,4 +1,6 @@
-class Post < ActiveRecord::Base
+class Post
+  include Mongoid::Document
+
   @allowed_categories = %w(home rule faq)
 
   validates :category, presence: true, length: { maximum: 40 }, :inclusion => { :in => @allowed_categories }
