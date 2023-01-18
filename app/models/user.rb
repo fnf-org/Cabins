@@ -19,7 +19,8 @@ class User
   validates :phone, presence: true, length: { maximum: 16 }
   validates :role, presence: true, length: { maximum: 20 }, :inclusion => { :in => @allowed_roles }
 
-  has_secure_password
+  # XXX: fixme: Why?
+  # has_secure_password
 
   # Returns the hash digest of the given string.
   def User.digest(string)
