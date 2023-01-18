@@ -8,4 +8,4 @@ if [ -f /runtime/config ]; then
 fi
 
 # Run the app
-bundle exec rails s -p 3000 -b '0.0.0.0'
+bundle exec rails s -p ${PORT} -b '0.0.0.0'
