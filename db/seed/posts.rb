@@ -81,7 +81,7 @@ Post.create(
     {
       category: 'faq',
       title: 'What are the different tiers for the reservation system?',
-      body: '<p><strong>Tier 1) Medical</strong> - People with a reasonable medical need for accommodation. This includes medical conditions, injuries, disabilities, and women in the third trimester of pregnancy. This tier is decided on a case-by-case basis, at our discretion.</p>
+      body: '<p><strong>Tier 1) Medical</strong> - People with a reasonable medical need for accommodation. This includes medical conditions, injuries, disabilities, and late-term pregnant/post-partum parents. This tier is decided on a case-by-case basis, at our discretion.</p>
 <p><strong>Tier 2) Planners and Coordinators</strong> - People on the FnF planners mailing list.</p>
 <p><strong>Tier 3) Other Volunteer</strong> - Anyone else who has tickets to the event.</p>'
     },
@@ -169,7 +169,7 @@ Once your tier is open, you will be able to sign in using the same email address
       category: 'faq',
       title: 'What sort of detail or proof do you need of my medical need?',
       body: '<p>We respect your privacy and ask that you provide only what is needed to determine your tier.</p>
-<p>The medical tier is for those with a reasonable medical need for accommodation. This includes medical conditions, injuries, disabilities, and women in the third trimester of pregnancy.</p>
+<p>The medical tier is for those with a reasonable medical need for accommodation. This includes medical conditions, injuries, disabilities, and late-term pregnant/post-partum parents.</p>
 <p>
 Examples of reasonable medical need:
 <ul>
